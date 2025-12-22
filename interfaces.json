@@ -1,0 +1,14 @@
+{
+  "net/minecraft/world/item/Item": [
+    "com/startraveler/celebratoryspruce/HasDescriptionId"
+  ],
+	"net/minecraft/world/level/block/Block": [
+    "com/startraveler/celebratoryspruce/HasDescriptionId"
+  ],
+	"net/minecraft/world/effect/MobEffect": [
+    "com/startraveler/celebratoryspruce/HasDescriptionId"
+  ],
+	"net/minecraft/world/entity/EntityType": [
+    "com/startraveler/celebratoryspruce/HasDescriptionId"
+  ]
+}

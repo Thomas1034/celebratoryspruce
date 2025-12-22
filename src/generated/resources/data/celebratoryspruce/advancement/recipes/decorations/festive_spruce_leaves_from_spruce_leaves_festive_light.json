@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_festive_light": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:festive_light"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_festive_spruce_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:festive_spruce_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_spruce_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:spruce_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "celebratoryspruce:festive_spruce_leaves_from_spruce_leaves_festive_light"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_spruce_leaves",
+      "has_festive_light",
+      "has_festive_spruce_leaves"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "celebratoryspruce:festive_spruce_leaves_from_spruce_leaves_festive_light"
+    ]
+  }
+}

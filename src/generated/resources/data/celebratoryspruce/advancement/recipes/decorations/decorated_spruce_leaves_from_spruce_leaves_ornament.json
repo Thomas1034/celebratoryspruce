@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_decorated_spruce_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:decorated_spruce_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_ornament": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:ornament"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_spruce_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:spruce_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "celebratoryspruce:decorated_spruce_leaves_from_spruce_leaves_ornament"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_spruce_leaves",
+      "has_ornament",
+      "has_decorated_spruce_leaves"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "celebratoryspruce:decorated_spruce_leaves_from_spruce_leaves_ornament"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "celebratoryspruce:block/overlaid_leaves_emissive",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "celebratoryspruce:block/festive_spruce_leaves_variant3",
+    "overlay": "celebratoryspruce:block/festive_spruce_leaves_variant3_overlay",
+    "particle": "celebratoryspruce:block/festive_spruce_leaves_variant3"
+  }
+}

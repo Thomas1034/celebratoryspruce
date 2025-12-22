@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "celebratoryspruce:block/celebratory_spruce_sapling"
+  }
+}

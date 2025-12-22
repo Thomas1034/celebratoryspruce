@@ -1,0 +1,230 @@
+{
+  "type": "minecraft:tree",
+  "config": {
+    "decorators": [
+      {
+        "type": "minecraft:alter_ground",
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "minecraft:podzol",
+            "Properties": {
+              "snowy": "false"
+            }
+          }
+        }
+      }
+    ],
+    "dirt_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:dirt"
+      }
+    },
+    "foliage_placer": {
+      "type": "minecraft:mega_pine_foliage_placer",
+      "crown_height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 7,
+        "min_inclusive": 3
+      },
+      "offset": 0,
+      "radius": 0
+    },
+    "foliage_provider": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "weight": 8,
+          "data": {
+            "Name": "minecraft:spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false"
+            }
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "celebratoryspruce:decorated_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "0"
+            }
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "celebratoryspruce:decorated_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "1"
+            }
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "celebratoryspruce:decorated_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "2"
+            }
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "celebratoryspruce:decorated_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "3"
+            }
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "celebratoryspruce:decorated_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "4"
+            }
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "celebratoryspruce:decorated_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "5"
+            }
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "celebratoryspruce:decorated_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "6"
+            }
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "celebratoryspruce:decorated_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "7"
+            }
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "celebratoryspruce:festive_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "1"
+            }
+          }
+        },
+        {
+          "weight": 2,
+          "data": {
+            "Name": "celebratoryspruce:festive_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "4"
+            }
+          }
+        },
+        {
+          "weight": 2,
+          "data": {
+            "Name": "celebratoryspruce:festive_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "5"
+            }
+          }
+        },
+        {
+          "weight": 2,
+          "data": {
+            "Name": "celebratoryspruce:festive_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "6"
+            }
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "celebratoryspruce:festive_spruce_leaves",
+            "Properties": {
+              "distance": "7",
+              "persistent": "false",
+              "waterlogged": "false",
+              "variant": "7"
+            }
+          }
+        }
+      ]
+    },
+    "force_dirt": false,
+    "ignore_vines": false,
+    "minimum_size": {
+      "type": "minecraft:two_layers_feature_size",
+      "limit": 1,
+      "lower_size": 1,
+      "upper_size": 2
+    },
+    "trunk_placer": {
+      "type": "minecraft:giant_trunk_placer",
+      "base_height": 13,
+      "height_rand_a": 2,
+      "height_rand_b": 14
+    },
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:spruce_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    }
+  }
+}

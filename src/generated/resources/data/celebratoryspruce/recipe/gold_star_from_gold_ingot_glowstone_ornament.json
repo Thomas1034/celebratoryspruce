@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "celebratoryspruce:gold_star",
+  "key": {
+    "i": "minecraft:gold_ingot",
+    "o": "celebratoryspruce:ornament",
+    "s": "minecraft:glowstone"
+  },
+  "pattern": [
+    "oio",
+    "isi",
+    "oio"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebratoryspruce:gold_star"
+  }
+}

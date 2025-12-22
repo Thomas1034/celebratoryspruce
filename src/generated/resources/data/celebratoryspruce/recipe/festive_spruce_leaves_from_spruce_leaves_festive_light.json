@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "celebratory_spruce_leaves",
+  "ingredients": [
+    "minecraft:spruce_leaves",
+    "celebratoryspruce:festive_light"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebratoryspruce:festive_spruce_leaves"
+  }
+}

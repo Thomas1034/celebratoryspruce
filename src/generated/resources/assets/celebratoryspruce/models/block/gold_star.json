@@ -1,7 +1,5 @@
 {
-  "parent": "minecraft:block/cross_emissive",
   "textures": {
-    "cross": "celebratoryspruce:block/gold_star",
-    "cross_emissive": "celebratoryspruce:block/gold_star_emissive"
+    "particle": "celebratoryspruce:block/gold_star"
   }
 }

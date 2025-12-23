@@ -1,5 +1,6 @@
 package com.startraveler.celebratoryspruce;
 
+import com.startraveler.celebratoryspruce.client.ItemRenderingBlockEntityRenderer;
 import com.startraveler.celebratoryspruce.datagen.*;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
@@ -20,6 +21,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
@@ -62,7 +64,20 @@ public class CelebratorySpruceClient {
                     ModBlocks.POTTED_CELEBRATORY_SPRUCE_SAPLING.get(),
                     ChunkSectionLayer.CUTOUT
             );
+            ItemBlockRenderTypes.setRenderLayer(
+                    ModBlocks.GOLD_STAR.get(),
+                    ChunkSectionLayer.CUTOUT
+            );
+
         });
+    }
+
+    @SubscribeEvent
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                ModBlockEntityTypes.ITEM_RENDERING_BLOCK.get(),
+                ItemRenderingBlockEntityRenderer::new
+        );
     }
 
     public static void registerTints(final RegisterColorHandlersEvent.Block event) {

@@ -29,7 +29,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.FESTIVE_LIGHT);
                         output.accept(ModBlocks.DECORATED_SPRUCE_LEAVES);
                         output.accept(ModBlocks.FESTIVE_SPRUCE_LEAVES);
-                        output.accept(ModBlocks.GOLD_STAR);
+                        output.accept(ModItems.GOLD_STAR);
                     }).build()
     );
 }

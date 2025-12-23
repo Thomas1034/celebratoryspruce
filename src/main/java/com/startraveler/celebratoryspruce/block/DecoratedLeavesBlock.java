@@ -23,6 +23,7 @@ public class DecoratedLeavesBlock extends TintedParticleLeavesBlock {
     public static final int MIN_VARIANTS = 0;
     public static final int MAX_VARIANTS = 7;
     public static final IntegerProperty VARIANT = IntegerProperty.create("variant", MIN_VARIANTS, MAX_VARIANTS);
+
     protected final @NotNull Supplier<Ingredient> cycleIngredient;
 
     public DecoratedLeavesBlock(float particleProbability, @NotNull Properties properties, @NotNull Supplier<Ingredient> cycleIngredient) {

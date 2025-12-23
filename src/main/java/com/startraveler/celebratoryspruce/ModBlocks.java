@@ -1,9 +1,8 @@
 package com.startraveler.celebratoryspruce;
 
 import com.google.common.base.Suppliers;
-import com.startraveler.celebratoryspruce.block.DecoratedLeavesBlock;
-import com.startraveler.celebratoryspruce.block.RandomizedDecoratedLeavesBlock;
-import com.startraveler.celebratoryspruce.block.StarBlock;
+import com.startraveler.celebratoryspruce.block.*;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -30,7 +29,6 @@ public class ModBlocks {
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)
     );
 
-
     public static final DeferredBlock<@NotNull FlowerPotBlock> POTTED_CELEBRATORY_SPRUCE_SAPLING = registerWithoutItem(
             "potted_celebratory_spruce_sapling",
             (properties) -> new FlowerPotBlock(
@@ -41,10 +39,23 @@ public class ModBlocks {
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_SPRUCE_SAPLING)
     );
 
-    public static final DeferredBlock<@NotNull StarBlock> GOLD_STAR = register(
+
+    public static final DeferredBlock<@NotNull LightNetBlock> LIGHT_NET = register(
+            "light_net",
+            properties -> new LightNetBlock(properties, Suppliers.memoize(() -> Ingredient.of(ModItems.FESTIVE_LIGHT))),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GLOW_LICHEN).lightLevel(state -> 5)
+    );
+
+    public static final DeferredBlock<@NotNull StarBlock> GOLD_STAR = registerWithoutItem(
             "gold_star",
-            StarBlock::new,
+            properties -> new StandingStarBlock(ParticleTypes.END_ROD, properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_GOLD_BLOCK).lightLevel(state -> 15)
+    );
+
+    public static final DeferredBlock<@NotNull WallStarBlock> WALL_GOLD_STAR = registerWithoutItem(
+            "wall_gold_star",
+            properties -> new WallStarBlock(ParticleTypes.END_ROD, properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_GOLD_BLOCK).lightLevel(state -> 14)
     );
 
 

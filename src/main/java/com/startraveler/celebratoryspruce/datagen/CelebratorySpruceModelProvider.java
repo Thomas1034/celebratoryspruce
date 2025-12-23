@@ -30,6 +30,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -43,6 +44,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -272,22 +274,18 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
                 ModBlocks.POTTED_CELEBRATORY_SPRUCE_SAPLING.get(),
                 BlockModelGenerators.PlantType.NOT_TINTED
         );
-        blockModels.createCrossBlock(ModBlocks.GOLD_STAR.get(), BlockModelGenerators.PlantType.EMISSIVE_NOT_TINTED);
-        blockModels.registerSimpleItemModel(
-                ModBlocks.GOLD_STAR.asItem(),
-                BlockModelGenerators.PlantType.EMISSIVE_NOT_TINTED.createItemModel(
-                        blockModels,
-                        ModBlocks.GOLD_STAR.get()
-                )
-        );
-
+        blockModels.registerSimpleFlatItemModel(ModItems.GOLD_STAR.asItem());
+        blockModels.createParticleOnlyBlock(ModBlocks.GOLD_STAR.get());
+        blockModels.createParticleOnlyBlock(ModBlocks.WALL_GOLD_STAR.get());
+        blockModels.createMultiface(ModBlocks.LIGHT_NET.get());
     }
 
     @SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "ConstantConditions"})
     @Override
     protected @NotNull Stream<? extends Holder<Block>> getKnownBlocks() {
         List<Block> excluded = new ArrayList<>();
-
+        excluded.add(ModBlocks.GOLD_STAR.get());
+        excluded.add(ModBlocks.WALL_GOLD_STAR.get());
         return super.getKnownBlocks().filter(entry -> !excluded.contains(entry.value()));
     }
 
@@ -322,6 +320,27 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
 
     public void createOverlaidTintedEmissiveLeaves(Block block, int tint, IntegerProperty intProperty) {
         createOverlaidTintedLeaves(block, CelebratorySpruceTexturedModel.OVERLAID_LEAVES_EMISSIVE, tint, intProperty);
+    }
+
+
+    // TODO make this support multiple decoration states.
+    public void createDecoratedMultifaceBlockStates(Block block, IntegerProperty intProperty) {
+        Map<Property<@NotNull Boolean>, VariantMutator> map = BlockModelGenerators.selectMultifaceProperties(
+                block.defaultBlockState(),
+                MultifaceBlock::getFaceProperty
+        );
+        ConditionBuilder conditionBuilder = BlockModelGenerators.condition();
+        map.forEach((booleanProperty, variantMutator) -> conditionBuilder.term(booleanProperty, false));
+        MultiVariant multiVariant = BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(block));
+        MultiPartGenerator multiPartGenerator = MultiPartGenerator.multiPart(block);
+        map.forEach((booleanProperty, variantMutator) -> {
+            multiPartGenerator.with(
+                    BlockModelGenerators.condition().term(booleanProperty, true),
+                    multiVariant.with(variantMutator)
+            );
+            multiPartGenerator.with(conditionBuilder, multiVariant.with(variantMutator));
+        });
+        this.blockModels.blockStateOutput.accept(multiPartGenerator);
     }
 
     public void createOverlaidTintedLeaves(Block block, Function<Integer, TexturedModel.Provider> provider, int tint, IntegerProperty intProperty) {

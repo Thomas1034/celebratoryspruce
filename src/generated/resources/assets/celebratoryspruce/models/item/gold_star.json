@@ -1,7 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "celebratoryspruce:block/gold_star",
-    "layer1": "celebratoryspruce:block/gold_star_emissive"
+    "layer0": "celebratoryspruce:item/gold_star"
   }
 }

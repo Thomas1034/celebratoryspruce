@@ -4,7 +4,9 @@
   "block.celebratoryspruce.festive_spruce_leaves": "Festive Spruce Leaves",
   "block.celebratoryspruce.gold_star": "Gold Star",
   "block.celebratoryspruce.potted_celebratory_spruce_sapling": "Potted Celebratory Spruce Sapling",
+  "block.celebratoryspruce.wall_gold_star": "Wall Gold Star",
   "item.celebratoryspruce.festive_light": "Festive Light",
+  "item.celebratoryspruce.gold_star": "Gold Star",
   "item.celebratoryspruce.ornament": "Ornament",
   "itemGroup.celebratory_spruce_items": "Celebratory Spruce Items"
 }

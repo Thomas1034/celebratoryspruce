@@ -80,16 +80,14 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
                 .collect(Collectors.toSet()));
 
         this.add(
-                ModBlocks.DECORATED_SPRUCE_LEAVES.get(),
-                createItemLeavesDrops(
+                ModBlocks.DECORATED_SPRUCE_LEAVES.get(), createItemLeavesDrops(
                         ModBlocks.DECORATED_SPRUCE_LEAVES.get(),
                         ModBlocks.CELEBRATORY_SPRUCE_SAPLING.get(),
                         ModItems.ORNAMENT.get()
                 )
         );
         this.add(
-                ModBlocks.FESTIVE_SPRUCE_LEAVES.get(),
-                createItemLeavesDrops(
+                ModBlocks.FESTIVE_SPRUCE_LEAVES.get(), createItemLeavesDrops(
                         ModBlocks.FESTIVE_SPRUCE_LEAVES.get(),
                         ModBlocks.CELEBRATORY_SPRUCE_SAPLING.get(),
                         ModItems.FESTIVE_LIGHT.get()
@@ -100,7 +98,9 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
                 ModBlocks.POTTED_CELEBRATORY_SPRUCE_SAPLING.get(),
                 this.createPotFlowerItemTable(ModBlocks.CELEBRATORY_SPRUCE_SAPLING.get())
         );
-        this.dropSelf(ModBlocks.GOLD_STAR.get());
+        this.dropOther(ModBlocks.GOLD_STAR.get(), ModItems.GOLD_STAR.get());
+        this.dropOther(ModBlocks.WALL_GOLD_STAR.get(), ModItems.GOLD_STAR.get());
+        this.add(ModBlocks.LIGHT_NET.get(), this.createMultifaceBlockDrops(ModBlocks.LIGHT_NET.get()));
 
     }
 

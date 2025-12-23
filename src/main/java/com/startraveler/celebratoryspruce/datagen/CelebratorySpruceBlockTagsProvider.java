@@ -23,6 +23,6 @@ public class CelebratorySpruceBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.LEAVES).add(ModBlocks.DECORATED_SPRUCE_LEAVES.get());
         this.tag(BlockTags.LEAVES).add(ModBlocks.FESTIVE_SPRUCE_LEAVES.get());
         this.tag(BlockTags.SAPLINGS).add(ModBlocks.CELEBRATORY_SPRUCE_SAPLING.get());
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.GOLD_STAR.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.GOLD_STAR.get(), ModBlocks.WALL_GOLD_STAR.get());
     }
 }

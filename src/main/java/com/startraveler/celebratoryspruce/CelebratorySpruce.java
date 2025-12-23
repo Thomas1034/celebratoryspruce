@@ -2,6 +2,7 @@ package com.startraveler.celebratoryspruce;
 
 import com.mojang.logging.LogUtils;
 import com.startraveler.celebratoryspruce.block.RandomizedDecoratedLeavesBlock;
+import com.startraveler.celebratoryspruce.block.entity.ItemRenderingBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionResult;
@@ -48,6 +49,10 @@ public class CelebratorySpruce {
         ModItems.ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         ModCreativeModeTabs.CREATIVE_MODE_TABS.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so tabs get registered
+        ModBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
+        // Prevent classloading cycle by init'ing this separately.
+        ItemRenderingBlockEntity.TransformTypeCodecRegistry.init();
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (CelebratorySpruce) to respond directly to events.

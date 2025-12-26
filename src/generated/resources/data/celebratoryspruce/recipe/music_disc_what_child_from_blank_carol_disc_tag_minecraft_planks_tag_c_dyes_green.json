@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "celebratoryspruce:music_disc_what_child",
+  "ingredients": [
+    "celebratoryspruce:blank_carol_disc",
+    "#minecraft:planks",
+    "#c:dyes/green"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebratoryspruce:music_disc_what_child"
+  }
+}

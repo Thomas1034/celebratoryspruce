@@ -1,0 +1,8 @@
+{
+  "parent": "celebratoryspruce:block/template_wall_wreath",
+  "textures": {
+    "all": "celebratoryspruce:block/wreath",
+    "front": "celebratoryspruce:block/wreath",
+    "particle": "celebratoryspruce:block/wreath"
+  }
+}

@@ -8,12 +8,14 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -32,19 +34,86 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes() {
         shapeless(
-                List.of(Blocks.SPRUCE_LEAVES, ModItems.ORNAMENT.get()), List.of(1, 1), RecipeCategory.DECORATIONS,
-                ModBlocks.DECORATED_SPRUCE_LEAVES.get(), 1, "celebratory_spruce_leaves"
+                List.of(Blocks.SPRUCE_LEAVES, ModItems.ORNAMENT.get()),
+                List.of(1, 1),
+                RecipeCategory.DECORATIONS,
+                ModBlocks.DECORATED_SPRUCE_LEAVES.get(),
+                1,
+                "celebratory_spruce_leaves"
         );
         shapeless(
-                List.of(Blocks.SPRUCE_LEAVES, ModItems.FESTIVE_LIGHT.get()), List.of(1, 1), RecipeCategory.DECORATIONS,
-                ModBlocks.FESTIVE_SPRUCE_LEAVES.get(), 1, "celebratory_spruce_leaves"
+                List.of(Blocks.SPRUCE_LEAVES, ModItems.FESTIVE_LIGHT.get()),
+                List.of(1, 1),
+                RecipeCategory.DECORATIONS,
+                ModBlocks.FESTIVE_SPRUCE_LEAVES.get(),
+                1,
+                "celebratory_spruce_leaves"
         );
         shaped(
                 List.of("oio", "isi", "oio"),
                 List.of('i', 's', 'o'),
                 List.of(Items.GOLD_INGOT, Blocks.GLOWSTONE, ModItems.ORNAMENT.get()),
                 RecipeCategory.DECORATIONS,
-                ModBlocks.GOLD_STAR.get(),
+                ModItems.GOLD_STAR.get(),
+                1
+        );
+        shaped(
+                List.of("oso", "oio", "oso"),
+                List.of('i', 's', 'o'),
+                List.of(Items.COPPER_INGOT, Items.STRING, ModItems.FESTIVE_LIGHT.get()),
+                RecipeCategory.DECORATIONS,
+                ModBlocks.LIGHT_NET.get(),
+                6
+        );
+        shaped(
+                List.of(" l ", "l l", " l "),
+                List.of('l'),
+                List.of(Items.SPRUCE_LEAVES),
+                RecipeCategory.DECORATIONS,
+                ModItems.WREATH.get(),
+                8
+        );
+        shapeless(
+                List.of(ModItems.FESTIVE_LIGHT, ModItems.ORNAMENT, ModItems.WREATH),
+                List.of(1, 1, 1),
+                RecipeCategory.DECORATIONS,
+                ModItems.DECORATED_WREATH.get(),
+                1
+        );
+        shapeless(
+                List.of(ItemTags.CREEPER_DROP_MUSIC_DISCS, ModItems.ORNAMENT, Items.PAPER),
+                List.of(1, 1, 1),
+                RecipeCategory.MISC,
+                ModItems.BLANK_CAROL_DISC.get(),
+                1
+        );
+        shaped(
+                List.of(" r ", "ror", " r "),
+                List.of('r', 'o'),
+                List.of(Items.RESIN_CLUMP, ModItems.ORNAMENT.get()),
+                RecipeCategory.MISC,
+                ModItems.BLANK_CAROL_DISC.get(),
+                2
+        );
+        shapeless(
+                List.of(ModItems.BLANK_CAROL_DISC.get(), ItemTags.WOOL, Tags.Items.DYES_BLUE),
+                List.of(1, 1, 1),
+                RecipeCategory.MISC,
+                ModItems.MUSIC_DISC_SILENT_NIGHT.get(),
+                1
+        );
+        shapeless(
+                List.of(ModItems.BLANK_CAROL_DISC.get(), ItemTags.PLANKS, Tags.Items.DYES_GREEN),
+                List.of(1, 1, 1),
+                RecipeCategory.MISC,
+                ModItems.MUSIC_DISC_WHAT_CHILD.get(),
+                1
+        );
+        shapeless(
+                List.of(ModItems.BLANK_CAROL_DISC.get(), Items.BELL, Tags.Items.DYES_RED),
+                List.of(1, 1, 1),
+                RecipeCategory.MISC,
+                ModItems.MUSIC_DISC_CHRISTMAS_DAY_BELLS.get(),
                 1
         );
         // TODO End of recipe definitions

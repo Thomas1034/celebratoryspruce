@@ -30,7 +30,10 @@ public class CelebratorySpruceTextureMapping {
     }
 
     public static TextureMapping asterisk(Block block) {
-        return new TextureMapping().put(CelebratorySpruceTextureSlot.PLUS, TextureMapping.getBlockTexture(block, "_plus"))
+        return new TextureMapping().put(
+                        CelebratorySpruceTextureSlot.PLUS,
+                        TextureMapping.getBlockTexture(block, "_plus")
+                )
                 .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(block, "_cross"));
     }
 
@@ -64,6 +67,30 @@ public class CelebratorySpruceTextureMapping {
                 .put(TextureSlot.TOP, topOverlay.withSuffix("_top"))
                 .put(TextureSlot.SIDE, topOverlay.withSuffix("_side"))
                 .put(TextureSlot.BOTTOM, topOverlay.withSuffix("_bottom"));
+    }
+
+    public static TextureMapping multifaceFace(Identifier identifier) {
+        return new TextureMapping().put(TextureSlot.PARTICLE, identifier)
+                .put(CelebratorySpruceTextureSlot.FACE, identifier);
+    }
+
+    public static TextureMapping wreath(Block block) {
+        Identifier identifier = TextureMapping.getBlockTexture(block);
+        return new TextureMapping().put(TextureSlot.PARTICLE, identifier)
+                .put(TextureSlot.FRONT, identifier).put(TextureSlot.ALL, identifier);
+    }
+
+    public static TextureMapping overlaidWreath(Block block) {
+        Identifier identifier = TextureMapping.getBlockTexture(block);
+        return overlaidWreath(identifier);
+    }
+
+    public static TextureMapping overlaidWreath(Identifier identifier) {
+        return new TextureMapping().put(TextureSlot.PARTICLE, identifier)
+                .put(TextureSlot.ALL, identifier)
+                .put(TextureSlot.FRONT, identifier)
+                .put(CelebratorySpruceTextureSlot.OVERLAY_FRONT, identifier.withSuffix("_overlay_front"))
+                .put(CelebratorySpruceTextureSlot.OVERLAY, identifier.withSuffix("_overlay"));
     }
 }
 

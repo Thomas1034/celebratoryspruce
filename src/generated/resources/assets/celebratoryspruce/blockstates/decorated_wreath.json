@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "celebratoryspruce:block/decorated_wreath_variant0"
+    },
+    "variant=1": {
+      "model": "celebratoryspruce:block/decorated_wreath_variant1"
+    },
+    "variant=2": {
+      "model": "celebratoryspruce:block/decorated_wreath_variant2"
+    },
+    "variant=3": {
+      "model": "celebratoryspruce:block/decorated_wreath_variant3"
+    },
+    "variant=4": {
+      "model": "celebratoryspruce:block/decorated_wreath_variant4"
+    },
+    "variant=5": {
+      "model": "celebratoryspruce:block/decorated_wreath_variant5"
+    },
+    "variant=6": {
+      "model": "celebratoryspruce:block/decorated_wreath_variant6"
+    },
+    "variant=7": {
+      "model": "celebratoryspruce:block/decorated_wreath_variant7"
+    }
+  }
+}

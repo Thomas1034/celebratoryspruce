@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "celebratoryspruce:decorated_wreath",
+  "ingredients": [
+    "celebratoryspruce:festive_light",
+    "celebratoryspruce:ornament",
+    "celebratoryspruce:wreath"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebratoryspruce:decorated_wreath"
+  }
+}

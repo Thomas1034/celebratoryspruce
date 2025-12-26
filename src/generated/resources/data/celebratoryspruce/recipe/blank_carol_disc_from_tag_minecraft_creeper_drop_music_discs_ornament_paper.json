@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "celebratoryspruce:blank_carol_disc",
+  "ingredients": [
+    "#minecraft:creeper_drop_music_discs",
+    "celebratoryspruce:ornament",
+    "minecraft:paper"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebratoryspruce:blank_carol_disc"
+  }
+}

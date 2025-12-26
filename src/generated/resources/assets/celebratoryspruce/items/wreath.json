@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "celebratoryspruce:item/wreath",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -10380959
+      }
+    ]
+  }
+}

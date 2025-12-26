@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "celebratoryspruce:light_net",
+  "key": {
+    "i": "minecraft:copper_ingot",
+    "o": "celebratoryspruce:festive_light",
+    "s": "minecraft:string"
+  },
+  "pattern": [
+    "oso",
+    "oio",
+    "oso"
+  ],
+  "result": {
+    "count": 6,
+    "id": "celebratoryspruce:light_net"
+  }
+}

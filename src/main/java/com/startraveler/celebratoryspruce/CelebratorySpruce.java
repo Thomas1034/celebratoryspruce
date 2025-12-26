@@ -81,44 +81,35 @@ public class CelebratorySpruce {
             if (player == null || !player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
-            level.setBlockAndUpdate(
+            @Nullable BlockState randomVariant = RandomizedDecoratedLeavesBlock.applyRandomVariant(
+                    ModBlocks.DECORATED_SPRUCE_LEAVES.get().withPropertiesOf(state),
                     pos,
-                    RandomizedDecoratedLeavesBlock.applyRandomVariant(
-                            ModBlocks.DECORATED_SPRUCE_LEAVES.get().withPropertiesOf(state),
-                            pos,
-                            RandomizedDecoratedLeavesBlock.VARIANT
-                    )
+                    RandomizedDecoratedLeavesBlock.VARIANT
             );
+            if (randomVariant != null) {
+                level.setBlockAndUpdate(pos, randomVariant);
+            }
+
             event.cancelWithResult(InteractionResult.SUCCESS);
         } else if (stack.isEmpty() && state.is(ModBlocks.DECORATED_SPRUCE_LEAVES)) {
             if (player != null) {
                 player.addItem(new ItemStack(ModItems.ORNAMENT.get(), 1));
             }
-            level.setBlockAndUpdate(
-                    pos,
-                    Blocks.SPRUCE_LEAVES.withPropertiesOf(state)
-            );
+            level.setBlockAndUpdate(pos, Blocks.SPRUCE_LEAVES.withPropertiesOf(state));
             event.cancelWithResult(InteractionResult.SUCCESS);
         } else if (stack.is(ModItems.FESTIVE_LIGHT) && state.is(Blocks.SPRUCE_LEAVES)) {
             if (player == null || !player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
-            level.setBlockAndUpdate(
-                    pos,
-                    ModBlocks.FESTIVE_SPRUCE_LEAVES.get().withPropertiesOf(state)
-            );
+            level.setBlockAndUpdate(pos, ModBlocks.FESTIVE_SPRUCE_LEAVES.get().withPropertiesOf(state));
             event.cancelWithResult(InteractionResult.SUCCESS);
         } else if (stack.isEmpty() && state.is(ModBlocks.FESTIVE_SPRUCE_LEAVES)) {
             if (player != null) {
                 player.addItem(new ItemStack(ModItems.FESTIVE_LIGHT.get(), 1));
             }
-            level.setBlockAndUpdate(
-                    pos,
-                    Blocks.SPRUCE_LEAVES.withPropertiesOf(state)
-            );
+            level.setBlockAndUpdate(pos, Blocks.SPRUCE_LEAVES.withPropertiesOf(state));
             event.cancelWithResult(InteractionResult.SUCCESS);
         }
-
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

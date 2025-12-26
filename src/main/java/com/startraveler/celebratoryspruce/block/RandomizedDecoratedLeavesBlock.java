@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class RandomizedDecoratedLeavesBlock extends DecoratedLeavesBlock {
@@ -30,6 +31,10 @@ public class RandomizedDecoratedLeavesBlock extends DecoratedLeavesBlock {
 
     @Override
     public @NotNull BlockState getStateForPlacement(final @NotNull BlockPlaceContext context) {
-        return applyRandomVariant(super.getStateForPlacement(context), context.getClickedPos(), VARIANT);
+        return Objects.requireNonNull(applyRandomVariant(
+                super.getStateForPlacement(context),
+                context.getClickedPos(),
+                VARIANT
+        ));
     }
 }

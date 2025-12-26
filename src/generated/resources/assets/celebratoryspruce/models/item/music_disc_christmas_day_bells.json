@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "celebratoryspruce:item/music_disc_christmas_day_bells"
+  }
+}

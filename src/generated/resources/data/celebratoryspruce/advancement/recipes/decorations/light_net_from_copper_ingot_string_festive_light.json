@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:copper_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_festive_light": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:festive_light"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_light_net": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:light_net"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_string": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:string"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "celebratoryspruce:light_net_from_copper_ingot_string_festive_light"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_copper_ingot",
+      "has_string",
+      "has_festive_light",
+      "has_light_net"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "celebratoryspruce:light_net_from_copper_ingot_string_festive_light"
+    ]
+  }
+}

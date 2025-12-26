@@ -7,6 +7,51 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureSlot;
 
 public class CelebratorySpruceModelTemplates {
+    public static final ModelTemplate OVERLAID_WREATH = ModelTemplates.create(
+            CelebratorySpruce.id("template_overlaid_wreath").toString(),
+            TextureSlot.FRONT,
+            TextureSlot.ALL,
+            CelebratorySpruceTextureSlot.OVERLAY,
+            CelebratorySpruceTextureSlot.OVERLAY_FRONT,
+            TextureSlot.PARTICLE
+    );
+
+    public static final ModelTemplate OVERLAID_WALL_WREATH = ModelTemplates.create(
+            CelebratorySpruce.id("template_overlaid_wall_wreath").toString(),
+            TextureSlot.FRONT,
+            TextureSlot.ALL,
+            CelebratorySpruceTextureSlot.OVERLAY,
+            CelebratorySpruceTextureSlot.OVERLAY_FRONT,
+            TextureSlot.PARTICLE
+    );
+
+    public static final ModelTemplate WREATH = ModelTemplates.create(
+            CelebratorySpruce.id("template_wreath").toString(),
+            TextureSlot.FRONT,
+            TextureSlot.ALL,
+            TextureSlot.PARTICLE
+    );
+
+    public static final ModelTemplate WALL_WREATH = ModelTemplates.create(
+            CelebratorySpruce.id("template_wall_wreath")
+                    .toString(),
+            TextureSlot.FRONT,
+            TextureSlot.ALL,
+            TextureSlot.PARTICLE
+    );
+
+    public static final ModelTemplate MULTIFACE_FACE = ModelTemplates.create(
+            CelebratorySpruce.id("multiface_face")
+                    .toString(), CelebratorySpruceTextureSlot.FACE, TextureSlot.PARTICLE
+    );
+
+    public static final ModelTemplate MULTIFACE_FACE_EMISSIVE = ModelTemplates.create(
+            CelebratorySpruce.id(
+                    "multiface_face_emissive").toString(),
+            CelebratorySpruceTextureSlot.FACE,
+            TextureSlot.PARTICLE
+    );
+
 
     public static final ModelTemplate ASTERISK = ModelTemplates.create(
             CelebratorySpruce.id("asterisk").toString(),
@@ -15,9 +60,8 @@ public class CelebratorySpruceModelTemplates {
     );
 
     public static final ModelTemplate DOUBLE_SIDED_CUBE_COLUMN = ModelTemplates.create(
-            CelebratorySpruce.id("double_sided_cube_column").toString(),
-            TextureSlot.END,
-            TextureSlot.SIDE
+            CelebratorySpruce.id(
+                    "double_sided_cube_column").toString(), TextureSlot.END, TextureSlot.SIDE
     );
 
     public static final ModelTemplate OVERLAID_CUBE = ModelTemplates.create(
@@ -26,7 +70,6 @@ public class CelebratorySpruceModelTemplates {
             CelebratorySpruceTextureSlot.BASE,
             CelebratorySpruceTextureSlot.OVERLAY
     );
-
 
 
     public static final ModelTemplate TOP_OVERLAID_CUBE = ModelTemplates.create(

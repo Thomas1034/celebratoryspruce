@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "facing=east,variant=0": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant0"
+    },
+    "facing=east,variant=1": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant1"
+    },
+    "facing=east,variant=2": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant2"
+    },
+    "facing=east,variant=3": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant3"
+    },
+    "facing=east,variant=4": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant4"
+    },
+    "facing=east,variant=5": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant5"
+    },
+    "facing=east,variant=6": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant6"
+    },
+    "facing=east,variant=7": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant7"
+    },
+    "facing=north,variant=0": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant0",
+      "y": 270
+    },
+    "facing=north,variant=1": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant1",
+      "y": 270
+    },
+    "facing=north,variant=2": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant2",
+      "y": 270
+    },
+    "facing=north,variant=3": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant3",
+      "y": 270
+    },
+    "facing=north,variant=4": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant4",
+      "y": 270
+    },
+    "facing=north,variant=5": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant5",
+      "y": 270
+    },
+    "facing=north,variant=6": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant6",
+      "y": 270
+    },
+    "facing=north,variant=7": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant7",
+      "y": 270
+    },
+    "facing=south,variant=0": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant0",
+      "y": 90
+    },
+    "facing=south,variant=1": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant1",
+      "y": 90
+    },
+    "facing=south,variant=2": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant2",
+      "y": 90
+    },
+    "facing=south,variant=3": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant3",
+      "y": 90
+    },
+    "facing=south,variant=4": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant4",
+      "y": 90
+    },
+    "facing=south,variant=5": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant5",
+      "y": 90
+    },
+    "facing=south,variant=6": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant6",
+      "y": 90
+    },
+    "facing=south,variant=7": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant7",
+      "y": 90
+    },
+    "facing=west,variant=0": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant0",
+      "y": 180
+    },
+    "facing=west,variant=1": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant1",
+      "y": 180
+    },
+    "facing=west,variant=2": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant2",
+      "y": 180
+    },
+    "facing=west,variant=3": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant3",
+      "y": 180
+    },
+    "facing=west,variant=4": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant4",
+      "y": 180
+    },
+    "facing=west,variant=5": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant5",
+      "y": 180
+    },
+    "facing=west,variant=6": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant6",
+      "y": 180
+    },
+    "facing=west,variant=7": {
+      "model": "celebratoryspruce:block/decorated_wall_wreath_variant7",
+      "y": 180
+    }
+  }
+}

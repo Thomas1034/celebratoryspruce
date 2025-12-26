@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "celebratoryspruce:celebratory_spruce_on_snow",
+    "features": [
+      {
+        "chance": 0.33333334,
+        "feature": "celebratoryspruce:celebratory_pine_on_snow"
+      }
+    ]
+  }
+}

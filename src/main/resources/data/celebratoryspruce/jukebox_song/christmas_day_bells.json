@@ -1,0 +1,10 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "jukebox_song.celebratoryspruce.christmas_day_bells"
+  },
+  "length_in_seconds": 180.0,
+  "sound_event": {
+		"sound_id": "celebratoryspruce:christmas_day_bells"
+	}
+}

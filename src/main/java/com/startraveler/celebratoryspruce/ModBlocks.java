@@ -22,28 +22,26 @@ public class ModBlocks {
     // Create a Deferred Register to hold Blocks which will all be registered under the "celebratoryspruce" namespace
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(CelebratorySpruce.MODID);
 
-
     public static final DeferredBlock<@NotNull SaplingBlock> CELEBRATORY_SPRUCE_SAPLING = register(
             "celebratory_spruce_sapling",
             (properties) -> new SaplingBlock(CelebratorySpruceTreeGrowers.CELEBRATORY_SPRUCE, properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)
     );
 
+    @SuppressWarnings("deprecation")
     public static final DeferredBlock<@NotNull FlowerPotBlock> POTTED_CELEBRATORY_SPRUCE_SAPLING = registerWithoutItem(
             "potted_celebratory_spruce_sapling",
             (properties) -> new FlowerPotBlock(
-                    () -> (FlowerPotBlock) Blocks.FLOWER_POT,
-                    ModBlocks.CELEBRATORY_SPRUCE_SAPLING,
+                    ModBlocks.CELEBRATORY_SPRUCE_SAPLING.get(),
                     properties
             ),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_SPRUCE_SAPLING)
     );
 
-
     public static final DeferredBlock<@NotNull LightNetBlock> LIGHT_NET = register(
             "light_net",
             properties -> new LightNetBlock(properties, Suppliers.memoize(() -> Ingredient.of(ModItems.FESTIVE_LIGHT))),
-            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GLOW_LICHEN).lightLevel(state -> 5)
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GLOW_LICHEN).lightLevel(LightNetBlock.emission(5))
     );
 
     public static final DeferredBlock<@NotNull StarBlock> GOLD_STAR = registerWithoutItem(
@@ -77,6 +75,36 @@ public class ModBlocks {
                     Suppliers.memoize(() -> Ingredient.of(ModItems.FESTIVE_LIGHT))
             ),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES).lightLevel(state -> 5)
+    );
+
+    public static final DeferredBlock<@NotNull DecoratedWreathBlock> DECORATED_WREATH = registerWithoutItem(
+            "decorated_wreath",
+            properties -> new DecoratedWreathBlock(
+                    properties,
+                    () -> Ingredient.of(ModItems.ORNAMENT, ModItems.FESTIVE_LIGHT)
+            ),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES)
+    );
+
+    public static final DeferredBlock<@NotNull DecoratedWallWreathBlock> DECORATED_WALL_WREATH = registerWithoutItem(
+            "decorated_wall_wreath",
+            properties -> new DecoratedWallWreathBlock(
+                    properties,
+                    () -> Ingredient.of(ModItems.ORNAMENT, ModItems.FESTIVE_LIGHT)
+            ),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES)
+    );
+
+    public static final DeferredBlock<@NotNull WreathBlock> WREATH = registerWithoutItem(
+            "wreath",
+            WreathBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES)
+    );
+
+    public static final DeferredBlock<@NotNull WallWreathBlock> WALL_WREATH = registerWithoutItem(
+            "wall_wreath",
+            WallWreathBlock::new,
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES)
     );
 
     public static <T extends Block> DeferredBlock<T> register(final String name, final Function<BlockBehaviour.Properties, T> block, final Supplier<BlockBehaviour.Properties> properties) {

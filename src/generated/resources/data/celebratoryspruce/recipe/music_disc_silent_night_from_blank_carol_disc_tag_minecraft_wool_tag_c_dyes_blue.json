@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "celebratoryspruce:music_disc_silent_night",
+  "ingredients": [
+    "celebratoryspruce:blank_carol_disc",
+    "#minecraft:wool",
+    "#c:dyes/blue"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebratoryspruce:music_disc_silent_night"
+  }
+}

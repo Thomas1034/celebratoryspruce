@@ -1,7 +1,12 @@
-// 1.21.11	2025-12-22T14:10:39.6445803	Loot Tables
+// 1.21.11	2025-12-23T20:55:57.429185	Loot Tables
 4d95f88e58447a02199e124c8cd19c0acf4a6d8c data/celebratoryspruce/loot_table/blocks/celebratory_spruce_sapling.json
 a0feba24bc7f344cb8366a8a8ccd47c12af881ed data/celebratoryspruce/loot_table/blocks/decorated_spruce_leaves.json
+071f2f67b3c3b00ef344c25395ff6bca5cc70649 data/celebratoryspruce/loot_table/blocks/decorated_wall_wreath.json
+29c595eb2b7a96eec92d7480969a0c48c568728e data/celebratoryspruce/loot_table/blocks/decorated_wreath.json
 25d775098de78f8ebb18da218b0a6c5c932bf3cb data/celebratoryspruce/loot_table/blocks/festive_spruce_leaves.json
 4f4e0fc7c57509f7fbb5238a4f99d4e157c34eb1 data/celebratoryspruce/loot_table/blocks/gold_star.json
+d4e92e0707543e24dabbcd8a49ebbe0262e1fb96 data/celebratoryspruce/loot_table/blocks/light_net.json
 f2924b27b1a4c426a3a6aaa7ed5af4e253082a1f data/celebratoryspruce/loot_table/blocks/potted_celebratory_spruce_sapling.json
 7d01cfb6fde61f2260b9793908155965b0ab2da5 data/celebratoryspruce/loot_table/blocks/wall_gold_star.json
+584c7b1419126c1558b367626f7b7e5f3ffab6ab data/celebratoryspruce/loot_table/blocks/wall_wreath.json
+e682be372fc06738a718cdc9956d03a7b3459fd4 data/celebratoryspruce/loot_table/blocks/wreath.json

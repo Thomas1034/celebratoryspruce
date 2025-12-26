@@ -1,12 +1,17 @@
 {
   "required": true,
   "package": "com.startraveler.celebratoryspruce.mixin",
+  "mixinextras": {
+    "minVersion": "0.5.0"
+  },
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BiomeMixin",
     "BlockMixin",
     "EntityTypeMixin",
     "ItemMixin",
-    "MobEffectMixin"
+    "MobEffectMixin",
+    "SnowLayerBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

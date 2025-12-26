@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "celebratoryspruce:music_disc_christmas_day_bells",
+  "ingredients": [
+    "celebratoryspruce:blank_carol_disc",
+    "minecraft:bell",
+    "#c:dyes/red"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebratoryspruce:music_disc_christmas_day_bells"
+  }
+}

@@ -5,6 +5,7 @@ import com.startraveler.celebratoryspruce.datagen.*;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.WritableRegistry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -26,12 +27,15 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
@@ -64,11 +68,6 @@ public class CelebratorySpruceClient {
                     ModBlocks.POTTED_CELEBRATORY_SPRUCE_SAPLING.get(),
                     ChunkSectionLayer.CUTOUT
             );
-            ItemBlockRenderTypes.setRenderLayer(
-                    ModBlocks.GOLD_STAR.get(),
-                    ChunkSectionLayer.CUTOUT
-            );
-
         });
     }
 
@@ -82,8 +81,13 @@ public class CelebratorySpruceClient {
 
     public static void registerTints(final RegisterColorHandlersEvent.Block event) {
         event.register(
-                (blockState, blockAndTintGetter, blockPos, i) -> SPRUCE_LEAVES_TINT,
-                ModBlocks.DECORATED_SPRUCE_LEAVES.get(), ModBlocks.FESTIVE_SPRUCE_LEAVES.get()
+                (blockState, blockAndTintGetter, blockPos, i) -> i == 0 ? SPRUCE_LEAVES_TINT : -1,
+                ModBlocks.DECORATED_SPRUCE_LEAVES.get(),
+                ModBlocks.FESTIVE_SPRUCE_LEAVES.get(),
+                ModBlocks.WREATH.get(),
+                ModBlocks.WALL_WREATH.get(),
+                ModBlocks.DECORATED_WREATH.get(),
+                ModBlocks.DECORATED_WALL_WREATH.get()
         );
     }
 
@@ -138,6 +142,19 @@ public class CelebratorySpruceClient {
                             packOutput, lookupProvider,
                             // Add generators here
                             List.of(CelebratorySpruceAdvancementProvider::generate)
+                    )
+            );
+
+            // Generate dynamic registries
+            generator.addProvider(
+                    true, new DatapackBuiltinEntriesProvider(
+                            packOutput,
+                            lookupProvider,
+                            new RegistrySetBuilder().add(
+                                    NeoForgeRegistries.Keys.BIOME_MODIFIERS,
+                                    CelebratorySpruceBiomeModifiers::register
+                            ),
+                            Set.of(CelebratorySpruce.MODID, "minecraft")
                     )
             );
 

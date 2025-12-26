@@ -1,0 +1,15 @@
+{
+	"silent_night": {
+		"name": "celebratoryspruce:records/silent_night",
+    "stream": true
+	},
+	"what_child": {
+		"name": "celebratoryspruce:records/what_child_is_this",
+    "stream": true
+	},
+	"christmas_day_bells": {
+		"name": "celebratoryspruce:records/i_heard_the_bells_on_christmas_day",
+    "stream": true
+	}
+	
+}

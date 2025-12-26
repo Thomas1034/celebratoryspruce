@@ -1,0 +1,8 @@
+{
+  "parent": "celebratoryspruce:block/multiface_face_emissive",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "face": "celebratoryspruce:block/light_net_variant4",
+    "particle": "celebratoryspruce:block/light_net_variant4"
+  }
+}

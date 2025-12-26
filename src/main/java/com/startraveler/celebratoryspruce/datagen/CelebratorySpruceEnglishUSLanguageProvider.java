@@ -10,12 +10,15 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider {
 
@@ -36,36 +39,68 @@ public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider
         excludedPotions = new HashSet<>();
     }
 
-
     @Override
     protected void addTranslations() {
-        // Now, do all the rest automagically.
 
+        this.add(ModItems.MUSIC_DISC_SILENT_NIGHT.get(), "Carol Disc");
+        this.add(ModItems.MUSIC_DISC_WHAT_CHILD.get(), "Carol Disc");
+        this.add(ModItems.MUSIC_DISC_CHRISTMAS_DAY_BELLS.get(), "Carol Disc");
+        this.add("jukebox_song.celebratoryspruce.silent_night", "Franz Gruber - Silent Night");
+        this.add("jukebox_song.celebratoryspruce.what_child", "William Chatterton Dix - What Child Is This?");
+        this.add(
+                "jukebox_song.celebratoryspruce.christmas_day_bells",
+                "Henry Wadsworth Longfellow / John Baptiste Calkin - I Heard the Bells on Christmas Day"
+        );
+
+        this.add(Config.SNOW_MELTS_IN_LIGHT);
+        this.add(Config.SNOW_MELTING_THRESHOLD);
+        this.add(Config.SNOW_ACCUMULATION_THRESHOLD);
+        // Now, do all the rest automagically.
         this.add(ModCreativeModeTabs.ITEMS_NAME, "Celebratory Spruce Items");
         this.addTranslations(ModBlocks.BLOCKS.getEntries(), excludedBlocks);
         this.addTranslations(ModItems.ITEMS.getEntries(), excludedItems);
         this.addTranslations(Set.of(), excludedEffects);
         this.addTranslations(Set.of(), excludedEntityTypes);
-        this.addPotionTranslations(Set.of());
-
+        this.addPotionTranslations(Set.of(), excludedPotions);
     }
 
+    @SuppressWarnings("deprecation")
+    public <T> void add(ModConfigSpec.ConfigValue<T> configValue) {
+        List<String> rawName = configValue.getPath();
+        List<String> splitRawName = List.of(rawName.getLast().split("(?=\\p{Lu})"));
+        String name = splitRawName.stream()
+                .map(WordUtils::capitalize).flatMap(string -> Stream.of(string, " "))
+                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+                .toString();
+
+        String rawNameJoinedByDots = String.join(".", rawName);
+        String generatedTranslationKey = CelebratorySpruce.MODID + ".configuration." + rawNameJoinedByDots;
+
+        CelebratorySpruce.LOGGER.warn("Key {} value {}", generatedTranslationKey, name);
+
+        // This crashes.
+        this.add(generatedTranslationKey, name);
+    }
+
+    @SuppressWarnings("unused")
     private void exclude(EntityType<?> key, String name) {
         this.excludedEntityTypes.add(key);
         super.add(key, name);
     }
 
+    @SuppressWarnings("unused")
     public <T extends HasDescriptionId> void exclude(T key, String name, Set<T> values) {
         values.add(key);
         super.add(key.getDescriptionId(), name);
     }
 
+    @SuppressWarnings("unused")
     public void exclude(TagKey<?> tagKey, String name) {
         this.excludedTags.add(tagKey);
         super.add(tagKey, name);
     }
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"deprecation", "unused"})
     protected void addTagTranslations(Iterable<TagKey<?>> tags) {
         tags.forEach(tag -> {
             if (!excludedTags.contains(tag)) {
@@ -87,7 +122,10 @@ public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider
                     this.add(
                             id,
                             WordUtils.capitalize(Objects.requireNonNull(holder.getKey())
-                                    .identifier().getPath().replace('/', ' ').replace('_', ' '))
+                                    .identifier()
+                                    .getPath()
+                                    .replace('/', ' ')
+                                    .replace('_', ' '))
                     );
                 } catch (IllegalStateException e) {
                     CelebratorySpruce.LOGGER.warn("Skipping duplicate translation key {}", id);
@@ -97,7 +135,7 @@ public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider
     }
 
     @SuppressWarnings("deprecation")
-    protected void addPotionTranslations(Iterable<Holder<Potion>> potions) {
+    protected void addPotionTranslations(Iterable<Holder<Potion>> potions, Set<Potion> excludedPotions) {
         potions.forEach(holder -> {
             if (!excludedPotions.contains(holder.value())) {
                 String rawId = Objects.requireNonNull(holder.getKey()).identifier().getPath();

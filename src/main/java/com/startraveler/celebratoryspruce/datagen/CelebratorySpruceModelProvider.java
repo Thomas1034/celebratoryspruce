@@ -1,10 +1,10 @@
 package com.startraveler.celebratoryspruce.datagen;
 
 import com.google.common.collect.Streams;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Quadrant;
 import com.startraveler.celebratoryspruce.*;
-import com.startraveler.celebratoryspruce.block.BoxPileBlock;
-import com.startraveler.celebratoryspruce.block.DecoratedLeavesBlock;
+import com.startraveler.celebratoryspruce.block.*;
 import com.startraveler.celebratoryspruce.datagen.model.CelebratorySpruceModelTemplates;
 import com.startraveler.celebratoryspruce.datagen.model.CelebratorySpruceTextureMapping;
 import com.startraveler.celebratoryspruce.datagen.model.CelebratorySpruceTexturedModel;
@@ -33,6 +33,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.apache.commons.lang3.function.TriFunction;
@@ -41,13 +42,11 @@ import org.apache.commons.lang3.mutable.MutableObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CelebratorySpruceModelProvider extends ModelProvider {
@@ -277,7 +276,24 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         blockModels.registerSimpleFlatItemModel(ModItems.GOLD_STAR.asItem());
         blockModels.createParticleOnlyBlock(ModBlocks.GOLD_STAR.get());
         blockModels.createParticleOnlyBlock(ModBlocks.WALL_GOLD_STAR.get());
-        blockModels.createMultiface(ModBlocks.LIGHT_NET.get());
+        // blockModels.createMultiface(ModBlocks.LIGHT_NET.get());
+        createDecoratedMultifaceBlock(
+                ModBlocks.LIGHT_NET.get(),
+                CelebratorySpruceTexturedModel.MULTIFACE_FACE_EMISSIVE,
+                LightNetBlock.VARIANT
+        );
+
+        createWreath(ModBlocks.WREATH.get(), ModBlocks.WALL_WREATH.get());
+        createOverlaidWreath(
+                ModBlocks.DECORATED_WREATH.get(),
+                ModBlocks.DECORATED_WALL_WREATH.get(),
+                DecoratedWreathBlock.VARIANT
+        );
+
+        basicItem(ModItems.BLANK_CAROL_DISC.get());
+        basicItem(ModItems.MUSIC_DISC_SILENT_NIGHT.get());
+        basicItem(ModItems.MUSIC_DISC_WHAT_CHILD.get());
+        basicItem(ModItems.MUSIC_DISC_CHRISTMAS_DAY_BELLS.get());
     }
 
     @SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "ConstantConditions"})
@@ -295,6 +311,98 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         List<Item> excluded = new ArrayList<>();
 
         return super.getKnownItems().filter(entry -> !excluded.contains(entry.value()));
+    }
+
+    public void createOverlaidWreath(Block wreathBlock, Block wallWreathBlock, IntegerProperty intProperty) {
+
+        this.blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(wreathBlock)
+                .with(PropertyDispatch.initial(intProperty).generate((property) -> {
+
+                    Identifier modelidentifier = this.blockModels.createSuffixedVariant(
+                            wreathBlock,
+                            "_" + intProperty.getName() + property,
+                            CelebratorySpruceTexturedModel.OVERLAID_WREATH.get(wreathBlock)
+                                    .getTemplate()
+                                    .extend()
+                                    .renderType(ChunkSectionLayer.CUTOUT.label())
+                                    .build(),
+                            CelebratorySpruceTextureMapping::overlaidWreath
+                    );
+                    return BlockModelGenerators.plainVariant(modelidentifier);
+                })));
+
+        Int2ObjectMap<Identifier> alreadyCreated = new Int2ObjectOpenHashMap<>();
+        Map<Direction, VariantMutator> propertyMap = BlockModelGenerators.ROTATION_TORCH.getEntries()
+                .entrySet()
+                .stream()
+                .map(entry -> Pair.of(
+                        entry.getKey()
+                                .values()
+                                .stream()
+                                .map(Property.Value::value)
+                                .map(value -> value instanceof Direction direction ? direction : null)
+                                .filter(Objects::nonNull)
+                                .findFirst()
+                                .orElse(null), entry.getValue()
+                ))
+                .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
+        this.blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(wallWreathBlock)
+                .with(PropertyDispatch.initial(intProperty, WallWreathBlock.FACING).generate((property, rotation) -> {
+
+                    Identifier modelIdentifier = alreadyCreated.computeIfAbsent(
+                            property, (i) -> this.blockModels.createSuffixedVariant(
+                                    wallWreathBlock,
+                                    "_" + intProperty.getName() + i,
+                                    CelebratorySpruceTexturedModel.OVERLAID_WREATH_WALL.get(wreathBlock)
+                                            .getTemplate()
+                                            .extend()
+                                            .renderType(ChunkSectionLayer.CUTOUT.label())
+                                            .build(),
+                                    CelebratorySpruceTextureMapping::overlaidWreath
+                            )
+                    );
+                    return BlockModelGenerators.plainVariant(modelIdentifier).with(propertyMap.get(rotation));
+                })));
+
+        Identifier identifier = this.blockModels.createFlatItemModelWithBlockTextureAndOverlay(
+                wreathBlock.asItem(),
+                wreathBlock,
+                "_overlay"
+        );
+
+        this.blockModels.registerSimpleTintedItemModel(
+                wreathBlock,
+                identifier,
+                ItemModelUtils.constantTint(CelebratorySpruceClient.SPRUCE_LEAVES_TINT)
+        );
+    }
+
+
+    public void createWreath(Block wreathBlock, Block wallWreathBlock) {
+        TextureMapping textureMapping = CelebratorySpruceTextureMapping.wreath(wreathBlock);
+        this.blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(
+                wreathBlock,
+                BlockModelGenerators.plainVariant(CelebratorySpruceModelTemplates.WREATH.create(
+                        wreathBlock,
+                        textureMapping,
+                        this.blockModels.modelOutput
+                ))
+        ));
+        this.blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(
+                wallWreathBlock,
+                BlockModelGenerators.plainVariant(CelebratorySpruceModelTemplates.WALL_WREATH.create(
+                        wallWreathBlock,
+                        textureMapping,
+                        this.blockModels.modelOutput
+                ))
+        ).with(BlockModelGenerators.ROTATION_TORCH));
+        Identifier identifier = this.blockModels.createFlatItemModelWithBlockTexture(wreathBlock.asItem(), wreathBlock);
+
+        this.blockModels.registerSimpleTintedItemModel(
+                wreathBlock,
+                identifier,
+                ItemModelUtils.constantTint(CelebratorySpruceClient.SPRUCE_LEAVES_TINT)
+        );
     }
 
     private String name(Block block) {
@@ -323,24 +431,63 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
     }
 
 
-    // TODO make this support multiple decoration states.
-    public void createDecoratedMultifaceBlockStates(Block block, IntegerProperty intProperty) {
+    public void createDecoratedMultifaceBlock(Block block, Function<Integer, TexturedModel.Provider> provider, IntegerProperty intProperty) {
+        String intPropertyName = intProperty.getName();
+        int firstIntValue = intProperty.getPossibleValues().getFirst();
         Map<Property<@NotNull Boolean>, VariantMutator> map = BlockModelGenerators.selectMultifaceProperties(
                 block.defaultBlockState(),
                 MultifaceBlock::getFaceProperty
         );
+
+        // Holds defaults for all the properties.
         ConditionBuilder conditionBuilder = BlockModelGenerators.condition();
+
+        Map<Integer, Map<BooleanProperty, VariantMutator>> decorationToSidesMap = intProperty.getPossibleValues()
+                .stream()
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        (i) -> BlockModelGenerators.selectMultifaceProperties(
+                                block.defaultBlockState(),
+                                MultifaceBlock::getFaceProperty
+                        )
+                ));
+
         map.forEach((booleanProperty, variantMutator) -> conditionBuilder.term(booleanProperty, false));
-        MultiVariant multiVariant = BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(block));
+        conditionBuilder.term(intProperty, firstIntValue);
+
+
+        // Root part of the blockstates file
         MultiPartGenerator multiPartGenerator = MultiPartGenerator.multiPart(block);
-        map.forEach((booleanProperty, variantMutator) -> {
-            multiPartGenerator.with(
-                    BlockModelGenerators.condition().term(booleanProperty, true),
-                    multiVariant.with(variantMutator)
+
+        decorationToSidesMap.forEach((decorationValue, sidesMap) -> {
+
+            Identifier modelIdentifier = this.blockModels.createSuffixedVariant(
+                    block,
+                    "_" + intPropertyName + decorationValue,
+                    provider.apply(decorationValue)
+                            .get(block)
+                            .getTemplate()
+                            .extend()
+                            .renderType(ChunkSectionLayer.CUTOUT.label())
+                            .build(),
+                    CelebratorySpruceTextureMapping::multifaceFace
             );
-            multiPartGenerator.with(conditionBuilder, multiVariant.with(variantMutator));
+            MultiVariant multiVariant = BlockModelGenerators.plainVariant(modelIdentifier);
+
+            sidesMap.forEach((booleanProperty, variantMutator) -> {
+                // Adds each conditional value to the blockstates property.
+                MultiVariant withVariantMutator = multiVariant.with(variantMutator);
+                multiPartGenerator.with(
+                        BlockModelGenerators.condition().term(booleanProperty, true).term(intProperty, decorationValue),
+                        withVariantMutator
+                );
+
+
+            });
         });
+
         this.blockModels.blockStateOutput.accept(multiPartGenerator);
+        this.basicItem(block.asItem());
     }
 
     public void createOverlaidTintedLeaves(Block block, Function<Integer, TexturedModel.Provider> provider, int tint, IntegerProperty intProperty) {

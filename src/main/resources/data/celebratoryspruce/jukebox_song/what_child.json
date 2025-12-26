@@ -1,0 +1,10 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "jukebox_song.celebratoryspruce.what_child"
+  },
+  "length_in_seconds": 121.0,
+  "sound_event": {
+		"sound_id": "celebratoryspruce:what_child"
+	}
+}

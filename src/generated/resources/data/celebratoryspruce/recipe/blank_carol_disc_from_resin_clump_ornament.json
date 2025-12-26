@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "celebratoryspruce:blank_carol_disc",
+  "key": {
+    "o": "celebratoryspruce:ornament",
+    "r": "minecraft:resin_clump"
+  },
+  "pattern": [
+    " r ",
+    "ror",
+    " r "
+  ],
+  "result": {
+    "count": 2,
+    "id": "celebratoryspruce:blank_carol_disc"
+  }
+}

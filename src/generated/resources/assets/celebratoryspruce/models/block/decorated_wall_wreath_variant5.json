@@ -1,0 +1,11 @@
+{
+  "parent": "celebratoryspruce:block/template_overlaid_wall_wreath",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "celebratoryspruce:block/decorated_wall_wreath_variant5",
+    "front": "celebratoryspruce:block/decorated_wall_wreath_variant5",
+    "overlay": "celebratoryspruce:block/decorated_wall_wreath_variant5_overlay",
+    "overlay_front": "celebratoryspruce:block/decorated_wall_wreath_variant5_overlay_front",
+    "particle": "celebratoryspruce:block/decorated_wall_wreath_variant5"
+  }
+}

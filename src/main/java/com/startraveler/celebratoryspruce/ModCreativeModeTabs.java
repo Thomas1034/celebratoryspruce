@@ -19,7 +19,8 @@ public class ModCreativeModeTabs {
     public static final String ITEMS_ID = "celebratory_spruce_items";
     public static final String ITEMS_NAME = PREFIX + ITEMS_ID;
     public static final DeferredHolder<CreativeModeTab, @NotNull CreativeModeTab> ITEMS = CREATIVE_MODE_TABS.register(
-            ITEMS_ID, () -> CreativeModeTab.builder()
+            ITEMS_ID,
+            () -> CreativeModeTab.builder()
                     .title(Component.translatable(ITEMS_NAME)) //The language key for the title of your CreativeModeTab
                     .withTabsBefore(CreativeModeTabs.COMBAT)
                     .icon(ModBlocks.CELEBRATORY_SPRUCE_SAPLING::toStack)
@@ -29,7 +30,15 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.FESTIVE_LIGHT);
                         output.accept(ModBlocks.DECORATED_SPRUCE_LEAVES);
                         output.accept(ModBlocks.FESTIVE_SPRUCE_LEAVES);
+                        output.accept(ModItems.WREATH);
+                        output.accept(ModItems.DECORATED_WREATH);
+                        output.accept(ModBlocks.LIGHT_NET);
                         output.accept(ModItems.GOLD_STAR);
-                    }).build()
+                        output.accept(ModItems.BLANK_CAROL_DISC);
+                        output.accept(ModItems.MUSIC_DISC_CHRISTMAS_DAY_BELLS);
+                        output.accept(ModItems.MUSIC_DISC_SILENT_NIGHT);
+                        output.accept(ModItems.MUSIC_DISC_WHAT_CHILD);
+                    })
+                    .build()
     );
 }

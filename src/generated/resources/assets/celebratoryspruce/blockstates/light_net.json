@@ -1,0 +1,516 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant0"
+      },
+      "when": {
+        "north": "true",
+        "variant": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant0",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "variant": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant0",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true",
+        "variant": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant0",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "variant": "0",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant0",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "up": "true",
+        "variant": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant0",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "down": "true",
+        "variant": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant1"
+      },
+      "when": {
+        "north": "true",
+        "variant": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant1",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "variant": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant1",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true",
+        "variant": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant1",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "variant": "1",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant1",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "up": "true",
+        "variant": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant1",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "down": "true",
+        "variant": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant2"
+      },
+      "when": {
+        "north": "true",
+        "variant": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant2",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "variant": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant2",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true",
+        "variant": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant2",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "variant": "2",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant2",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "up": "true",
+        "variant": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant2",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "down": "true",
+        "variant": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant3"
+      },
+      "when": {
+        "north": "true",
+        "variant": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant3",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "variant": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant3",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true",
+        "variant": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant3",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "variant": "3",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant3",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "up": "true",
+        "variant": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant3",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "down": "true",
+        "variant": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant4"
+      },
+      "when": {
+        "north": "true",
+        "variant": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant4",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "variant": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant4",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true",
+        "variant": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant4",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "variant": "4",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant4",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "up": "true",
+        "variant": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant4",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "down": "true",
+        "variant": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant5"
+      },
+      "when": {
+        "north": "true",
+        "variant": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant5",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "variant": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant5",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true",
+        "variant": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant5",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "variant": "5",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant5",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "up": "true",
+        "variant": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant5",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "down": "true",
+        "variant": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant6"
+      },
+      "when": {
+        "north": "true",
+        "variant": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant6",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "variant": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant6",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true",
+        "variant": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant6",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "variant": "6",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant6",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "up": "true",
+        "variant": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant6",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "down": "true",
+        "variant": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant7"
+      },
+      "when": {
+        "north": "true",
+        "variant": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant7",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "variant": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant7",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true",
+        "variant": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant7",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "variant": "7",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant7",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "up": "true",
+        "variant": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/light_net_variant7",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "down": "true",
+        "variant": "7"
+      }
+    }
+  ]
+}

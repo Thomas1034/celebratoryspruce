@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "celebratoryspruce:block/decorated_wreath",
+    "layer1": "celebratoryspruce:block/decorated_wreath_overlay"
+  }
+}

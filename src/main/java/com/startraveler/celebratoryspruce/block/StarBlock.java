@@ -43,7 +43,8 @@ public class StarBlock extends BaseStarBlock implements SimpleWaterloggedBlock {
             )
             .fieldOf("particle_options");
 
-    public static final MapCodec<StarBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(PARTICLE_OPTIONS_FIELD.forGetter((starBlock) -> starBlock.gleamParticle),
+    public static final MapCodec<StarBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+                    PARTICLE_OPTIONS_FIELD.forGetter((starBlock) -> starBlock.gleamParticle),
                     propertiesCodec()
             )
             .apply(instance, StarBlock::new));

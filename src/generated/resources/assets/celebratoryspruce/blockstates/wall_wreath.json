@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "celebratoryspruce:block/wall_wreath"
+    },
+    "facing=north": {
+      "model": "celebratoryspruce:block/wall_wreath",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "celebratoryspruce:block/wall_wreath",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "celebratoryspruce:block/wall_wreath",
+      "y": 180
+    }
+  }
+}

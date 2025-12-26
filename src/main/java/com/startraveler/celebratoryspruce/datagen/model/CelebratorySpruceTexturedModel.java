@@ -12,6 +12,36 @@ import java.util.function.Function;
 
 public class CelebratorySpruceTexturedModel {
 
+    public static final TexturedModel.Provider WREATH = TexturedModel.createDefault(
+            CelebratorySpruceTextureMapping::wreath,
+            CelebratorySpruceModelTemplates.WREATH
+    );
+
+    public static final TexturedModel.Provider WREATH_WALL = TexturedModel.createDefault(
+            CelebratorySpruceTextureMapping::wreath,
+            CelebratorySpruceModelTemplates.WALL_WREATH
+    );
+
+    public static final TexturedModel.Provider OVERLAID_WREATH = TexturedModel.createDefault(
+            CelebratorySpruceTextureMapping::overlaidWreath,
+            CelebratorySpruceModelTemplates.OVERLAID_WREATH
+    );
+
+    public static final TexturedModel.Provider OVERLAID_WREATH_WALL = TexturedModel.createDefault(
+            CelebratorySpruceTextureMapping::overlaidWreath,
+            CelebratorySpruceModelTemplates.OVERLAID_WALL_WREATH
+    );
+
+    public static final Function<Integer, TexturedModel.Provider> MULTIFACE_FACE = variant -> TexturedModel.createDefault(
+            block -> CelebratorySpruceTextureMapping.multifaceFace(TextureMapping.getBlockTexture(block)),
+            CelebratorySpruceModelTemplates.MULTIFACE_FACE
+    );
+
+    public static final Function<Integer, TexturedModel.Provider> MULTIFACE_FACE_EMISSIVE = variant -> TexturedModel.createDefault(
+            block -> CelebratorySpruceTextureMapping.multifaceFace(TextureMapping.getBlockTexture(block)),
+            CelebratorySpruceModelTemplates.MULTIFACE_FACE_EMISSIVE
+    );
+
     public static final Function<Integer, TexturedModel.Provider> OVERLAID_LEAVES = age -> TexturedModel.createDefault(
             block -> CelebratorySpruceTextureMapping.overlaidLeaves(TextureMapping.getBlockTexture(block)),
             CelebratorySpruceModelTemplates.OVERLAID_LEAVES
@@ -34,7 +64,10 @@ public class CelebratorySpruceTexturedModel {
     );
 
     public static final Function<Integer, TexturedModel.Provider> BOX_PILE = (boxes) -> TexturedModel.createDefault(
-            (block) -> CelebratorySpruceTextureMapping.boxPile(block, boxes),
+            (block) -> CelebratorySpruceTextureMapping.boxPile(
+                    block,
+                    boxes
+            ),
             CelebratorySpruceModelTemplates.boxPile(boxes)
     );
 
@@ -44,8 +77,7 @@ public class CelebratorySpruceTexturedModel {
                     block,
                     base,
                     Identifier.fromNamespaceAndPath(CelebratorySpruce.MODID, overlay).withPrefix("block/")
-            ),
-            CelebratorySpruceModelTemplates.OVERLAID_CUBE
+            ), CelebratorySpruceModelTemplates.OVERLAID_CUBE
     );
 
     public static final TriFunction<String, String, Block, TexturedModel.Provider> TOP_OVERLAID_CUBE = (overlay, topOverlay, base) -> TexturedModel.createDefault(

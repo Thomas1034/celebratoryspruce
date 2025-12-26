@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "celebratoryspruce:wreath",
+  "key": {
+    "l": "minecraft:spruce_leaves"
+  },
+  "pattern": [
+    " l ",
+    "l l",
+    " l "
+  ],
+  "result": {
+    "count": 8,
+    "id": "celebratoryspruce:wreath"
+  }
+}

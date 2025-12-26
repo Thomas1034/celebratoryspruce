@@ -101,7 +101,10 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
         this.dropOther(ModBlocks.GOLD_STAR.get(), ModItems.GOLD_STAR.get());
         this.dropOther(ModBlocks.WALL_GOLD_STAR.get(), ModItems.GOLD_STAR.get());
         this.add(ModBlocks.LIGHT_NET.get(), this.createMultifaceBlockDrops(ModBlocks.LIGHT_NET.get()));
-
+        this.dropOther(ModBlocks.WREATH.get(), ModItems.WREATH.get());
+        this.dropOther(ModBlocks.WALL_WREATH.get(), ModItems.WREATH.get());
+        this.dropOther(ModBlocks.DECORATED_WREATH.get(), ModItems.DECORATED_WREATH.get());
+        this.dropOther(ModBlocks.DECORATED_WALL_WREATH.get(), ModItems.DECORATED_WREATH.get());
     }
 
     @Override

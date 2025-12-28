@@ -1,21 +1,21 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bell": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:bell"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_blank_carol_disc": {
       "conditions": {
         "items": [
           {
             "items": "celebratoryspruce:blank_carol_disc"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_copper_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:copper_ingot"
           }
         ]
       },
@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "celebratoryspruce:music_disc_christmas_day_bells_from_blank_carol_disc_bell_tag_c_dyes_red"
+        "recipe": "celebratoryspruce:music_disc_christmas_day_bells_from_blank_carol_disc_copper_ingot_tag_c_dyes_red"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -52,14 +52,14 @@
     [
       "has_the_recipe",
       "has_blank_carol_disc",
-      "has_bell",
+      "has_copper_ingot",
       "hasminecraft_root",
       "has_music_disc_christmas_day_bells"
     ]
   ],
   "rewards": {
     "recipes": [
-      "celebratoryspruce:music_disc_christmas_day_bells_from_blank_carol_disc_bell_tag_c_dyes_red"
+      "celebratoryspruce:music_disc_christmas_day_bells_from_blank_carol_disc_copper_ingot_tag_c_dyes_red"
     ]
   }
 }

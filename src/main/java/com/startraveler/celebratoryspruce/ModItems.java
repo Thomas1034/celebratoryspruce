@@ -28,12 +28,30 @@ public class ModItems {
             )
     );
 
+    public static final DeferredItem<@NotNull Item> ITEM_DISPLAY = register(
+            "item_display",
+            (properties) -> new StandingAndWallBlockItem(
+                    ModBlocks.ITEM_DISPLAY.get(),
+                    ModBlocks.WALL_ITEM_DISPLAY.get(),
+                    Direction.DOWN,
+                    properties
+            )
+    );
+
     public static final DeferredItem<@NotNull Item> WREATH = register(
             "wreath",
             (properties) -> new StandingAndWallBlockItem(
                     ModBlocks.WREATH.get(),
                     ModBlocks.WALL_WREATH.get(),
                     Direction.DOWN,
+                    properties
+            )
+    );
+
+    public static final DeferredItem<@NotNull Item> PRESENT = register(
+            "present",
+            (properties) -> new BlockItem(
+                    ModBlocks.PRESENT_PILE.get(),
                     properties
             )
     );
@@ -49,11 +67,15 @@ public class ModItems {
     );
 
     public static final DeferredItem<@NotNull Item> BLANK_CAROL_DISC = register(
-            "blank_carol_disc", Item::new, () -> new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON)
+            "blank_carol_disc",
+            Item::new,
+            () -> new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON)
     );
 
     public static final DeferredItem<@NotNull Item> MUSIC_DISC_SILENT_NIGHT = register(
-            "music_disc_silent_night", Item::new, () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).component(
+            "music_disc_silent_night",
+            Item::new,
+            () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).component(
                     DataComponents.JUKEBOX_PLAYABLE,
                     new JukeboxPlayable(new EitherHolder<>(ResourceKey.create(
                             Registries.JUKEBOX_SONG,
@@ -63,7 +85,9 @@ public class ModItems {
     );
 
     public static final DeferredItem<@NotNull Item> MUSIC_DISC_WHAT_CHILD = register(
-            "music_disc_what_child", Item::new, () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).component(
+            "music_disc_what_child",
+            Item::new,
+            () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).component(
                     DataComponents.JUKEBOX_PLAYABLE,
                     new JukeboxPlayable(new EitherHolder<>(ResourceKey.create(
                             Registries.JUKEBOX_SONG,
@@ -73,11 +97,25 @@ public class ModItems {
     );
 
     public static final DeferredItem<@NotNull Item> MUSIC_DISC_CHRISTMAS_DAY_BELLS = register(
-            "music_disc_christmas_day_bells", Item::new, () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).component(
+            "music_disc_christmas_day_bells",
+            Item::new,
+            () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).component(
                     DataComponents.JUKEBOX_PLAYABLE,
                     new JukeboxPlayable(new EitherHolder<>(ResourceKey.create(
                             Registries.JUKEBOX_SONG,
                             CelebratorySpruce.id("christmas_day_bells")
+                    )))
+            )
+    );
+
+    public static final DeferredItem<@NotNull Item> MUSIC_DISC_CAROL_OF_THE_BELLS = register(
+            "music_disc_carol_of_the_bells",
+            Item::new,
+            () -> new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).component(
+                    DataComponents.JUKEBOX_PLAYABLE,
+                    new JukeboxPlayable(new EitherHolder<>(ResourceKey.create(
+                            Registries.JUKEBOX_SONG,
+                            CelebratorySpruce.id("carol_of_the_bells")
                     )))
             )
     );

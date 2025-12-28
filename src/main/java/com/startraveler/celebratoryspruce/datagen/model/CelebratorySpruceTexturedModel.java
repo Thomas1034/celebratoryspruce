@@ -12,11 +12,13 @@ import java.util.function.Function;
 
 public class CelebratorySpruceTexturedModel {
 
+    @SuppressWarnings("unused")
     public static final TexturedModel.Provider WREATH = TexturedModel.createDefault(
             CelebratorySpruceTextureMapping::wreath,
             CelebratorySpruceModelTemplates.WREATH
     );
 
+    @SuppressWarnings("unused")
     public static final TexturedModel.Provider WREATH_WALL = TexturedModel.createDefault(
             CelebratorySpruceTextureMapping::wreath,
             CelebratorySpruceModelTemplates.WALL_WREATH
@@ -32,6 +34,7 @@ public class CelebratorySpruceTexturedModel {
             CelebratorySpruceModelTemplates.OVERLAID_WALL_WREATH
     );
 
+    @SuppressWarnings("unused")
     public static final Function<Integer, TexturedModel.Provider> MULTIFACE_FACE = variant -> TexturedModel.createDefault(
             block -> CelebratorySpruceTextureMapping.multifaceFace(TextureMapping.getBlockTexture(block)),
             CelebratorySpruceModelTemplates.MULTIFACE_FACE
@@ -63,11 +66,8 @@ public class CelebratorySpruceTexturedModel {
             CelebratorySpruceModelTemplates.DOUBLE_SIDED_CUBE_COLUMN
     );
 
-    public static final Function<Integer, TexturedModel.Provider> BOX_PILE = (boxes) -> TexturedModel.createDefault(
-            (block) -> CelebratorySpruceTextureMapping.boxPile(
-                    block,
-                    boxes
-            ),
+    public static final BiFunction<Integer, Boolean, TexturedModel.Provider> BOX_PILE = (boxes, closed) -> TexturedModel.createDefault(
+            (block) -> CelebratorySpruceTextureMapping.boxPile(block, boxes, closed),
             CelebratorySpruceModelTemplates.boxPile(boxes)
     );
 

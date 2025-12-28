@@ -58,6 +58,14 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
                 1
         );
         shaped(
+                List.of("oio", "isi", "oio"),
+                List.of('i', 's', 'o'),
+                List.of(Items.COPPER_INGOT, Blocks.GLASS, ModItems.FESTIVE_LIGHT.get()),
+                RecipeCategory.DECORATIONS,
+                ModItems.ITEM_DISPLAY.get(),
+                4
+        );
+        shaped(
                 List.of("oso", "oio", "oso"),
                 List.of('i', 's', 'o'),
                 List.of(Items.COPPER_INGOT, Items.STRING, ModItems.FESTIVE_LIGHT.get()),
@@ -110,10 +118,17 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
                 1
         );
         shapeless(
-                List.of(ModItems.BLANK_CAROL_DISC.get(), Items.BELL, Tags.Items.DYES_RED),
+                List.of(ModItems.BLANK_CAROL_DISC.get(), Items.COPPER_INGOT, Tags.Items.DYES_RED),
                 List.of(1, 1, 1),
                 RecipeCategory.MISC,
                 ModItems.MUSIC_DISC_CHRISTMAS_DAY_BELLS.get(),
+                1
+        );
+        shapeless(
+                List.of(ModItems.BLANK_CAROL_DISC.get(), Items.IRON_INGOT, Tags.Items.DYES_PURPLE),
+                List.of(1, 1, 1),
+                RecipeCategory.MISC,
+                ModItems.MUSIC_DISC_CAROL_OF_THE_BELLS.get(),
                 1
         );
         // TODO End of recipe definitions
@@ -175,7 +190,7 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
         recipe.save(this.output, recipeName.toString());
     }
 
-    @SuppressWarnings({"unchecked", "SameParameterValue"})
+    @SuppressWarnings({"unchecked", "SameParameterValue", "unused"})
     protected void stonecutting(Object ingredient, RecipeCategory recipeCategory, ItemLike result, int count) {
 
         // The name of the recipe.
@@ -218,6 +233,7 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
         recipe.save(this.output, recipeName);
     }
 
+    @SuppressWarnings("SameParameterValue")
     protected void shapeless(List<Object> ingredients, List<Integer> counts, RecipeCategory recipeCategory, ItemLike result, int count) {
         shapeless(ingredients, counts, recipeCategory, result, count, null);
     }
@@ -270,7 +286,7 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
 
     }
 
-    @SuppressWarnings("SameParameterValue")
+    @SuppressWarnings({"SameParameterValue", "unused"})
     protected void foodCooking(List<ItemLike> ingredients, RecipeCategory category, ItemLike result, float experience, int cookingTime) {
         String group = (namespace(result) + ":" + getItemName(result));
         campfire(ingredients, category, result, experience, 2 * cookingTime, group);
@@ -283,7 +299,7 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
         return "has_" + name(item);
     }
 
-    @SuppressWarnings("SameParameterValue")
+    @SuppressWarnings({"SameParameterValue", "unused"})
     protected void shapeless(RecipeCategory recipeCategory, ItemLike input, int inCount, ItemLike output, int count) {
         shapeless(recipeCategory, input, inCount, output, count, null);
     }

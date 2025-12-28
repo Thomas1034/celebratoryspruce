@@ -2,7 +2,6 @@ package com.startraveler.celebratoryspruce.block;
 
 import com.google.common.collect.ArrayTable;
 import com.google.common.collect.Table;
-import com.mojang.serialization.MapCodec;
 import com.startraveler.celebratoryspruce.XFactHDShapeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,7 +17,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -31,7 +29,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-public class BoxPileBlock extends FallingBlock {
+import java.util.function.Supplier;
+
+public class BoxPileBlock extends Block {
 
     public static final int MIN_BOXES = 1;
     public static final int MAX_BOXES = 8;
@@ -41,9 +41,9 @@ public class BoxPileBlock extends FallingBlock {
             BOXES.getPossibleValues(),
             FACING.getPossibleValues()
     );
-    protected final Ingredient canIncreaseSize;
+    protected final Supplier<Ingredient> canIncreaseSize;
 
-    public BoxPileBlock(Properties properties, Ingredient canIncreaseSize) {
+    public BoxPileBlock(Properties properties, Supplier<Ingredient> canIncreaseSize) {
         super(properties);
         this.canIncreaseSize = canIncreaseSize;
         this.registerDefaultState(this.getStateDefinition().any().setValue(BOXES, MIN_BOXES));
@@ -53,7 +53,7 @@ public class BoxPileBlock extends FallingBlock {
     protected @NotNull InteractionResult useItemOn(ItemStack stack, BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult result) {
         int numBombs = state.getValue(BOXES);
         Item item = stack.getItem();
-        if (numBombs < MAX_BOXES && this.canIncreaseSize.test(stack)) {
+        if (numBombs < MAX_BOXES && this.canIncreaseSize.get().test(stack)) {
             level.setBlockAndUpdate(pos, state.setValue(BOXES, numBombs + 1));
             player.awardStat(Stats.ITEM_USED.get(item));
             stack.consume(1, player);
@@ -81,23 +81,14 @@ public class BoxPileBlock extends FallingBlock {
         return shape;
     }
 
-    @Override
-    protected @NotNull MapCodec<? extends FallingBlock> codec() {
-        throw new IllegalStateException("Block codecs are not yet implemented.");
-    }
-
-    @Override
-    public int getDustColor(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
-        return 0x494949;
-    }
-
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState state = this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
         return this.canSurvive(state, context.getLevel(), context.getClickedPos()) ? state : null;
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, @NotNull BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, @NotNull BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(FACING, BOXES);
     }
 

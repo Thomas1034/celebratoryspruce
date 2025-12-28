@@ -2,25 +2,14 @@ package com.startraveler.celebratoryspruce.block.entity;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.startraveler.celebratoryspruce.CelebratorySpruce;
 import com.startraveler.celebratoryspruce.ModBlockEntityTypes;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.util.ProblemReporter;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
@@ -34,16 +23,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-public class ItemRenderingBlockEntity extends BlockEntity {
-    public static final String ITEM_KEY = "item";
+public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
+    public static final String DEFAULT_ITEM_KEY = "default_item";
     public static final String TRANSFORMS_KEY = "transforms";
     protected final @NotNull List<Transform<?>> transforms;
-    protected @NotNull ItemStack item;
+    protected @NotNull ItemStack defaultDisplayStack;
 
     public ItemRenderingBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntityTypes.ITEM_RENDERING_BLOCK.get(), pos, blockState);
         this.transforms = new ArrayList<>();
-        this.item = ItemStack.EMPTY;
+        this.defaultDisplayStack = ItemStack.EMPTY;
     }
 
     @Override
@@ -51,7 +40,7 @@ public class ItemRenderingBlockEntity extends BlockEntity {
         super.loadAdditional(input);
 
         // load item and transforms
-        this.item = input.read(ITEM_KEY, ItemStack.CODEC).orElse(ItemStack.EMPTY);
+        this.defaultDisplayStack = input.read(DEFAULT_ITEM_KEY, ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
         this.transforms.clear();
         this.transforms.addAll(input.read(TRANSFORMS_KEY, Transform.TRANSFORM_CODEC.listOf()).orElse(List.of()));
     }
@@ -62,64 +51,37 @@ public class ItemRenderingBlockEntity extends BlockEntity {
 
         super.saveAdditional(output);
 
-        output.store(ITEM_KEY, ItemStack.CODEC, this.item);
+        output.store(DEFAULT_ITEM_KEY, ItemStack.OPTIONAL_CODEC, this.defaultDisplayStack);
         output.store(TRANSFORMS_KEY, Transform.TRANSFORM_CODEC.listOf(), this.transforms);
 
         // save item and transforms
     }
 
-    @Override
-    public Packet<@NotNull ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    @Override
-    public @NotNull CompoundTag getUpdateTag(HolderLookup.@NotNull Provider registries) {
-        CompoundTag tag = super.getUpdateTag(registries);
-        try (ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(
-                this::toString,
-                CelebratorySpruce.LOGGER
-        )) {
-            TagValueOutput output = TagValueOutput.createWithContext(reporter, registries);
-            this.saveAdditional(output);
-            tag.merge(output.buildResult());
-        }
-        return tag;
-    }
-
+    @SuppressWarnings("unused")
     public void addTransform(Transform<?> transform) {
         this.transforms.addLast(transform);
         this.markAsChanged();
     }
 
+    @SuppressWarnings("unused")
     public void clearTransforms() {
         this.transforms.clear();
         this.markAsChanged();
     }
 
-    public @NotNull ItemStack getDisplayItem() {
-        return item;
+    public @NotNull ItemStack getDefaultDisplayStack() {
+        return this.defaultDisplayStack;
     }
 
-    public void setDisplayItem(@NotNull ItemLike item) {
-        this.setDisplayItem(item.asItem().getDefaultInstance());
-    }
-
-    public void setDisplayItem(ItemStack item) {
-        this.item = item;
+    public void setDefaultDisplayStack(@NotNull ItemStack stack) {
+        this.defaultDisplayStack = stack;
         this.markAsChanged();
     }
 
-    public void markAsChanged() {
-        this.setChanged();
-        if (this.level != null) {
-            this.level.sendBlockUpdated(
-                    this.getBlockPos(),
-                    this.getBlockState(),
-                    this.getBlockState(),
-                    Block.UPDATE_ALL
-            );
-        }
+
+    public @NotNull ItemStack getStackForDisplay() {
+        ItemStack stack = this.getStoredItemStack();
+        return stack.isEmpty() ? this.getDefaultDisplayStack() : stack;
     }
 
     public @NotNull List<Transform<?>> getTransforms() {
@@ -187,11 +149,14 @@ public class ItemRenderingBlockEntity extends BlockEntity {
 
     public abstract static class Transform<T> {
 
+        @SuppressWarnings("unused")
         public static final Codec<Transform<?>> TRANSFORM_CODEC = TransformType.CODEC.dispatch(
                 Transform::getType,
                 transformType -> transformType.codec().fieldOf("transform")
         );
-        public static final StreamCodec<ByteBuf, Transform<?>> TRANSFORM_STREAM_CODEC = TransformType.STREAM_CODEC.dispatch(Transform::getType,
+        @SuppressWarnings("unused")
+        public static final StreamCodec<ByteBuf, Transform<?>> TRANSFORM_STREAM_CODEC = TransformType.STREAM_CODEC.dispatch(
+                Transform::getType,
                 TransformType::streamCodec
         );
 
@@ -205,8 +170,10 @@ public class ItemRenderingBlockEntity extends BlockEntity {
             return this.type;
         }
 
+        @SuppressWarnings("unused")
         public abstract @NotNull StreamCodec<ByteBuf, @NotNull T> streamCodec();
 
+        @SuppressWarnings("unused")
         public abstract @NotNull Codec<@NotNull T> codec();
     }
 
@@ -252,18 +219,22 @@ public class ItemRenderingBlockEntity extends BlockEntity {
         }
 
 
+        @SuppressWarnings("unused")
         public float getX() {
             return x;
         }
 
+        @SuppressWarnings("unused")
         public float getY() {
             return y;
         }
 
+        @SuppressWarnings("unused")
         public float getZ() {
             return z;
         }
 
+        @SuppressWarnings("unused")
         public float getW() {
             return w;
         }
@@ -312,6 +283,7 @@ public class ItemRenderingBlockEntity extends BlockEntity {
             this.z = z;
         }
 
+        @SuppressWarnings("unused")
         public Translation(Vector3f vector) {
             super(TransformType.ROTATION);
             this.x = vector.x;
@@ -331,6 +303,7 @@ public class ItemRenderingBlockEntity extends BlockEntity {
             return z;
         }
 
+        @SuppressWarnings("unused")
         public @NotNull Vector3f vector() {
             return new Vector3f(this.x, this.y, this.z);
         }
@@ -368,6 +341,7 @@ public class ItemRenderingBlockEntity extends BlockEntity {
         protected final float y;
         protected final float z;
 
+        @SuppressWarnings("unused")
         public Scale(float s) {
             super(TransformType.SCALE);
             this.x = s;
@@ -375,6 +349,7 @@ public class ItemRenderingBlockEntity extends BlockEntity {
             this.z = s;
         }
 
+        @SuppressWarnings("unused")
         public Scale(float x, float y, float z) {
             super(TransformType.SCALE);
             this.x = x;
@@ -382,6 +357,7 @@ public class ItemRenderingBlockEntity extends BlockEntity {
             this.z = z;
         }
 
+        @SuppressWarnings("unused")
         public Scale(Vector3f vector) {
             super(TransformType.ROTATION);
             this.x = vector.x;
@@ -401,6 +377,7 @@ public class ItemRenderingBlockEntity extends BlockEntity {
             return z;
         }
 
+        @SuppressWarnings("unused")
         public @NotNull Vector3f vector() {
             return new Vector3f(this.x, this.y, this.z);
         }

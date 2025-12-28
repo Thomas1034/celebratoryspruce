@@ -1,0 +1,10 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "jukebox_song.celebratoryspruce.carol_of_the_bells"
+  },
+  "length_in_seconds": 94.0,
+  "sound_event": {
+		"sound_id": "celebratoryspruce:carol_of_the_bells"
+	}
+}

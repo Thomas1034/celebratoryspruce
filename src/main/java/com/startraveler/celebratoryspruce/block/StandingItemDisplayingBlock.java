@@ -18,12 +18,14 @@ import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Optional;
 
-public class StandingStarBlock extends StarBlock {
+public class StandingItemDisplayingBlock extends ItemDisplayingBlock {
     public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
 
 
-    public StandingStarBlock(SimpleParticleType gleamParticle, Properties properties) {
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+    public StandingItemDisplayingBlock(Optional<SimpleParticleType> gleamParticle, Properties properties) {
         super(gleamParticle, properties);
     }
 
@@ -33,6 +35,8 @@ public class StandingStarBlock extends StarBlock {
         @NotNull List<ItemRenderingBlockEntity.@NotNull Transform<?>> transforms = super.setupDisplayTransforms(state);
         float angle = Mth.DEG_TO_RAD * getYRotationDegrees(state);
         transforms.addLast(new ItemRenderingBlockEntity.Rotation(Axis.YN.rotation(angle)));
+        transforms.addLast(new ItemRenderingBlockEntity.Rotation(Axis.YN.rotation(Mth.PI)));
+
         return transforms;
     }
 
@@ -64,4 +68,5 @@ public class StandingStarBlock extends StarBlock {
     protected @NotNull BlockState mirror(BlockState state, Mirror mirror) {
         return state.setValue(ROTATION, mirror.mirror(state.getValue(ROTATION), 16));
     }
+
 }

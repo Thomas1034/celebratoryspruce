@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:copper_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_festive_light": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:festive_light"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_item_display": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:item_display"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "celebratoryspruce:item_display_from_copper_ingot_glass_festive_light"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_copper_ingot",
+      "has_glass",
+      "has_festive_light",
+      "has_item_display"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "celebratoryspruce:item_display_from_copper_ingot_glass_festive_light"
+    ]
+  }
+}

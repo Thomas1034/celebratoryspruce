@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "celebratoryspruce:music_disc_carol_of_the_bells",
+  "ingredients": [
+    "celebratoryspruce:blank_carol_disc",
+    "minecraft:iron_ingot",
+    "#c:dyes/purple"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebratoryspruce:music_disc_carol_of_the_bells"
+  }
+}

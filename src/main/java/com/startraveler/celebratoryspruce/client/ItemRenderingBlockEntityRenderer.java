@@ -66,7 +66,7 @@ public class ItemRenderingBlockEntityRenderer<T extends ItemRenderingBlockEntity
         renderState.item = new ItemStackRenderState();
         this.itemModelResolver.updateForTopItem(
                 renderState.item,
-                blockEntity.getDisplayItem(),
+                blockEntity.getStackForDisplay(),
                 ItemDisplayContext.FIXED,
                 blockEntity.getLevel(),
                 null,
@@ -79,6 +79,7 @@ public class ItemRenderingBlockEntityRenderer<T extends ItemRenderingBlockEntity
     public void submit(ItemRenderingBlockEntityRenderState itemRenderingBlockEntityRenderState, @NotNull PoseStack poseStack, @NotNull SubmitNodeCollector submitNodeCollector, @NotNull CameraRenderState cameraRenderState) {
         poseStack.pushPose();
         applyAllTransforms(poseStack, itemRenderingBlockEntityRenderState.transforms);
+
         itemRenderingBlockEntityRenderState.item.submit(
                 poseStack,
                 submitNodeCollector,
@@ -89,9 +90,4 @@ public class ItemRenderingBlockEntityRenderer<T extends ItemRenderingBlockEntity
 
         poseStack.popPose();
     }
-
-    private int getLightCoords(boolean isGlowing, int glowLight, int normalLight) {
-        return isGlowing ? glowLight : normalLight;
-    }
-
 }

@@ -29,6 +29,7 @@ public class CelebratorySpruceTextureMapping {
         return new TextureMapping().put(CelebratorySpruceTextureSlot.PLUS, plus).put(TextureSlot.CROSS, cross);
     }
 
+    @SuppressWarnings("unused")
     public static TextureMapping asterisk(Block block) {
         return new TextureMapping().put(
                         CelebratorySpruceTextureSlot.PLUS,
@@ -37,8 +38,12 @@ public class CelebratorySpruceTextureMapping {
                 .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(block, "_cross"));
     }
 
-    public static TextureMapping boxPile(Block block, int boxes) {
-        return new TextureMapping().put(CelebratorySpruceTextureSlot.FLOWER, TextureMapping.getBlockTexture(block))
+    @SuppressWarnings("unused")
+    public static TextureMapping boxPile(Block block, int boxes, boolean closed) {
+        return new TextureMapping().put(
+                        CelebratorySpruceTextureSlot.FLOWER,
+                        TextureMapping.getBlockTexture(block).withSuffix(closed ? "_closed" : "")
+                )
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block))
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"));
     }

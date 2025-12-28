@@ -5,6 +5,8 @@ import com.startraveler.celebratoryspruce.block.RandomizedDecoratedLeavesBlock;
 import com.startraveler.celebratoryspruce.block.entity.ItemRenderingBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +25,10 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
-// Perfect. Put these in music disks.
+// TODO: make enchanted items in item displays display correctly!
+// mixin to ice melting, add config for that.
+
+// https://commons.wikimedia.org/wiki/File:Shchedryk_(Carol_of_the_Bells)_-_Instrumental.ogg
 // https://commons.wikimedia.org/wiki/File%3AJohn_Baptiste_Calkin_-_I_Heard_the_Bells_on_Christmas_Day.ogg
 // https://www.loc.gov/item/jukebox-26061/ (silent night)
 // https://en.wikipedia.org/wiki/File:What_Child_is_this.mid
@@ -87,26 +92,31 @@ public class CelebratorySpruce {
                     RandomizedDecoratedLeavesBlock.VARIANT
             );
             if (randomVariant != null) {
+                level.playSound(null, pos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS);
                 level.setBlockAndUpdate(pos, randomVariant);
             }
+
 
             event.cancelWithResult(InteractionResult.SUCCESS);
         } else if (stack.isEmpty() && state.is(ModBlocks.DECORATED_SPRUCE_LEAVES)) {
             if (player != null) {
                 player.addItem(new ItemStack(ModItems.ORNAMENT.get(), 1));
             }
+            level.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS);
             level.setBlockAndUpdate(pos, Blocks.SPRUCE_LEAVES.withPropertiesOf(state));
             event.cancelWithResult(InteractionResult.SUCCESS);
         } else if (stack.is(ModItems.FESTIVE_LIGHT) && state.is(Blocks.SPRUCE_LEAVES)) {
             if (player == null || !player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
+            level.playSound(null, pos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS);
             level.setBlockAndUpdate(pos, ModBlocks.FESTIVE_SPRUCE_LEAVES.get().withPropertiesOf(state));
             event.cancelWithResult(InteractionResult.SUCCESS);
         } else if (stack.isEmpty() && state.is(ModBlocks.FESTIVE_SPRUCE_LEAVES)) {
             if (player != null) {
                 player.addItem(new ItemStack(ModItems.FESTIVE_LIGHT.get(), 1));
             }
+            level.playSound(null, pos, SoundEvents.GLOW_ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS);
             level.setBlockAndUpdate(pos, Blocks.SPRUCE_LEAVES.withPropertiesOf(state));
             event.cancelWithResult(InteractionResult.SUCCESS);
         }

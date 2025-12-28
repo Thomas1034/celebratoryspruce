@@ -15,6 +15,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -31,10 +32,7 @@ public class ModBlocks {
     @SuppressWarnings("deprecation")
     public static final DeferredBlock<@NotNull FlowerPotBlock> POTTED_CELEBRATORY_SPRUCE_SAPLING = registerWithoutItem(
             "potted_celebratory_spruce_sapling",
-            (properties) -> new FlowerPotBlock(
-                    ModBlocks.CELEBRATORY_SPRUCE_SAPLING.get(),
-                    properties
-            ),
+            (properties) -> new FlowerPotBlock(ModBlocks.CELEBRATORY_SPRUCE_SAPLING.get(), properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_SPRUCE_SAPLING)
     );
 
@@ -44,16 +42,29 @@ public class ModBlocks {
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GLOW_LICHEN).lightLevel(LightNetBlock.emission(5))
     );
 
-    public static final DeferredBlock<@NotNull StarBlock> GOLD_STAR = registerWithoutItem(
+    public static final DeferredBlock<@NotNull StandingItemDisplayingBlock> GOLD_STAR = registerWithoutItem(
             "gold_star",
-            properties -> new StandingStarBlock(ParticleTypes.END_ROD, properties),
+            properties -> new StandingItemDisplayingBlock(Optional.of(ParticleTypes.END_ROD), properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_GOLD_BLOCK).lightLevel(state -> 15)
     );
 
-    public static final DeferredBlock<@NotNull WallStarBlock> WALL_GOLD_STAR = registerWithoutItem(
+    public static final DeferredBlock<@NotNull WallItemDisplayingBlock> WALL_GOLD_STAR = registerWithoutItem(
             "wall_gold_star",
-            properties -> new WallStarBlock(ParticleTypes.END_ROD, properties),
+            properties -> new WallItemDisplayingBlock(Optional.of(ParticleTypes.END_ROD), properties),
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_GOLD_BLOCK).lightLevel(state -> 14)
+    );
+
+
+    public static final DeferredBlock<@NotNull InteractableStandingItemDisplayingBlock> ITEM_DISPLAY = registerWithoutItem(
+            "item_display",
+            properties -> new InteractableStandingItemDisplayingBlock(Optional.empty(), properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE)
+    );
+
+    public static final DeferredBlock<@NotNull InteractableWallItemDisplayingBlock> WALL_ITEM_DISPLAY = registerWithoutItem(
+            "wall_item_display",
+            properties -> new InteractableWallItemDisplayingBlock(Optional.empty(), properties),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE)
     );
 
 
@@ -105,6 +116,16 @@ public class ModBlocks {
             "wall_wreath",
             WallWreathBlock::new,
             () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES)
+    );
+
+
+    public static final DeferredBlock<@NotNull ItemHoldingBoxPileBlock> PRESENT_PILE = registerWithoutItem(
+            "present_pile",
+            (properties) -> new ItemHoldingBoxPileBlock(
+                    properties,
+                    Suppliers.memoize(() -> Ingredient.of(ModItems.PRESENT))
+            ),
+            () -> BlockBehaviour.Properties.ofFullCopy(Blocks.RED_WOOL)
     );
 
     public static <T extends Block> DeferredBlock<T> register(final String name, final Function<BlockBehaviour.Properties, T> block, final Supplier<BlockBehaviour.Properties> properties) {

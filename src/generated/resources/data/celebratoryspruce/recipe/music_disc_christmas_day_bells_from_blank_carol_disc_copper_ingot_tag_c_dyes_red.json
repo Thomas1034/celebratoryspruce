@@ -4,7 +4,7 @@
   "group": "celebratoryspruce:music_disc_christmas_day_bells",
   "ingredients": [
     "celebratoryspruce:blank_carol_disc",
-    "minecraft:bell",
+    "minecraft:copper_ingot",
     "#c:dyes/red"
   ],
   "result": {

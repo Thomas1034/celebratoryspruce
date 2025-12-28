@@ -25,7 +25,6 @@ import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
@@ -153,8 +152,51 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
                     BlockModelGenerators.variants(new Variant(model))
             );
         }
-
         return generator;
+    }
+
+    public static MultiPartGenerator createBooleanPropertyBoxPile(Block block, BiFunction<Integer, Boolean, Identifier> modelFunction, BooleanProperty property) {
+        MultiPartGenerator generator = MultiPartGenerator.multiPart(block);
+        for (int i : BoxPileBlock.BOXES.getPossibleValues()) {
+            for (boolean b : property.getPossibleValues()) {
+                Identifier model = modelFunction.apply(i, b);
+                generator = generator.with(
+                        new ConditionBuilder().term(BoxPileBlock.FACING, Direction.EAST)
+                                .term(BoxPileBlock.BOXES, i)
+                                .term(ItemHoldingBoxPileBlock.CLOSED, b),
+                        BlockModelGenerators.variants(new Variant(model))
+                                .with(VariantMutator.Y_ROT.withValue(Quadrant.R90))
+                ).with(
+                        new ConditionBuilder().term(BoxPileBlock.FACING, Direction.SOUTH)
+                                .term(BoxPileBlock.BOXES, i)
+                                .term(ItemHoldingBoxPileBlock.CLOSED, b),
+                        BlockModelGenerators.variants(new Variant(model))
+                                .with(VariantMutator.Y_ROT.withValue(Quadrant.R180))
+                ).with(
+                        new ConditionBuilder().term(BoxPileBlock.FACING, Direction.WEST)
+                                .term(BoxPileBlock.BOXES, i)
+                                .term(ItemHoldingBoxPileBlock.CLOSED, b),
+                        BlockModelGenerators.variants(new Variant(model))
+                                .with(VariantMutator.Y_ROT.withValue(Quadrant.R270))
+                ).with(
+                        new ConditionBuilder().term(BoxPileBlock.FACING, Direction.NORTH)
+                                .term(BoxPileBlock.BOXES, i)
+                                .term(ItemHoldingBoxPileBlock.CLOSED, b),
+                        BlockModelGenerators.variants(new Variant(model))
+                );
+            }
+        }
+        return generator;
+    }
+
+    protected void booleanPropertyBoxPile(Block block) {
+        blockModels.blockStateOutput.accept(createBooleanPropertyBoxPile(
+                block,
+                (i, b) -> CelebratorySpruceTexturedModel.BOX_PILE.apply(i, b)
+                        .get(block)
+                        .updateTemplate(template -> template.extend().renderType("cutout").build())
+                        .createWithSuffix(block, "_stack" + i + (b ? "_closed" : ""), blockModels.modelOutput), ItemHoldingBoxPileBlock.CLOSED
+        ));
     }
 
     protected MultiVariantGenerator createRotatedTopOverlaidBlock(Block block, Function<String, TexturedModel.Provider> model, String[] overlays) {
@@ -209,16 +251,18 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         return MultiVariantGenerator.dispatch(block, BlockModelGenerators.variants(variants));
     }
 
+    @SuppressWarnings("unused")
     protected void boxPile(Block block) {
         blockModels.blockStateOutput.accept(createBoxPile(
                 block,
-                (i) -> CelebratorySpruceTexturedModel.BOX_PILE.apply(i)
+                (i) -> CelebratorySpruceTexturedModel.BOX_PILE.apply(i, false)
                         .get(block)
                         .updateTemplate(template -> template.extend().renderType("cutout").build())
                         .createWithSuffix(block, "_stack" + i, blockModels.modelOutput)
         ));
     }
 
+    @SuppressWarnings("unused")
     public void candleCake(Block candleBlock, Block cakeBlock, Block candleCakeBlock) {
         this.blockModels.registerSimpleFlatItemModel(candleBlock.asItem());
         Identifier candleCakeBase = ModelTemplates.CANDLE_CAKE.create(
@@ -240,6 +284,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
                 )));
     }
 
+    @SuppressWarnings("unused")
     public void cakeBlock(Block cake, Item cakeItem) {
         this.blockModels.registerSimpleFlatItemModel(cakeItem);
         this.blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(cake)
@@ -276,6 +321,9 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         blockModels.registerSimpleFlatItemModel(ModItems.GOLD_STAR.asItem());
         blockModels.createParticleOnlyBlock(ModBlocks.GOLD_STAR.get());
         blockModels.createParticleOnlyBlock(ModBlocks.WALL_GOLD_STAR.get());
+        blockModels.registerSimpleFlatItemModel(ModItems.ITEM_DISPLAY.asItem());
+        blockModels.createParticleOnlyBlock(ModBlocks.ITEM_DISPLAY.get());
+        blockModels.createParticleOnlyBlock(ModBlocks.WALL_ITEM_DISPLAY.get());
         // blockModels.createMultiface(ModBlocks.LIGHT_NET.get());
         createDecoratedMultifaceBlock(
                 ModBlocks.LIGHT_NET.get(),
@@ -294,14 +342,16 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         basicItem(ModItems.MUSIC_DISC_SILENT_NIGHT.get());
         basicItem(ModItems.MUSIC_DISC_WHAT_CHILD.get());
         basicItem(ModItems.MUSIC_DISC_CHRISTMAS_DAY_BELLS.get());
+        basicItem(ModItems.MUSIC_DISC_CAROL_OF_THE_BELLS.get());
+
+        booleanPropertyBoxPile(ModBlocks.PRESENT_PILE.get());
+        basicItem(ModItems.PRESENT.get());
     }
 
     @SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "ConstantConditions"})
     @Override
     protected @NotNull Stream<? extends Holder<Block>> getKnownBlocks() {
         List<Block> excluded = new ArrayList<>();
-        excluded.add(ModBlocks.GOLD_STAR.get());
-        excluded.add(ModBlocks.WALL_GOLD_STAR.get());
         return super.getKnownBlocks().filter(entry -> !excluded.contains(entry.value()));
     }
 
@@ -405,14 +455,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         );
     }
 
-    private String name(Block block) {
-        return this.key(block).getPath();
-    }
-
-    private Identifier key(Block block) {
-        return BuiltInRegistries.BLOCK.getKey(block);
-    }
-
+    @SuppressWarnings("unused")
     public void createOverlaidTintedLeaves(Block block, int tint, IntegerProperty intProperty) {
         createOverlaidTintedLeaves(block, CelebratorySpruceTexturedModel.OVERLAID_LEAVES, tint, intProperty);
     }
@@ -524,10 +567,12 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         itemModels.generateFlatItem(item, item, ModelTemplates.FLAT_ITEM);
     }
 
+    @SuppressWarnings("unused")
     private void handheldItem(Item item) {
         itemModels.generateFlatItem(item, item, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 
+    @SuppressWarnings("unused")
     public void tippedArrow(Item arrowItem) {
         Identifier Identifier = itemModels.generateLayeredItem(
                 arrowItem,
@@ -537,10 +582,12 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         itemModels.addPotionTint(arrowItem, Identifier);
     }
 
+    @SuppressWarnings("unused")
     protected void simpleBlockWithItem(Block block) {
         blockModels.createTrivialBlock(block, TexturedModel.CUBE);
     }
 
+    @SuppressWarnings("unused")
     protected void simpleBlockWithItem(Block block, String renderType) {
         blockModels.createTrivialBlock(
                 block,
@@ -548,6 +595,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         );
     }
 
+    @SuppressWarnings("unused")
     protected void nonrotatablePillarBlock(Block block) {
         TexturedModel model = TexturedModel.COLUMN.get(block)
                 .updateTextures(p_387400_ -> p_387400_.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block)));
@@ -557,10 +605,12 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         ));
     }
 
+    @SuppressWarnings("unused")
     protected void tumbledBlockWithItem(Block block) {
         tumbledBlockWithItem(block, null);
     }
 
+    @SuppressWarnings("unused")
     protected void mirroredColumnBlock(Block block) {
         TextureMapping mapping = TextureMapping.column(block);
         TextureMapping altMapping = CelebratorySpruceTextureMapping.columnAlt(block);
@@ -588,6 +638,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         blockModels.blockStateOutput.accept(createTumbledBlock(block, model.create(block, blockModels.modelOutput)));
     }
 
+    @SuppressWarnings("unused")
     protected void tumbledOverlaidBlockWithItem(Block block, Block base, String... overlays) {
         BiFunction<String, Block, TexturedModel.Provider> baseModel = CelebratorySpruceTexturedModel.OVERLAID_CUBE;
 
@@ -597,6 +648,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         blockModels.blockStateOutput.accept(createTumbledOverlaidBlock(block, model, overlays));
     }
 
+    @SuppressWarnings("unused")
     protected void overlaidBlockWithItem(Block block, Block base, String... overlays) {
         BiFunction<String, Block, TexturedModel.Provider> baseModel = CelebratorySpruceTexturedModel.OVERLAID_CUBE;
 
@@ -606,6 +658,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         blockModels.blockStateOutput.accept(createOverlaidBlock(block, model, overlays));
     }
 
+    @SuppressWarnings("unused")
     protected void doubleSidedLogBlockWithItem(Block block) {
         blockModels.blockStateOutput.accept(createDoubleSidedLogBlock(
                 block,
@@ -613,7 +666,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         ));
     }
 
-    @SuppressWarnings("SameParameterValue")
+    @SuppressWarnings({"SameParameterValue", "unused"})
     protected void rotatedTopOverlaidBlockWithItem(Block block, Block base, String topOverlay, @NotNull String[] overlays) {
         TriFunction<String, String, Block, TexturedModel.Provider> baseModel = CelebratorySpruceTexturedModel.TOP_OVERLAID_CUBE;
 
@@ -628,11 +681,13 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
     }
 
 
+    @SuppressWarnings("unused")
     public void createPlantWithDefaultItem(Block block, Block pottedBlock, BlockModelGenerators.PlantType plantType, String renderType) {
         blockModels.registerSimpleItemModel(block.asItem(), plantType.createItemModel(blockModels, block));
         createPlant(block, pottedBlock, plantType, renderType);
     }
 
+    @SuppressWarnings("unused")
     public void createPlantWithDefaultItemWithCustomPottedTexture(Block block, Block pottedBlock, Identifier customTexture, BlockModelGenerators.PlantType plantType, String renderType) {
         blockModels.registerSimpleItemModel(block.asItem(), plantType.createItemModel(blockModels, block));
         createPlantWithCustomPottedTexture(block, pottedBlock, customTexture, plantType, renderType);
@@ -667,6 +722,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         ));
     }
 
+    @SuppressWarnings("unused")
     public void createPottedOnly(Block block, Block pottedBlock, BlockModelGenerators.PlantType plantType, String renderType) {
         TextureMapping texturemapping = plantType.getPlantTextureMapping(block);
         Identifier Identifier = plantType.getCrossPot()
@@ -716,6 +772,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         }
     }
 
+    @SuppressWarnings("unused")
     public void createCropBlock(Block cropBlock, String renderType, Property<@NotNull Integer> ageProperty, int... ageToVisualStageMapping) {
         this.blockModels.registerSimpleFlatItemModel(cropBlock.asItem());
         createCropBlockWithoutItem(cropBlock, renderType, ageProperty, ageToVisualStageMapping);
@@ -741,12 +798,14 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         }
     }
 
+    @SuppressWarnings("unused")
     public void createCrossBlock(Block block, BlockModelGenerators.PlantType plantType, String renderType, Property<@NotNull Integer> ageProperty, int... possibleValues) {
         createCrossBlockWithoutItem(block, plantType, renderType, ageProperty, possibleValues);
         blockModels.registerSimpleFlatItemModel(block.asItem());
 
     }
 
+    @SuppressWarnings("unused")
     public void createAsteriskBlockWithoutItem(Block block, BlockModelGenerators.PlantType plantType, String renderType, Property<@NotNull Integer> ageProperty, int... possibleValues) {
         if (ageProperty.getPossibleValues().size() != possibleValues.length) {
             throw new IllegalArgumentException("missing values for property: " + ageProperty);
@@ -768,7 +827,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         }
     }
 
-
+    @SuppressWarnings("unused")
     public void generateSimpleSpecialItemModel(Block block, SpecialModelRenderer.Unbaked specialModel) {
         Item item = block.asItem();
         Identifier Identifier = ModelLocationUtils.getModelLocation(item);

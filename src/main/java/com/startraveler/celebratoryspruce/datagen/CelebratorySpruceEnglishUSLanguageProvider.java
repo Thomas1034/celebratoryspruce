@@ -31,25 +31,30 @@ public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider
 
     public CelebratorySpruceEnglishUSLanguageProvider(PackOutput output) {
         super(output, CelebratorySpruce.MODID, "en_us");
-        excludedBlocks = new HashSet<>();
-        excludedItems = new HashSet<>();
-        excludedTags = new HashSet<>();
-        excludedEffects = new HashSet<>();
-        excludedEntityTypes = new HashSet<>();
-        excludedPotions = new HashSet<>();
+        this.excludedBlocks = new HashSet<>();
+        this.excludedItems = new HashSet<>();
+        this.excludedTags = new HashSet<>();
+        this.excludedEffects = new HashSet<>();
+        this.excludedEntityTypes = new HashSet<>();
+        this.excludedPotions = new HashSet<>();
     }
 
     @Override
     protected void addTranslations() {
 
-        this.add(ModItems.MUSIC_DISC_SILENT_NIGHT.get(), "Carol Disc");
-        this.add(ModItems.MUSIC_DISC_WHAT_CHILD.get(), "Carol Disc");
-        this.add(ModItems.MUSIC_DISC_CHRISTMAS_DAY_BELLS.get(), "Carol Disc");
+        this.exclude(ModItems.MUSIC_DISC_SILENT_NIGHT.get(), "Carol Disc", this.excludedItems);
+        this.exclude(ModItems.MUSIC_DISC_WHAT_CHILD.get(), "Carol Disc", this.excludedItems);
+        this.exclude(ModItems.MUSIC_DISC_CHRISTMAS_DAY_BELLS.get(), "Carol Disc", this.excludedItems);
+        this.exclude(ModItems.MUSIC_DISC_CAROL_OF_THE_BELLS.get(), "Carol Disc", this.excludedItems);
         this.add("jukebox_song.celebratoryspruce.silent_night", "Franz Gruber - Silent Night");
         this.add("jukebox_song.celebratoryspruce.what_child", "William Chatterton Dix - What Child Is This?");
         this.add(
                 "jukebox_song.celebratoryspruce.christmas_day_bells",
                 "Henry Wadsworth Longfellow / John Baptiste Calkin - I Heard the Bells on Christmas Day"
+        );
+        this.add(
+                "jukebox_song.celebratoryspruce.carol_of_the_bells",
+                "Mykola Leontovych / Jason Shaw - Shchedryk (Carol of the Bells)"
         );
 
         this.add(Config.SNOW_MELTS_IN_LIGHT);
@@ -57,11 +62,11 @@ public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider
         this.add(Config.SNOW_ACCUMULATION_THRESHOLD);
         // Now, do all the rest automagically.
         this.add(ModCreativeModeTabs.ITEMS_NAME, "Celebratory Spruce Items");
-        this.addTranslations(ModBlocks.BLOCKS.getEntries(), excludedBlocks);
-        this.addTranslations(ModItems.ITEMS.getEntries(), excludedItems);
-        this.addTranslations(Set.of(), excludedEffects);
-        this.addTranslations(Set.of(), excludedEntityTypes);
-        this.addPotionTranslations(Set.of(), excludedPotions);
+        this.addTranslations(ModBlocks.BLOCKS.getEntries(), this.excludedBlocks);
+        this.addTranslations(ModItems.ITEMS.getEntries(), this.excludedItems);
+        this.addTranslations(Set.of(), this.excludedEffects);
+        this.addTranslations(Set.of(), this.excludedEntityTypes);
+        this.addPotionTranslations(Set.of(), this.excludedPotions);
     }
 
     @SuppressWarnings("deprecation")
@@ -69,23 +74,16 @@ public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider
         List<String> rawName = configValue.getPath();
         List<String> splitRawName = List.of(rawName.getLast().split("(?=\\p{Lu})"));
         String name = splitRawName.stream()
-                .map(WordUtils::capitalize).flatMap(string -> Stream.of(string, " "))
+                .map(WordUtils::capitalize)
+                .flatMap(string -> Stream.of(string, " "))
                 .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
                 .toString();
 
         String rawNameJoinedByDots = String.join(".", rawName);
         String generatedTranslationKey = CelebratorySpruce.MODID + ".configuration." + rawNameJoinedByDots;
 
-        CelebratorySpruce.LOGGER.warn("Key {} value {}", generatedTranslationKey, name);
-
         // This crashes.
         this.add(generatedTranslationKey, name);
-    }
-
-    @SuppressWarnings("unused")
-    private void exclude(EntityType<?> key, String name) {
-        this.excludedEntityTypes.add(key);
-        super.add(key, name);
     }
 
     @SuppressWarnings("unused")
@@ -95,7 +93,7 @@ public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider
     }
 
     @SuppressWarnings("unused")
-    public void exclude(TagKey<?> tagKey, String name) {
+    public void excludeTag(TagKey<?> tagKey, String name) {
         this.excludedTags.add(tagKey);
         super.add(tagKey, name);
     }
@@ -113,8 +111,8 @@ public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider
     }
 
     @SuppressWarnings("deprecation")
-    protected <T extends HasDescriptionId> void addTranslations(Iterable<? extends Holder<T>> blocks, Set<T> addTo) {
-        blocks.forEach(holder -> {
+    protected <T extends HasDescriptionId> void addTranslations(Iterable<? extends Holder<T>> toTranslate, Set<T> addTo) {
+        toTranslate.forEach(holder -> {
             String id = holder.value().getDescriptionId();
 
             if (!(addTo.contains(holder.value()))) {
@@ -130,6 +128,8 @@ public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider
                 } catch (IllegalStateException e) {
                     CelebratorySpruce.LOGGER.warn("Skipping duplicate translation key {}", id);
                 }
+            } else {
+                CelebratorySpruce.LOGGER.warn("Skipping manually entered translation key {}", id);
             }
         });
     }

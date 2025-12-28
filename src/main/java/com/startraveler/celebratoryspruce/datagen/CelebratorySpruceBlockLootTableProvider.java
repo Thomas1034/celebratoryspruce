@@ -2,6 +2,8 @@ package com.startraveler.celebratoryspruce.datagen;
 
 import com.startraveler.celebratoryspruce.ModBlocks;
 import com.startraveler.celebratoryspruce.ModItems;
+import com.startraveler.celebratoryspruce.block.BoxPileBlock;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -28,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvider {
@@ -43,6 +47,7 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
         this.knownBlocks = new HashSet<>();
     }
 
+    @SuppressWarnings("unused")
     protected LootTable.Builder createChanceDrops(Block block, Item item, float chance) {
         return createShearsDispatchTable(
                 block, this.applyExplosionDecay(
@@ -59,7 +64,7 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
     }
 
     public LootTable.Builder createSingleItemTable(ItemLike item, List<Integer> range) {
-        return LootTable.lootTable().withPool((LootPool.Builder) this.applyExplosionCondition(
+        return LootTable.lootTable().withPool(this.applyExplosionCondition(
                 item,
                 LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
@@ -105,6 +110,69 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
         this.dropOther(ModBlocks.WALL_WREATH.get(), ModItems.WREATH.get());
         this.dropOther(ModBlocks.DECORATED_WREATH.get(), ModItems.DECORATED_WREATH.get());
         this.dropOther(ModBlocks.DECORATED_WALL_WREATH.get(), ModItems.DECORATED_WREATH.get());
+        this.dropOther(ModBlocks.ITEM_DISPLAY.get(), ModItems.ITEM_DISPLAY.get());
+        this.dropOther(ModBlocks.WALL_ITEM_DISPLAY.get(), ModItems.ITEM_DISPLAY.get());
+
+
+        BiFunction<Block, ItemLike, LootTable.Builder> bombPileTableMaker = (block, itemLike) -> LootTable.lootTable()
+                .withPool(this.applyExplosionCondition(
+                        itemLike,
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+
+                                .add(LootItem.lootTableItem(itemLike)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BoxPileBlock.BOXES, 1)))
+                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+
+                                .add(LootItem.lootTableItem(itemLike)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BoxPileBlock.BOXES, 2)))
+                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))))
+
+                                .add(LootItem.lootTableItem(itemLike)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BoxPileBlock.BOXES, 3)))
+                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+
+                                .add(LootItem.lootTableItem(itemLike)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BoxPileBlock.BOXES, 4)))
+                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))))
+
+                                .add(LootItem.lootTableItem(itemLike)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BoxPileBlock.BOXES, 5)))
+                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(5))))
+
+                                .add(LootItem.lootTableItem(itemLike)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BoxPileBlock.BOXES, 6)))
+                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(6))))
+
+                                .add(LootItem.lootTableItem(itemLike)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BoxPileBlock.BOXES, 7)))
+                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(7))))
+
+                                .add(LootItem.lootTableItem(itemLike)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(BoxPileBlock.BOXES, 8)))
+                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(8))))
+
+                ));
+        this.add(
+                ModBlocks.PRESENT_PILE.get(),
+                bombPileTableMaker.apply(ModBlocks.PRESENT_PILE.get(), ModItems.PRESENT.get())
+        );
     }
 
     @Override
@@ -144,6 +212,7 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
         );
     }
 
+    @SuppressWarnings("unused")
     protected void dropOther(Block block, ItemLike item, List<Integer> range) {
         this.add(block, this.createSingleItemTable(item, range));
     }
@@ -179,27 +248,33 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
         return createSilkTouchOrShearsOreDrops(pBlock, item, range);
     }
 
+    @SuppressWarnings("unused")
     protected void requireSilkTouch(Block base, ItemLike withoutSilk) {
         this.add(base, block -> createSilkTouchDrop(base, withoutSilk.asItem()));
     }
 
+    @SuppressWarnings("unused")
     protected void requireSilkTouchOrShears(Block base, ItemLike withoutSilk) {
         this.add(base, block -> createSilkTouchOrShearsDrop(base, withoutSilk.asItem()));
     }
 
+    @SuppressWarnings("unused")
     protected void requireSilkTouchOrShears(Block base, ItemLike withoutSilk, List<Integer> range) {
         this.add(base, block -> createSilkTouchOrShearsDrop(base, withoutSilk.asItem(), range));
     }
 
+    @SuppressWarnings("unused")
     protected void requireSilkTouch(Block base, ItemLike withoutSilk, List<Integer> range) {
         this.add(base, block -> createOreDrops(base, withoutSilk.asItem(), range));
     }
 
+    @SuppressWarnings("unused")
     protected void requireSilkTouchDropsOther(Block base, Block source) {
         Identifier sourceLoc = BuiltInRegistries.BLOCK.getKey(source).withPrefix("blocks/");
         this.add(base, block -> this.createSilkTouchOrOtherDrop(block, sourceLoc));
     }
 
+    @SuppressWarnings("unused")
     protected void oreDrop(Block base, ItemLike drop, List<Integer> range) {
         this.add(base, block -> createOreDrops(base, drop, range));
     }

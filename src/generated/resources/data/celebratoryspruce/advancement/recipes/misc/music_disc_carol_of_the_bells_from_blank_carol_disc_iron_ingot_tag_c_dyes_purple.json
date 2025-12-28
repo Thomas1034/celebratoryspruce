@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blank_carol_disc": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:blank_carol_disc"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_iron_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_music_disc_carol_of_the_bells": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:music_disc_carol_of_the_bells"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "celebratoryspruce:music_disc_carol_of_the_bells_from_blank_carol_disc_iron_ingot_tag_c_dyes_purple"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hasminecraft_root": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:dyes/purple"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_blank_carol_disc",
+      "has_iron_ingot",
+      "hasminecraft_root",
+      "has_music_disc_carol_of_the_bells"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "celebratoryspruce:music_disc_carol_of_the_bells_from_blank_carol_disc_iron_ingot_tag_c_dyes_purple"
+    ]
+  }
+}

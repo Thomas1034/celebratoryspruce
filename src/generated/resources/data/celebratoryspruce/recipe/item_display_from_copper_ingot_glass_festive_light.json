@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "celebratoryspruce:item_display",
+  "key": {
+    "i": "minecraft:copper_ingot",
+    "o": "celebratoryspruce:festive_light",
+    "s": "minecraft:glass"
+  },
+  "pattern": [
+    "oio",
+    "isi",
+    "oio"
+  ],
+  "result": {
+    "count": 4,
+    "id": "celebratoryspruce:item_display"
+  }
+}

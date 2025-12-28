@@ -1,4 +1,10 @@
 
+
+
+The included jukebox song ["Carol Of The Bells"](https://audionautix.com/Music/CarolOfTheBells.mp3) by [Jason Shaw](https://audionautix.com/) is licensed under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0).
+
+
+
 Installation information
 =======
 

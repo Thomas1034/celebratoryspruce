@@ -70,7 +70,10 @@ public class ItemHoldingBoxPileBlock extends BoxPileBlock implements EntityBlock
             if (blockEntity instanceof ItemHoldingBlockEntity itemHoldingBlockEntity && !level.isClientSide()) {
                 ItemStack oldStack = itemHoldingBlockEntity.getStoredItemStack();
                 if (oldStack.isEmpty()) {
-                    ItemStack newStack = stack.copyAndClear();
+                    ItemStack newStack = stack.copy();
+                    if (!player.getAbilities().instabuild) {
+                        stack.setCount(0);
+                    }
                     itemHoldingBlockEntity.setStoredItemStack(newStack);
                     level.setBlockAndUpdate(pos, state.trySetValue(CLOSED, true));
                     if (!newStack.isEmpty()) {

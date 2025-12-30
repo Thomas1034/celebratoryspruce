@@ -1,5 +1,6 @@
 package com.startraveler.celebratoryspruce;
 
+import com.startraveler.celebratoryspruce.item.GoodieBagItem;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -18,7 +19,7 @@ public class ModItems {
 
     public static final DeferredItem<@NotNull Item> ORNAMENT = register("ornament");
     public static final DeferredItem<@NotNull Item> FESTIVE_LIGHT = register("festive_light");
-    public static final DeferredItem<@NotNull Item> GOLD_STAR = register(
+    public static final DeferredItem<@NotNull StandingAndWallBlockItem> GOLD_STAR = register(
             "gold_star",
             (properties) -> new StandingAndWallBlockItem(
                     ModBlocks.GOLD_STAR.get(),
@@ -28,7 +29,7 @@ public class ModItems {
             )
     );
 
-    public static final DeferredItem<@NotNull Item> ITEM_DISPLAY = register(
+    public static final DeferredItem<@NotNull StandingAndWallBlockItem> ITEM_DISPLAY = register(
             "item_display",
             (properties) -> new StandingAndWallBlockItem(
                     ModBlocks.ITEM_DISPLAY.get(),
@@ -38,7 +39,7 @@ public class ModItems {
             )
     );
 
-    public static final DeferredItem<@NotNull Item> WREATH = register(
+    public static final DeferredItem<@NotNull StandingAndWallBlockItem> WREATH = register(
             "wreath",
             (properties) -> new StandingAndWallBlockItem(
                     ModBlocks.WREATH.get(),
@@ -48,12 +49,9 @@ public class ModItems {
             )
     );
 
-    public static final DeferredItem<@NotNull Item> PRESENT = register(
+    public static final DeferredItem<@NotNull BlockItem> PRESENT = register(
             "present",
-            (properties) -> new BlockItem(
-                    ModBlocks.PRESENT_PILE.get(),
-                    properties
-            )
+            (properties) -> new BlockItem(ModBlocks.PRESENT_PILE.get(), properties)
     );
 
     public static final DeferredItem<@NotNull Item> DECORATED_WREATH = register(
@@ -118,6 +116,13 @@ public class ModItems {
                             CelebratorySpruce.id("carol_of_the_bells")
                     )))
             )
+    );
+
+
+    public static final DeferredItem<@NotNull GoodieBagItem> STOCKING = register(
+            "stocking",
+            GoodieBagItem::new,
+            () -> new Item.Properties().component(ModDataComponentTypes.DEFAULT_GOODIE_BAG_SIZE, 2)
     );
 
     public static DeferredItem<@NotNull Item> register(String name) {

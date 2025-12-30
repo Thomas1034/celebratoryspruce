@@ -1,4 +1,4 @@
-// 1.21.11	2025-12-27T21:00:49.3771074	Model Definitions - celebratoryspruce
+// 1.21.11	2025-12-29T21:46:10.7571795	Model Definitions - celebratoryspruce
 3f15c3abcd974fa65fe88a9e59701efdba16ad25 assets/celebratoryspruce/blockstates/celebratory_spruce_sapling.json
 ec5d4b1ad4f63c56def71da23dca7de624aafc43 assets/celebratoryspruce/blockstates/decorated_spruce_leaves.json
 367364e18c275a1e7cab100341b641c53eef6761 assets/celebratoryspruce/blockstates/decorated_wall_wreath.json
@@ -28,6 +28,7 @@ bba4c14fc5fdfe3a9253b8cd8fb20fc680c194c3 assets/celebratoryspruce/items/music_di
 04f3d7ad17e2a5aed063984abab619b4808b62cd assets/celebratoryspruce/items/music_disc_what_child.json
 50eb24cf8c53513437643a5097222b46f3911dd5 assets/celebratoryspruce/items/ornament.json
 c87ddae750ac53660d743e0bffe83496d39a45b8 assets/celebratoryspruce/items/present.json
+b03777f729737543ddefb161c954fdd10e521aea assets/celebratoryspruce/items/stocking.json
 dffc4dbeb98c296b081c76135428f3c668d5e40c assets/celebratoryspruce/items/wreath.json
 bc1cb2e56f4111751dd15acee48918ca7301d140 assets/celebratoryspruce/models/block/celebratory_spruce_sapling.json
 9484fdd4d34831ca7470e2d57ecf06fb30fb1141 assets/celebratoryspruce/models/block/decorated_spruce_leaves_variant0.json
@@ -106,4 +107,5 @@ e91e5f0338b3e6c6d189ede36298ea7cd2531d71 assets/celebratoryspruce/models/item/mu
 04ddbb255d45c6eff5a5f454bf320f0927e132d9 assets/celebratoryspruce/models/item/music_disc_what_child.json
 676746531e186e3174ac0663ad3392efa05dbdf3 assets/celebratoryspruce/models/item/ornament.json
 59b2bd50a5a6f3d20441ffec7917b7c7835be9a6 assets/celebratoryspruce/models/item/present.json
+c647f38503e02d93e9d2612c3b70f8982dd7a217 assets/celebratoryspruce/models/item/stocking.json
 f1faf9f045e8944378bdd3228dac7b9b32e96eba assets/celebratoryspruce/models/item/wreath.json

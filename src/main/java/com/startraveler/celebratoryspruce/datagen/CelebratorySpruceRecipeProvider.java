@@ -131,6 +131,24 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
                 ModItems.MUSIC_DISC_CAROL_OF_THE_BELLS.get(),
                 1
         );
+
+        shaped(
+                List.of(" i ", "ioi", " i "),
+                List.of('i', 'o'),
+                List.of(Items.PAPER, ModItems.ORNAMENT.get()),
+                RecipeCategory.DECORATIONS,
+                ModItems.PRESENT.get(),
+                2
+        );
+
+        shaped(
+                List.of("ioi", "i i"),
+                List.of('i', 'o'),
+                List.of(ItemTags.WOOL, ModItems.ORNAMENT.get()),
+                RecipeCategory.MISC,
+                ModItems.STOCKING.get(),
+                2
+        );
         // TODO End of recipe definitions
     }
 

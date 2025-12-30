@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "celebratoryspruce:present",
+  "key": {
+    "i": "minecraft:paper",
+    "o": "celebratoryspruce:ornament"
+  },
+  "pattern": [
+    " i ",
+    "ioi",
+    " i "
+  ],
+  "result": {
+    "count": 2,
+    "id": "celebratoryspruce:present"
+  }
+}

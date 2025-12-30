@@ -18,6 +18,7 @@ public class ModCreativeModeTabs {
     public static final String PREFIX = "itemGroup.";
     public static final String ITEMS_ID = "celebratory_spruce_items";
     public static final String ITEMS_NAME = PREFIX + ITEMS_ID;
+    @SuppressWarnings("unused")
     public static final DeferredHolder<CreativeModeTab, @NotNull CreativeModeTab> ITEMS = CREATIVE_MODE_TABS.register(
             ITEMS_ID,
             () -> CreativeModeTab.builder()
@@ -34,10 +35,13 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.DECORATED_WREATH);
                         output.accept(ModBlocks.LIGHT_NET);
                         output.accept(ModItems.GOLD_STAR);
+                        output.accept(ModItems.PRESENT);
+                        output.accept(ModItems.STOCKING);
                         output.accept(ModItems.BLANK_CAROL_DISC);
                         output.accept(ModItems.MUSIC_DISC_CHRISTMAS_DAY_BELLS);
                         output.accept(ModItems.MUSIC_DISC_SILENT_NIGHT);
                         output.accept(ModItems.MUSIC_DISC_WHAT_CHILD);
+                        output.accept(ModItems.MUSIC_DISC_CAROL_OF_THE_BELLS);
                     })
                     .build()
     );

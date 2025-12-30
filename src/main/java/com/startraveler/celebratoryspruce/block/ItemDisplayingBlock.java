@@ -3,6 +3,7 @@ package com.startraveler.celebratoryspruce.block;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.startraveler.celebratoryspruce.block.entity.ItemHoldingBlockEntity;
 import com.startraveler.celebratoryspruce.block.entity.ItemRenderingBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -78,6 +79,21 @@ public class ItemDisplayingBlock extends BaseEntityBlock implements SimpleWaterl
     }
 
     @Override
+    public @NotNull ItemStack getCloneItemStack(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state, boolean includeData, @NotNull Player player) {
+        if (!level.isClientSide()) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof ItemHoldingBlockEntity itemHoldingBlockEntity) {
+                ItemStack cloneItemStack = itemHoldingBlockEntity.getStoredItemStack();
+                if (!cloneItemStack.isEmpty()) {
+                    return cloneItemStack;
+                }
+            }
+        }
+        return state.getCloneItemStack(level, pos, includeData);
+    }
+
+
+    @Override
     protected @NotNull BlockState updateShape(@NotNull BlockState state, @NotNull LevelReader level, @NotNull ScheduledTickAccess tickAccess, @NotNull BlockPos pos, @NotNull Direction direction, @NotNull BlockPos neighborPos, @NotNull BlockState neighborState, @NotNull RandomSource random) {
         if (state.getValue(WATERLOGGED)) {
             tickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
@@ -104,13 +120,11 @@ public class ItemDisplayingBlock extends BaseEntityBlock implements SimpleWaterl
             if (!level.isClientSide()) {
                 BlockEntity blockEntity = level.getBlockEntity(pos);
                 if (blockEntity instanceof ItemRenderingBlockEntity itemRenderingBlockEntity) {
-                    ItemStack stack = itemRenderingBlockEntity.getStoredItemStack().copyAndClear();
-                    if (!stack.isEmpty()) {
+                    ItemStack stack = itemRenderingBlockEntity.getStoredItemStack();
+                    if (!stack.isEmpty() && player.addItem(stack)) {
                         level.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS);
+                        itemRenderingBlockEntity.setStoredItemStack(ItemStack.EMPTY);
                     }
-                    player.addItem(stack);
-                    itemRenderingBlockEntity.setStoredItemStack(ItemStack.EMPTY);
-
                 }
             }
             return InteractionResult.CONSUME;
@@ -125,7 +139,10 @@ public class ItemDisplayingBlock extends BaseEntityBlock implements SimpleWaterl
             if (blockEntity instanceof ItemRenderingBlockEntity itemRenderingBlockEntity && !level.isClientSide()) {
                 ItemStack oldStack = itemRenderingBlockEntity.getStoredItemStack();
                 if (oldStack.isEmpty()) {
-                    ItemStack newStack = stack.copyAndClear();
+                    ItemStack newStack = stack.copy();
+                    if (!player.getAbilities().instabuild) {
+                        stack.setCount(0);
+                    }
                     itemRenderingBlockEntity.setStoredItemStack(newStack);
                     if (!newStack.isEmpty()) {
                         level.playSound(null, pos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS);

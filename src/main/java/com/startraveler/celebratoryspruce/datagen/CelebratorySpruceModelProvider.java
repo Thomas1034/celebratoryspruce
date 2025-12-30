@@ -346,6 +346,8 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
 
         booleanPropertyBoxPile(ModBlocks.PRESENT_PILE.get());
         basicItem(ModItems.PRESENT.get());
+
+        basicItem(ModItems.STOCKING.get());
     }
 
     @SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "ConstantConditions"})

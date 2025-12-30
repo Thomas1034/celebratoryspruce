@@ -7,32 +7,40 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.joml.AxisAngle4f;
+import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.jspecify.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
-public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
+public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity implements ItemOwner {
     public static final String DEFAULT_ITEM_KEY = "default_item";
     public static final String TRANSFORMS_KEY = "transforms";
     protected final @NotNull List<Transform<?>> transforms;
     protected @NotNull ItemStack defaultDisplayStack;
+    protected @Nullable Matrix4f bakedTransforms;
+    protected float bakedYRotation;
+
 
     public ItemRenderingBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntityTypes.ITEM_RENDERING_BLOCK.get(), pos, blockState);
         this.transforms = new ArrayList<>();
         this.defaultDisplayStack = ItemStack.EMPTY;
+        this.bakedTransforms = null;
+        this.bakedYRotation = 0;
     }
 
     @Override
@@ -43,6 +51,7 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
         this.defaultDisplayStack = input.read(DEFAULT_ITEM_KEY, ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
         this.transforms.clear();
         this.transforms.addAll(input.read(TRANSFORMS_KEY, Transform.TRANSFORM_CODEC.listOf()).orElse(List.of()));
+        this.bakedTransforms = null;
     }
 
     // Save values into the passed CompoundTag here.
@@ -55,6 +64,12 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
         output.store(TRANSFORMS_KEY, Transform.TRANSFORM_CODEC.listOf(), this.transforms);
 
         // save item and transforms
+    }
+
+    @Override
+    public void markAsChanged() {
+        super.markAsChanged();
+        this.bakedTransforms = null;
     }
 
     @SuppressWarnings("unused")
@@ -91,6 +106,36 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
     public void addTransforms(@NotNull List<Transform<?>> transforms) {
         this.transforms.addAll(transforms);
         this.markAsChanged();
+    }
+
+    @Override
+    public @NotNull Level level() {
+        return Objects.requireNonNull(this.level);
+    }
+
+    @Override
+    public @NotNull Vec3 position() {
+        return this.getBlockPos().getCenter();
+    }
+
+    @Override
+    public float getVisualRotationYInDegrees() {
+        if (this.bakedTransforms == null) {
+            AxisAngle4f angle = this.bakeTransforms().getRotation(new AxisAngle4f()).normalize();
+            Vector3f yAxis = new Vector3f(0, -1, 0);
+            this.bakedYRotation = Mth.RAD_TO_DEG * angle.angle * (yAxis.dot(angle.x, angle.y, angle.z));
+        }
+        return this.bakedYRotation;
+    }
+
+    public @NotNull Matrix4f bakeTransforms() {
+        if (this.bakedTransforms == null) {
+            this.bakedTransforms = new Matrix4f();
+            for (Transform<?> transform : this.transforms) {
+                transform.apply(this.bakedTransforms);
+            }
+        }
+        return this.bakedTransforms;
     }
 
     public enum TransformType implements StringRepresentable {
@@ -147,7 +192,7 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
         }
     }
 
-    public abstract static class Transform<T> {
+    public abstract static class Transform<T> implements Function<Matrix4f, Matrix4f> {
 
         @SuppressWarnings("unused")
         public static final Codec<Transform<?>> TRANSFORM_CODEC = TransformType.CODEC.dispatch(
@@ -169,6 +214,14 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
         public TransformType getType() {
             return this.type;
         }
+
+        /**
+         * Mutates the input parameter.
+         *
+         * @param stack the function argument
+         * @return The input matrix as transformed by this transformation.
+         */
+        public abstract Matrix4f apply(Matrix4f stack);
 
         @SuppressWarnings("unused")
         public abstract @NotNull StreamCodec<ByteBuf, @NotNull T> streamCodec();
@@ -201,6 +254,7 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
         protected final float y;
         protected final float z;
         protected final float w;
+        protected final Quaternionf quaternionf;
 
         public Rotation(float x, float y, float z, float w) {
             super(TransformType.ROTATION);
@@ -208,6 +262,7 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
             this.y = y;
             this.z = z;
             this.w = w;
+            this.quaternionf = new Quaternionf(this.x, this.y, this.z, this.w);
         }
 
         public Rotation(Quaternionf quaternion) {
@@ -216,6 +271,7 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
             this.y = quaternion.y;
             this.z = quaternion.z;
             this.w = quaternion.w;
+            this.quaternionf = new Quaternionf(this.x, this.y, this.z, this.w);
         }
 
 
@@ -239,8 +295,14 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
             return w;
         }
 
+        @SuppressWarnings("unused")
         public @NotNull Quaternionf quaternion() {
-            return new Quaternionf(this.x, this.y, this.z, this.w);
+            return this.quaternionf;
+        }
+
+        @Override
+        public Matrix4f apply(Matrix4f stack) {
+            return stack.rotate(this.quaternionf);
         }
 
         @Override
@@ -275,12 +337,14 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
         protected final float x;
         protected final float y;
         protected final float z;
+        protected final Vector3f vector3f;
 
         public Translation(float x, float y, float z) {
             super(TransformType.TRANSLATION);
             this.x = x;
             this.y = y;
             this.z = z;
+            this.vector3f = new Vector3f(this.x, this.y, this.z);
         }
 
         @SuppressWarnings("unused")
@@ -289,23 +353,32 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
             this.x = vector.x;
             this.y = vector.y;
             this.z = vector.z;
+            this.vector3f = new Vector3f(this.x, this.y, this.z);
         }
 
+        @SuppressWarnings("unused")
         public float getX() {
             return x;
         }
 
+        @SuppressWarnings("unused")
         public float getY() {
             return y;
         }
 
+        @SuppressWarnings("unused")
         public float getZ() {
             return z;
         }
 
         @SuppressWarnings("unused")
         public @NotNull Vector3f vector() {
-            return new Vector3f(this.x, this.y, this.z);
+            return this.vector3f;
+        }
+
+        @Override
+        public Matrix4f apply(Matrix4f stack) {
+            return stack.translate(this.vector3f);
         }
 
         @Override
@@ -365,14 +438,17 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
             this.z = vector.z;
         }
 
+        @SuppressWarnings("unused")
         public float getX() {
             return x;
         }
 
+        @SuppressWarnings("unused")
         public float getY() {
             return y;
         }
 
+        @SuppressWarnings("unused")
         public float getZ() {
             return z;
         }
@@ -380,6 +456,11 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity {
         @SuppressWarnings("unused")
         public @NotNull Vector3f vector() {
             return new Vector3f(this.x, this.y, this.z);
+        }
+
+        @Override
+        public Matrix4f apply(Matrix4f stack) {
+            return stack.scale(this.x, this.y, this.z);
         }
 
         @Override

@@ -60,6 +60,9 @@ public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider
         this.add(Config.SNOW_MELTS_IN_LIGHT);
         this.add(Config.SNOW_MELTING_THRESHOLD);
         this.add(Config.SNOW_ACCUMULATION_THRESHOLD);
+        this.add("item.celebratoryspruce.goodie_bag.for", "For: ");
+        this.add("item.celebratoryspruce.goodie_bag.full", "Contains a gift! Use to open.");
+        this.add("item.celebratoryspruce.goodie_bag.empty", "Add a stack of items!");
         // Now, do all the rest automagically.
         this.add(ModCreativeModeTabs.ITEMS_NAME, "Celebratory Spruce Items");
         this.addTranslations(ModBlocks.BLOCKS.getEntries(), this.excludedBlocks);

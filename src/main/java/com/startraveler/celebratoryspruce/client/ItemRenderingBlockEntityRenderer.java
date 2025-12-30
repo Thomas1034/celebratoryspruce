@@ -10,14 +10,16 @@ import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
-public class ItemRenderingBlockEntityRenderer<T extends ItemRenderingBlockEntity> implements BlockEntityRenderer<T, @NotNull ItemRenderingBlockEntityRenderState> {
+public class ItemRenderingBlockEntityRenderer<T extends ItemRenderingBlockEntity> implements BlockEntityRenderer<@NotNull T, @NotNull ItemRenderingBlockEntityRenderState> {
 
     private final ItemModelResolver itemModelResolver;
 
@@ -25,26 +27,9 @@ public class ItemRenderingBlockEntityRenderer<T extends ItemRenderingBlockEntity
         this.itemModelResolver = context.itemModelResolver();
     }
 
-    public static void applyTransform(PoseStack stack, ItemRenderingBlockEntity.Transform<?> transform) {
-        switch (transform.getType()) {
-            case SCALE:
-                ItemRenderingBlockEntity.Scale scale = (ItemRenderingBlockEntity.Scale) transform;
-                stack.scale(scale.getX(), scale.getY(), scale.getZ());
-                break;
-            case ROTATION:
-                ItemRenderingBlockEntity.Rotation rotation = (ItemRenderingBlockEntity.Rotation) transform;
-                stack.mulPose(rotation.quaternion());
-                break;
-            case TRANSLATION:
-                ItemRenderingBlockEntity.Translation translation = (ItemRenderingBlockEntity.Translation) transform;
-                stack.translate(translation.getX(), translation.getY(), translation.getZ());
-                break;
-        }
-    }
-
     public static void applyAllTransforms(PoseStack stack, List<ItemRenderingBlockEntity.Transform<?>> transforms) {
         for (ItemRenderingBlockEntity.Transform<?> transform : transforms) {
-            applyTransform(stack, transform);
+            transform.apply(stack.last().pose());
         }
     }
 
@@ -62,22 +47,29 @@ public class ItemRenderingBlockEntityRenderer<T extends ItemRenderingBlockEntity
                 cameraPosition,
                 breakProgress
         );
-
+        ItemStack stack = blockEntity.getStackForDisplay();
+        Boolean isNormallyFoil = stack.get(DataComponents.ENCHANTMENT_GLINT_OVERRIDE);
+        stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, false);
         renderState.item = new ItemStackRenderState();
         this.itemModelResolver.updateForTopItem(
                 renderState.item,
                 blockEntity.getStackForDisplay(),
-                ItemDisplayContext.FIXED,
+                ItemDisplayContext.FIXED, // FIXED
                 blockEntity.getLevel(),
-                null,
+                blockEntity,
                 (int) blockEntity.getBlockPos().asLong()
         );
+
+        if (isNormallyFoil != null) {
+            stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, isNormallyFoil);
+        }
         renderState.transforms = blockEntity.getTransforms();
     }
 
     @Override
     public void submit(ItemRenderingBlockEntityRenderState itemRenderingBlockEntityRenderState, @NotNull PoseStack poseStack, @NotNull SubmitNodeCollector submitNodeCollector, @NotNull CameraRenderState cameraRenderState) {
         poseStack.pushPose();
+        // TODO refactor to use baked transforms.
         applyAllTransforms(poseStack, itemRenderingBlockEntityRenderState.transforms);
 
         itemRenderingBlockEntityRenderState.item.submit(

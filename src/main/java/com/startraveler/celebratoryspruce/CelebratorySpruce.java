@@ -25,9 +25,6 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
-// TODO: ensure goodie bag and item displays give back items when the player's inventory is full.
-// mixin to ice melting and frosted ice melting, add config for that.
-
 // https://commons.wikimedia.org/wiki/File:Shchedryk_(Carol_of_the_Bells)_-_Instrumental.ogg
 // https://commons.wikimedia.org/wiki/File%3AJohn_Baptiste_Calkin_-_I_Heard_the_Bells_on_Christmas_Day.ogg
 // https://www.loc.gov/item/jukebox-26061/ (silent night)

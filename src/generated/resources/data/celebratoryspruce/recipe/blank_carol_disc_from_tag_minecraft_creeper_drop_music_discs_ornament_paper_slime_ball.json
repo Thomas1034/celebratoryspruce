@@ -5,7 +5,8 @@
   "ingredients": [
     "#minecraft:creeper_drop_music_discs",
     "celebratoryspruce:ornament",
-    "minecraft:paper"
+    "minecraft:paper",
+    "minecraft:slime_ball"
   ],
   "result": {
     "count": 1,

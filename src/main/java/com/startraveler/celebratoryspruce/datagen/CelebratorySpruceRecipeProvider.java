@@ -29,10 +29,9 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
         this.modid = CelebratorySpruce.MODID;
     }
 
-
-    // TODO marking the place since IntelliJ sorts this file (partially and arbitrarily)
     @Override
     protected void buildRecipes() {
+
         shapeless(
                 List.of(Blocks.SPRUCE_LEAVES, ModItems.ORNAMENT.get()),
                 List.of(1, 1),
@@ -52,7 +51,7 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
         shaped(
                 List.of("oio", "isi", "oio"),
                 List.of('i', 's', 'o'),
-                List.of(Items.GOLD_INGOT, Blocks.GLOWSTONE, ModItems.ORNAMENT.get()),
+                List.of(Items.GOLD_INGOT, Blocks.GLOWSTONE, ModItems.FESTIVE_LIGHT.get()),
                 RecipeCategory.DECORATIONS,
                 ModItems.GOLD_STAR.get(),
                 1
@@ -89,8 +88,8 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
                 1
         );
         shapeless(
-                List.of(ItemTags.CREEPER_DROP_MUSIC_DISCS, ModItems.ORNAMENT, Items.PAPER),
-                List.of(1, 1, 1),
+                List.of(ItemTags.CREEPER_DROP_MUSIC_DISCS, ModItems.ORNAMENT, Items.PAPER, Items.SLIME_BALL),
+                List.of(1, 1, 1, 1),
                 RecipeCategory.MISC,
                 ModItems.BLANK_CAROL_DISC.get(),
                 1
@@ -149,7 +148,6 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
                 ModItems.STOCKING.get(),
                 2
         );
-        // TODO End of recipe definitions
     }
 
     protected void shaped(List<String> pattern, List<Character> tokens, List<Object> ingredients, RecipeCategory recipeCategory, ItemLike result, int count) {

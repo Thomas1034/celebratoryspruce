@@ -5,7 +5,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -118,11 +121,20 @@ public class ModItems {
             )
     );
 
-
     public static final DeferredItem<@NotNull GoodieBagItem> STOCKING = register(
             "stocking",
             GoodieBagItem::new,
-            () -> new Item.Properties().component(ModDataComponentTypes.DEFAULT_GOODIE_BAG_SIZE, 2)
+            () -> new Item.Properties().component(ModDataComponentTypes.DEFAULT_GOODIE_BAG_SIZE, 3)
+                    .component(DataComponents.UNBREAKABLE, Unit.INSTANCE)
+                    .component(
+                            DataComponents.EQUIPPABLE,
+                            Equippable.builder(EquipmentSlot.HEAD)
+                                    .setAsset(ModArmorMaterials.CHRISTMAS_ASSET)
+                                    .setDispensable(true)
+                                    .setDamageOnHurt(false)
+                                    .setSwappable(false)
+                                    .build()
+                    )
     );
 
     public static DeferredItem<@NotNull Item> register(String name) {

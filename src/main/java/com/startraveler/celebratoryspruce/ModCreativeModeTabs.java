@@ -37,6 +37,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.GOLD_STAR);
                         output.accept(ModItems.PRESENT);
                         output.accept(ModItems.STOCKING);
+                        output.accept(ModItems.ITEM_DISPLAY);
                         output.accept(ModItems.BLANK_CAROL_DISC);
                         output.accept(ModItems.MUSIC_DISC_CHRISTMAS_DAY_BELLS);
                         output.accept(ModItems.MUSIC_DISC_SILENT_NIGHT);

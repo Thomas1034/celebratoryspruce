@@ -4,7 +4,7 @@
   "group": "celebratoryspruce:gold_star",
   "key": {
     "i": "minecraft:gold_ingot",
-    "o": "celebratoryspruce:ornament",
+    "o": "celebratoryspruce:festive_light",
     "s": "minecraft:glowstone"
   },
   "pattern": [

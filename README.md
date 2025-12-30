@@ -1,31 +1,10 @@
+## Credits
 
+The included jukebox song ["Carol Of The Bells"](https://audionautix.com/Music/CarolOfTheBells.mp3)
+by [Jason Shaw](https://audionautix.com/) is licensed under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0).
 
+Special thanks to the Library of Congress for providing
+a [1917 recording of Silent Night](https://www.loc.gov/item/jukebox-26061/), and to Wikimedia Commons for locating
+public domain tracks of [What Child is This](https://commons.wikimedia.org/wiki/File:What_Child_is_this.mid)
+and [I Heard the Bells on Christmas Day](https://commons.wikimedia.org/wiki/File%3AJohn_Baptiste_Calkin_-_I_Heard_the_Bells_on_Christmas_Day.ogg).
 
-The included jukebox song ["Carol Of The Bells"](https://audionautix.com/Music/CarolOfTheBells.mp3) by [Jason Shaw](https://audionautix.com/) is licensed under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0).
-
-
-
-Installation information
-=======
-
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
-
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
-
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
-
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
-
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/

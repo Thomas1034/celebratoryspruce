@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_festive_light": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:festive_light"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_glowstone": {
       "conditions": {
         "items": [
@@ -31,19 +41,9 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_ornament": {
-      "conditions": {
-        "items": [
-          {
-            "items": "celebratoryspruce:ornament"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "celebratoryspruce:gold_star_from_gold_ingot_glowstone_ornament"
+        "recipe": "celebratoryspruce:gold_star_from_gold_ingot_glowstone_festive_light"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -53,13 +53,13 @@
       "has_the_recipe",
       "has_gold_ingot",
       "has_glowstone",
-      "has_ornament",
+      "has_festive_light",
       "has_gold_star"
     ]
   ],
   "rewards": {
     "recipes": [
-      "celebratoryspruce:gold_star_from_gold_ingot_glowstone_ornament"
+      "celebratoryspruce:gold_star_from_gold_ingot_glowstone_festive_light"
     ]
   }
 }

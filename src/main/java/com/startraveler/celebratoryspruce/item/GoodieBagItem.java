@@ -34,8 +34,7 @@ public class GoodieBagItem extends Item {
 
 
         if (!level.isClientSide() && stack.get(ModDataComponentTypes.GOODIE_BAG_CONTENTS.get()) instanceof GoodieBagContents goodieBagContents) {
-            // TODO make sure this works for filtering player names.
-            boolean hasNameAndNameDoesNotMatchPlayer = stack.get(DataComponents.CUSTOM_NAME) instanceof Component customName && customName.tryCollapseToString() instanceof String customNameString && customNameString.equals(
+            boolean hasNameAndNameDoesNotMatchPlayer = stack.get(DataComponents.CUSTOM_NAME) instanceof Component customName && customName.tryCollapseToString() instanceof String customNameString && !customNameString.equals(
                     player.getPlainTextName());
 
             if (!hasNameAndNameDoesNotMatchPlayer) {
@@ -122,8 +121,14 @@ public class GoodieBagItem extends Item {
         if (stack.getCustomName() instanceof Component customName) {
             tooltipAdder.accept(Component.translatable("item.celebratoryspruce.goodie_bag.for").append(customName));
         }
-        if (stack.get(ModDataComponentTypes.GOODIE_BAG_CONTENTS.get()) instanceof GoodieBagContents) {
-            tooltipAdder.accept(Component.translatable("item.celebratoryspruce.goodie_bag.full"));
+        if (stack.get(ModDataComponentTypes.GOODIE_BAG_CONTENTS.get()) instanceof GoodieBagContents contents) {
+            int n = contents.stacks().size();
+            if (n == 1) {
+                tooltipAdder.accept(Component.translatable("item.celebratoryspruce.goodie_bag.contains_one"));
+            } else {
+                tooltipAdder.accept(Component.translatable("item.celebratoryspruce.goodie_bag.contains_n", n));
+
+            }
         } else {
             tooltipAdder.accept(Component.translatable("item.celebratoryspruce.goodie_bag.empty"));
         }

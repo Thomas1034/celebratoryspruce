@@ -148,6 +148,24 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
                 ModItems.STOCKING.get(),
                 2
         );
+
+        shaped(
+                List.of("afa", "beb", "cfc"),
+                List.of('a', 'b', 'c', 'e', 'f'),
+                List.of(Items.MILK_BUCKET, Items.HONEY_BOTTLE, Items.WHEAT, ItemTags.EGGS, Tags.Items.FOODS_FRUIT),
+                RecipeCategory.MISC,
+                ModItems.FRUIT_CAKE.get(),
+                1
+        );
+
+        shaped(
+                List.of("afa", "beb", "cfc"),
+                List.of('a', 'b', 'c', 'e', 'f'),
+                List.of(Items.MILK_BUCKET, Items.SUGAR, Items.WHEAT, ItemTags.EGGS, Items.COCOA_BEANS),
+                RecipeCategory.MISC,
+                ModItems.FRUIT_CAKE.get(),
+                1
+        );
     }
 
     protected void shaped(List<String> pattern, List<Character> tokens, List<Object> ingredients, RecipeCategory recipeCategory, ItemLike result, int count) {

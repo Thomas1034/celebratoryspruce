@@ -45,6 +45,7 @@ import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -195,7 +196,8 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
                 (i, b) -> CelebratorySpruceTexturedModel.BOX_PILE.apply(i, b)
                         .get(block)
                         .updateTemplate(template -> template.extend().renderType("cutout").build())
-                        .createWithSuffix(block, "_stack" + i + (b ? "_closed" : ""), blockModels.modelOutput), ItemHoldingBoxPileBlock.CLOSED
+                        .createWithSuffix(block, "_stack" + i + (b ? "_closed" : ""), blockModels.modelOutput),
+                ItemHoldingBoxPileBlock.CLOSED
         ));
     }
 
@@ -264,6 +266,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
 
     @SuppressWarnings("unused")
     public void candleCake(Block candleBlock, Block cakeBlock, Block candleCakeBlock) {
+
         this.blockModels.registerSimpleFlatItemModel(candleBlock.asItem());
         Identifier candleCakeBase = ModelTemplates.CANDLE_CAKE.create(
                 candleCakeBlock,
@@ -287,6 +290,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
     @SuppressWarnings("unused")
     public void cakeBlock(Block cake, Item cakeItem) {
         this.blockModels.registerSimpleFlatItemModel(cakeItem);
+
         this.blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(cake)
                 .with(PropertyDispatch.initial(BlockStateProperties.BITES)
                         .generate(n -> BlockModelGenerators.variant(new Variant(ModelLocationUtils.getModelLocation(
@@ -348,6 +352,12 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         basicItem(ModItems.PRESENT.get());
 
         basicItem(ModItems.STOCKING.get());
+
+        cakeBlock(ModBlocks.YULE_LOG_CAKE.get(), ModItems.YULE_LOG_CAKE.get());
+        cakeBlock(ModBlocks.FRUIT_CAKE.get(), ModItems.FRUIT_CAKE.get());
+        ModBlocks.CANDLE_CAKES.stream()
+                .map(Supplier::get)
+                .forEach(cake -> candleCake(cake.getCandle().get(), cake.getBaseCake().get(), cake));
     }
 
     @SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "ConstantConditions"})

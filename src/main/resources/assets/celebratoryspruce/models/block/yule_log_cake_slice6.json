@@ -1,0 +1,11 @@
+{
+  "parent": "celebratoryspruce:block/log_cake_slice6",
+  "textures": {
+    "bottom": "celebratoryspruce:block/yule_log_cake_bottom",
+    "inside": "celebratoryspruce:block/yule_log_cake_inner",
+    "end": "celebratoryspruce:block/yule_log_cake_end",
+    "particle": "celebratoryspruce:block/yule_log_cake_side",
+    "side": "celebratoryspruce:block/yule_log_cake_side",
+    "top": "celebratoryspruce:block/yule_log_cake_top"
+  }
+}

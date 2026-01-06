@@ -43,6 +43,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.MUSIC_DISC_SILENT_NIGHT);
                         output.accept(ModItems.MUSIC_DISC_WHAT_CHILD);
                         output.accept(ModItems.MUSIC_DISC_CAROL_OF_THE_BELLS);
+                        output.accept(ModItems.FRUIT_CAKE);
+                        output.accept(ModItems.YULE_LOG_CAKE);
                     })
                     .build()
     );

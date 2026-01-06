@@ -25,6 +25,10 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
+import java.util.function.Supplier;
+
+// Maybe make description have fancy titles and headers as images? Hmm...
+
 // https://commons.wikimedia.org/wiki/File:Shchedryk_(Carol_of_the_Bells)_-_Instrumental.ogg
 // https://commons.wikimedia.org/wiki/File%3AJohn_Baptiste_Calkin_-_I_Heard_the_Bells_on_Christmas_Day.ogg
 // https://www.loc.gov/item/jukebox-26061/ (silent night)
@@ -123,6 +127,9 @@ public class CelebratorySpruce {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
+        event.enqueueWork(() -> ModBlocks.CANDLE_CAKES.stream()
+                .map(Supplier::get)
+                .forEach(cake -> cake.getBaseCake().get().addCandleCake(cake.getCandle().get(), cake)));
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

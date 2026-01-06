@@ -9,6 +9,7 @@ import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 public class CelebratorySpruceBlockTagsProvider extends BlockTagsProvider {
 
@@ -19,6 +20,8 @@ public class CelebratorySpruceBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(final HolderLookup.@NotNull Provider lookupProvider) {
+
+        ModBlocks.CANDLE_CAKES.stream().map(Supplier::get).forEach(this.tag(BlockTags.CANDLE_CAKES)::add);
 
         this.tag(BlockTags.LEAVES).add(ModBlocks.DECORATED_SPRUCE_LEAVES.get());
         this.tag(BlockTags.LEAVES).add(ModBlocks.FESTIVE_SPRUCE_LEAVES.get());

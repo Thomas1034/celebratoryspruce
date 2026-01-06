@@ -3,6 +3,7 @@ package com.startraveler.celebratoryspruce.datagen;
 import com.startraveler.celebratoryspruce.ModBlocks;
 import com.startraveler.celebratoryspruce.ModItems;
 import com.startraveler.celebratoryspruce.block.BoxPileBlock;
+import com.startraveler.celebratoryspruce.block.ExtensibleCakeBlock;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -32,6 +33,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvider {
@@ -114,11 +116,9 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
         this.dropOther(ModBlocks.WALL_ITEM_DISPLAY.get(), ModItems.ITEM_DISPLAY.get());
 
 
-        BiFunction<Block, ItemLike, LootTable.Builder> bombPileTableMaker = (block, itemLike) -> LootTable.lootTable()
+        BiFunction<Block, ItemLike, LootTable.Builder> boxPileTableMaker = (block, itemLike) -> LootTable.lootTable()
                 .withPool(this.applyExplosionCondition(
-                        itemLike,
-                        LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1.0F))
+                        itemLike, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 
                                 .add(LootItem.lootTableItem(itemLike)
                                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
@@ -171,8 +171,27 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
                 ));
         this.add(
                 ModBlocks.PRESENT_PILE.get(),
-                bombPileTableMaker.apply(ModBlocks.PRESENT_PILE.get(), ModItems.PRESENT.get())
+                boxPileTableMaker.apply(ModBlocks.PRESENT_PILE.get(), ModItems.PRESENT.get())
         );
+        ModBlocks.CANDLE_CAKES.stream()
+                .map(Supplier::get)
+                .forEach(c -> this.add(c, BlockLootSubProvider.createCandleCakeDrops(c.getCandle().get())));
+        this.add(
+                ModBlocks.FRUIT_CAKE.get(), block -> LootTable.lootTable().withPool(this.applyExplosionCondition(
+                        block,
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0f))
+                                .add(LootItem.lootTableItem(block)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(
+                                                                ExtensibleCakeBlock.BITES,
+                                                                0
+                                                        ))))
+                ))
+        );
+
+        this.add(ModBlocks.YULE_LOG_CAKE.get(), noDrop());
     }
 
     @Override

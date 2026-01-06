@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/cake_slice4",
+  "textures": {
+    "bottom": "celebratoryspruce:block/fruit_cake_bottom",
+    "inside": "celebratoryspruce:block/fruit_cake_inner",
+    "particle": "celebratoryspruce:block/fruit_cake_side",
+    "side": "celebratoryspruce:block/fruit_cake_side",
+    "top": "celebratoryspruce:block/fruit_cake_top"
+  }
+}

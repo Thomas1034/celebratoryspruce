@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "celebratoryspruce:block/light_gray_candle_fruit_cake"
+    },
+    "lit=true": {
+      "model": "celebratoryspruce:block/light_gray_candle_fruit_cake_lit"
+    }
+  }
+}

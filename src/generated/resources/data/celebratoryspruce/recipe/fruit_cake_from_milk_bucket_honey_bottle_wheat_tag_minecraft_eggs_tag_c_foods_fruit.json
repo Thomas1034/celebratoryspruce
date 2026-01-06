@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "celebratoryspruce:fruit_cake",
+  "key": {
+    "a": "minecraft:milk_bucket",
+    "b": "minecraft:honey_bottle",
+    "c": "minecraft:wheat",
+    "e": "#minecraft:eggs",
+    "f": "#c:foods/fruit"
+  },
+  "pattern": [
+    "afa",
+    "beb",
+    "cfc"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebratoryspruce:fruit_cake"
+  }
+}

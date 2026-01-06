@@ -137,6 +137,16 @@ public class ModItems {
                     )
     );
 
+
+    public static final DeferredItem<@NotNull BlockItem> FRUIT_CAKE = register(
+            "fruit_cake",
+            (properties) -> new BlockItem(ModBlocks.FRUIT_CAKE.get(), properties.stacksTo(1))
+    );
+    public static final DeferredItem<@NotNull BlockItem> YULE_LOG_CAKE = register(
+            "yule_log_cake",
+            (properties) -> new BlockItem(ModBlocks.YULE_LOG_CAKE.get(), properties.stacksTo(1))
+    );
+
     public static DeferredItem<@NotNull Item> register(String name) {
         return register(name, Item::new);
     }

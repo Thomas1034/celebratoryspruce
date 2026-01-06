@@ -64,6 +64,34 @@ public class CelebratorySpruceEnglishUSLanguageProvider extends LanguageProvider
         this.add(Config.SNOW_MELTING_THRESHOLD);
         this.add(Config.SNOW_ACCUMULATION_THRESHOLD);
         this.add(Config.SNOW_TEMPERATURE_THRESHOLD);
+        this.add(
+                "celebratoryspruce.configuration.section.celebratoryspruce.common.toml.title",
+                "Celebratory Spruce Common Configuration"
+        );
+        this.add(
+                "celebratoryspruce.configuration.snowBuildupLightThreshold.tooltip",
+                "The light level below which snow accumulates. Typically one less than the level at which snow melts."
+        );
+        this.add("celebratoryspruce.configuration.title", "Celebratory Spruce Configuration");
+        this.add("celebratoryspruce.configuration.iceMeltsInLight.tooltip", "Whether or not ice melts in light.");
+        this.add("celebratoryspruce.configuration.snowMeltsInLight.tooltip", "Whether or not snow melts in light.");
+        this.add(
+                "celebratoryspruce.configuration.iceMeltingLightThreshold.tooltip",
+                "The light level above which ice melts, if ice melting in light is enabled. Typically one more than the level at which ice freezes."
+        );
+        this.add(
+                "celebratoryspruce.configuration.snowMeltingLightThreshold.tooltip",
+                "The light level above which snow melts, if snow melting in light is enabled. Typically one more than the level at which snow lands."
+        );
+        this.add("celebratoryspruce.configuration.section.celebratoryspruce.common.toml", "Celebratory Spruce Common");
+        this.add(
+                "celebratoryspruce.configuration.snowTemperatureThreshold.tooltip",
+                "The temperature threshold required for rain to turn to snow. Higher values will make warm biomes have snow; lower values will make cold biomes have rain."
+        );
+        this.add(
+                "celebratoryspruce.configuration.iceFreezingLightThreshold.tooltip",
+                "The light level below which ice freezes. Typically one less than the level at which ice melts."
+        );
         this.add("item.celebratoryspruce.goodie_bag.for", "For: ");
         this.add("item.celebratoryspruce.goodie_bag.contains_one", "Contains a gift! Use to open.");
         this.add("item.celebratoryspruce.goodie_bag.contains_n", "Contains %s gifts! Use to open.");

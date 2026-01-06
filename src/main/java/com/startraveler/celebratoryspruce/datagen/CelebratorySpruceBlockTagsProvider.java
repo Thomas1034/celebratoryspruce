@@ -22,10 +22,11 @@ public class CelebratorySpruceBlockTagsProvider extends BlockTagsProvider {
     protected void addTags(final HolderLookup.@NotNull Provider lookupProvider) {
 
         ModBlocks.CANDLE_CAKES.stream().map(Supplier::get).forEach(this.tag(BlockTags.CANDLE_CAKES)::add);
-
+        this.tag(BlockTags.CAMPFIRES).add(ModBlocks.LOG_FIRE.get());
         this.tag(BlockTags.LEAVES).add(ModBlocks.DECORATED_SPRUCE_LEAVES.get());
         this.tag(BlockTags.LEAVES).add(ModBlocks.FESTIVE_SPRUCE_LEAVES.get());
         this.tag(BlockTags.SAPLINGS).add(ModBlocks.CELEBRATORY_SPRUCE_SAPLING.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.GOLD_STAR.get(), ModBlocks.WALL_GOLD_STAR.get());
+        this.tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.LOG_FIRE.get());
     }
 }

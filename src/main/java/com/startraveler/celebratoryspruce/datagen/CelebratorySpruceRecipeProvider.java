@@ -163,7 +163,7 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
                 List.of('a', 'b', 'c', 'e', 'f'),
                 List.of(Items.MILK_BUCKET, Items.SUGAR, Items.WHEAT, ItemTags.EGGS, Items.COCOA_BEANS),
                 RecipeCategory.MISC,
-                ModItems.FRUIT_CAKE.get(),
+                ModItems.YULE_LOG_CAKE.get(),
                 1
         );
     }

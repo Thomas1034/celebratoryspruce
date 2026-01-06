@@ -358,6 +358,8 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         ModBlocks.CANDLE_CAKES.stream()
                 .map(Supplier::get)
                 .forEach(cake -> candleCake(cake.getCandle().get(), cake.getBaseCake().get(), cake));
+
+        createLogFires(ModBlocks.LOG_FIRE.get());
     }
 
     @SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "ConstantConditions"})
@@ -373,6 +375,30 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         List<Item> excluded = new ArrayList<>();
 
         return super.getKnownItems().filter(entry -> !excluded.contains(entry.value()));
+    }
+
+    @SuppressWarnings("deprecation")
+    public void createLogFires(Block... logFireBlocks) {
+        MultiVariant offVariant = BlockModelGenerators.plainVariant(ModelLocationUtils.decorateBlockModelLocation(
+                "campfire_off"));
+
+        for (Block block : logFireBlocks) {
+            MultiVariant onVariant = BlockModelGenerators.plainVariant(CelebratorySpruceModelTemplates.LOG_FIRE.create(
+                    block,
+                    CelebratorySpruceTextureMapping.logFire(block),
+                    blockModels.modelOutput
+            ));
+            blockModels.registerSimpleFlatItemModel(block.asItem());
+            blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+                    .with(BlockModelGenerators.createBooleanModelDispatch(
+                            BlockStateProperties.LIT,
+                            onVariant,
+                            offVariant
+                    ))
+                    .with(
+                            BlockModelGenerators.ROTATION_HORIZONTAL_FACING_ALT));
+        }
+
     }
 
     public void createOverlaidWreath(Block wreathBlock, Block wallWreathBlock, IntegerProperty intProperty) {

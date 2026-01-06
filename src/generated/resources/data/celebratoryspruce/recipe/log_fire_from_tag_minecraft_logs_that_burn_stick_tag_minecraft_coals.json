@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "celebratoryspruce:log_fire",
+  "key": {
+    "c": "#minecraft:coals",
+    "l": "#minecraft:logs_that_burn",
+    "s": "minecraft:stick"
+  },
+  "pattern": [
+    "lll",
+    "scs"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebratoryspruce:log_fire"
+  }
+}

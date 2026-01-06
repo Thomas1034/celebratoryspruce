@@ -7,6 +7,15 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureSlot;
 
 public class CelebratorySpruceModelTemplates {
+
+    public static final ModelTemplate LOG_FIRE = ModelTemplates.create(
+            CelebratorySpruce.id("template_log_fire").toString(),
+            TextureSlot.FIRE,
+            TextureSlot.LIT_LOG,
+            CelebratorySpruceTextureSlot.LOG,
+            CelebratorySpruceTextureSlot.BASE
+    );
+
     public static final ModelTemplate OVERLAID_WREATH = ModelTemplates.create(
             CelebratorySpruce.id("template_overlaid_wreath").toString(),
             TextureSlot.FRONT,

@@ -30,6 +30,20 @@ public class CelebratorySpruceTextureMapping {
     }
 
     @SuppressWarnings("unused")
+    public static TextureMapping logFire(Block block) {
+        return new TextureMapping().put(
+                        CelebratorySpruceTextureSlot.LOG,
+                        TextureMapping.getBlockTexture(block, "_log")
+                ).put(
+                        CelebratorySpruceTextureSlot.BASE,
+                        TextureMapping.getBlockTexture(block, "_base")
+                )
+                .put(TextureSlot.LIT_LOG, TextureMapping.getBlockTexture(block, "_log_lit"))
+                .put(TextureSlot.FIRE, TextureMapping.getBlockTexture(block, "_fire"));
+    }
+
+
+    @SuppressWarnings("unused")
     public static TextureMapping asterisk(Block block) {
         return new TextureMapping().put(
                         CelebratorySpruceTextureSlot.PLUS,

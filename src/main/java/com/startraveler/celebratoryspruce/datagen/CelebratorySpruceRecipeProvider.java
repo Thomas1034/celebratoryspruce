@@ -166,6 +166,15 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
                 ModItems.YULE_LOG_CAKE.get(),
                 1
         );
+
+        shaped(
+                List.of("lll", "scs"),
+                List.of('l', 's', 'c'),
+                List.of(ItemTags.LOGS_THAT_BURN, Items.STICK, ItemTags.COALS),
+                RecipeCategory.MISC,
+                ModBlocks.LOG_FIRE.get(),
+                1
+        );
     }
 
     protected void shaped(List<String> pattern, List<Character> tokens, List<Object> ingredients, RecipeCategory recipeCategory, ItemLike result, int count) {

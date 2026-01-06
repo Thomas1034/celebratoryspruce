@@ -11,11 +11,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +26,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
 
 public class ModBlocks {
     // Create a Deferred Register to hold Blocks which will all be registered under the "celebratoryspruce" namespace
@@ -388,6 +390,23 @@ public class ModBlocks {
             ), () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE)
     );
 
+    public static final DeferredBlock<@NotNull LogFireBlock> LOG_FIRE = register(
+            "log_fire",
+            properties -> new LogFireBlock(true, 1, properties),
+            () -> BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PODZOL)
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.0F)
+                    .sound(SoundType.WOOD)
+                    .lightLevel(litBlockEmission(15))
+                    .noOcclusion()
+                    .ignitedByLava()
+    );
+
+
+    public static ToIntFunction<BlockState> litBlockEmission(int lightValue) {
+        return (state) -> (Boolean) state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
+    }
 
     @SuppressWarnings("unused")
     public static <T extends Block> Supplier<@NotNull T> addToSet(Supplier<@NotNull T> cake, Set<Supplier<T>> set) {

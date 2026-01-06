@@ -1,0 +1,9 @@
+{
+  "parent": "celebratoryspruce:block/template_log_fire",
+  "textures": {
+    "base": "celebratoryspruce:block/log_fire_base",
+    "fire": "celebratoryspruce:block/log_fire_fire",
+    "lit_log": "celebratoryspruce:block/log_fire_log_lit",
+    "log": "celebratoryspruce:block/log_fire_log"
+  }
+}

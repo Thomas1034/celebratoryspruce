@@ -1,5 +1,7 @@
-// 1.21.11	2026-01-06T00:20:33.9042369	Tags for minecraft:block mod id celebratoryspruce
-3882a1822b18cd0ba176a1c48f7803a6888fbda0 data/minecraft/tags/block/candle_cakes.json
+// 1.21.11	2026-01-06T16:46:39.0743088	Tags for minecraft:block mod id celebratoryspruce
+66b4647ec1e91fe768ee3be22a0aaf11bab8d3d6 data/minecraft/tags/block/campfires.json
+f4aa5983cad5f53d635708449644ce061f4e9d39 data/minecraft/tags/block/candle_cakes.json
 bb8ec3cd1dd284b2b49d63e43ca25e7525be0313 data/minecraft/tags/block/leaves.json
+66b4647ec1e91fe768ee3be22a0aaf11bab8d3d6 data/minecraft/tags/block/mineable/axe.json
 b133bafe4d442fb9d8c222431b51d80ec1c04bf0 data/minecraft/tags/block/mineable/pickaxe.json
 4d4c1d5f16c7cb1fda433b6297dd8587b616635f data/minecraft/tags/block/saplings.json

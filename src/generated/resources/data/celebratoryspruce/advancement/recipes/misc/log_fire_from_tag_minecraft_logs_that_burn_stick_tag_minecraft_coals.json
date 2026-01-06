@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_log_fire": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:log_fire"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft_root": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:coals"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:stick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "celebratoryspruce:log_fire_from_tag_minecraft_logs_that_burn_stick_tag_minecraft_coals"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_minecraft_root",
+      "has_stick",
+      "has_log_fire"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "celebratoryspruce:log_fire_from_tag_minecraft_logs_that_burn_stick_tag_minecraft_coals"
+    ]
+  }
+}

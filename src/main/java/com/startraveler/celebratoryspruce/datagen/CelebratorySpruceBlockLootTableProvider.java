@@ -13,6 +13,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -184,14 +185,21 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
                                 .add(LootItem.lootTableItem(block)
                                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                                                 .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                        .hasProperty(
-                                                                ExtensibleCakeBlock.BITES,
-                                                                0
-                                                        ))))
+                                                        .hasProperty(ExtensibleCakeBlock.BITES, 0))))
                 ))
         );
 
         this.add(ModBlocks.YULE_LOG_CAKE.get(), noDrop());
+
+        this.add(
+                ModBlocks.LOG_FIRE.get(), block -> this.createSilkTouchDispatchTable(
+                        block, this.applyExplosionCondition(
+                                block,
+                                LootItem.lootTableItem(Items.CHARCOAL)
+                                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))
+                        )
+                )
+        );
     }
 
     @Override

@@ -20,6 +20,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.jetbrains.annotations.Nullable;
@@ -62,6 +63,9 @@ public class CelebratorySpruce {
         // Prevent classloading cycle by init'ing this separately.
         ItemRenderingBlockEntity.TransformTypeCodecRegistry.init();
 
+        // Add the log fire as a basic campfire.
+        modEventBus.addListener(this::addBlockEntityBlocks);
+
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (CelebratorySpruce) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
@@ -76,6 +80,10 @@ public class CelebratorySpruce {
 
     public static Identifier id(String name) {
         return Identifier.fromNamespaceAndPath(MODID, name);
+    }
+
+    public void addBlockEntityBlocks(final BlockEntityTypeAddBlocksEvent event) {
+        // Nothing to do here.
     }
 
     public void useItemOnBlock(final UseItemOnBlockEvent event) {

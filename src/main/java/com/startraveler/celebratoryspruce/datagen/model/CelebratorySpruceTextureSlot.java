@@ -3,8 +3,10 @@ package com.startraveler.celebratoryspruce.datagen.model;
 
 import net.minecraft.client.data.models.model.TextureSlot;
 
+@SuppressWarnings("unused")
 public class CelebratorySpruceTextureSlot {
 
+    public static final TextureSlot LOG = TextureSlot.create("log", TextureSlot.ALL);
     public static final TextureSlot FACE = TextureSlot.create("face", TextureSlot.ALL);
     public static final TextureSlot PLUS = TextureSlot.create("plus", TextureSlot.ALL);
     public static final TextureSlot INSET_HIGH = TextureSlot.create("inset_high", TextureSlot.ALL);

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "celebratoryspruce:fruit_cake",
+  "group": "celebratoryspruce:yule_log_cake",
   "key": {
     "a": "minecraft:milk_bucket",
     "b": "minecraft:sugar",
@@ -16,6 +16,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "celebratoryspruce:fruit_cake"
+    "id": "celebratoryspruce:yule_log_cake"
   }
 }

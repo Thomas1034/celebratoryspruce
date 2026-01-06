@@ -68,6 +68,10 @@ public class CelebratorySpruceClient {
                     ModBlocks.POTTED_CELEBRATORY_SPRUCE_SAPLING.get(),
                     ChunkSectionLayer.CUTOUT
             );
+            ItemBlockRenderTypes.setRenderLayer(
+                    ModBlocks.LOG_FIRE.get(),
+                    ChunkSectionLayer.CUTOUT
+            );
         });
     }
 

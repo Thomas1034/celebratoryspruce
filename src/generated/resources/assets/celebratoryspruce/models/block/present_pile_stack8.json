@@ -1,9 +1,0 @@
-{
-  "parent": "celebratoryspruce:block/box_pile_stack8",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "flower": "celebratoryspruce:block/present_pile",
-    "particle": "celebratoryspruce:block/present_pile",
-    "side": "celebratoryspruce:block/present_pile_side"
-  }
-}

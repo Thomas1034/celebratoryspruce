@@ -1,6 +1,16 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "celebratoryspruce:item/stocking"
+    "model": "celebratoryspruce:item/stocking",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -1
+      },
+      {
+        "type": "minecraft:dye",
+        "default": -7596516
+      }
+    ]
   }
 }

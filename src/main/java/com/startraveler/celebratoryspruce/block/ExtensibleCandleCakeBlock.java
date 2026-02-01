@@ -54,11 +54,10 @@ public class ExtensibleCandleCakeBlock extends AbstractCandleBlock {
     protected static final VoxelShape SHAPE = Shapes.or(CAKE_SHAPE, CANDLE_SHAPE);
     private static final Iterable<Vec3> PARTICLE_OFFSETS = ImmutableList.of(new Vec3(0.5D, 1.0D, 0.5D));
 
-    protected final Supplier<ExtensibleCakeBlock> baseCake;
-    protected final Supplier<Block> candle;
+    protected final Supplier<@NotNull ExtensibleCakeBlock> baseCake;
+    protected final Supplier<@NotNull Block> candle;
 
-    public ExtensibleCandleCakeBlock(Supplier<Block> candle, Supplier<ExtensibleCakeBlock> baseCake, Properties properties) {
-
+    public ExtensibleCandleCakeBlock(Supplier<@NotNull Block> candle, Supplier<@NotNull ExtensibleCakeBlock> baseCake, Properties properties) {
         super(properties);
         this.candle = candle;
         this.baseCake = baseCake;
@@ -88,7 +87,8 @@ public class ExtensibleCandleCakeBlock extends AbstractCandleBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, @NotNull BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, @NotNull BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(LIT);
     }
 

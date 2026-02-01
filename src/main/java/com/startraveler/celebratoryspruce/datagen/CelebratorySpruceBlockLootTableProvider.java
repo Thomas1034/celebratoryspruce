@@ -106,6 +106,12 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
                 ModBlocks.POTTED_CELEBRATORY_SPRUCE_SAPLING.get(),
                 this.createPotFlowerItemTable(ModBlocks.CELEBRATORY_SPRUCE_SAPLING.get())
         );
+        this.dropOther(ModBlocks.DIAMOND_STAR.get(), ModItems.DIAMOND_STAR.get());
+        this.dropOther(ModBlocks.WALL_DIAMOND_STAR.get(), ModItems.DIAMOND_STAR.get());
+        this.dropOther(ModBlocks.COPPER_STAR.get(), ModItems.COPPER_STAR.get());
+        this.dropOther(ModBlocks.WALL_COPPER_STAR.get(), ModItems.COPPER_STAR.get());
+        this.dropOther(ModBlocks.IRON_STAR.get(), ModItems.IRON_STAR.get());
+        this.dropOther(ModBlocks.WALL_IRON_STAR.get(), ModItems.IRON_STAR.get());
         this.dropOther(ModBlocks.GOLD_STAR.get(), ModItems.GOLD_STAR.get());
         this.dropOther(ModBlocks.WALL_GOLD_STAR.get(), ModItems.GOLD_STAR.get());
         this.add(ModBlocks.LIGHT_NET.get(), this.createMultifaceBlockDrops(ModBlocks.LIGHT_NET.get()));
@@ -170,13 +176,20 @@ public class CelebratorySpruceBlockLootTableProvider extends BlockLootSubProvide
                                         .apply(SetItemCountFunction.setCount(ConstantValue.exactly(8))))
 
                 ));
-        this.add(
-                ModBlocks.PRESENT_PILE.get(),
-                boxPileTableMaker.apply(ModBlocks.PRESENT_PILE.get(), ModItems.PRESENT.get())
-        );
-        ModBlocks.CANDLE_CAKES.stream()
+        ModItems.PRESENTS_BY_COLOR.values()
+                .stream()
                 .map(Supplier::get)
-                .forEach(c -> this.add(c, BlockLootSubProvider.createCandleCakeDrops(c.getCandle().get())));
+                .forEach(blockItem -> this.add(
+                        blockItem.getBlock(),
+                        boxPileTableMaker.apply(blockItem.getBlock(), blockItem)
+                ));
+        ModBlocks.CANDLE_FRUIT_CAKES.stream().map(Supplier::get).forEach(c -> this.add(
+                c,
+                BlockLootSubProvider.createCandleCakeDrops(c.getCandle().get())
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0f))
+                                .add(LootItem.lootTableItem(ModBlocks.FRUIT_CAKE.get())))
+        ));
         this.add(
                 ModBlocks.FRUIT_CAKE.get(), block -> LootTable.lootTable().withPool(this.applyExplosionCondition(
                         block,

@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "celebratoryspruce:item/stocking"
+    "layer0": "celebratoryspruce:item/stocking",
+    "layer1": "celebratoryspruce:item/stocking_overlay"
   }
 }

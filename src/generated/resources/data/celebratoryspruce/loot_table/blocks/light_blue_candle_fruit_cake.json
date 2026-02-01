@@ -10,6 +10,16 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "celebratoryspruce:fruit_cake"
+        }
+      ],
+      "rolls": 1.0
     }
   ],
   "random_sequence": "celebratoryspruce:blocks/light_blue_candle_fruit_cake"

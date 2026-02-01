@@ -99,10 +99,6 @@ public class ItemRenderingBlockEntity extends ItemHoldingBlockEntity implements 
         return stack.isEmpty() ? this.getDefaultDisplayStack() : stack;
     }
 
-    public @NotNull List<Transform<?>> getTransforms() {
-        return this.transforms;
-    }
-
     public void addTransforms(@NotNull List<Transform<?>> transforms) {
         this.transforms.addAll(transforms);
         this.markAsChanged();

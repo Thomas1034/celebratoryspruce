@@ -2,9 +2,11 @@ package com.startraveler.celebratoryspruce;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,8 +36,16 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.WREATH);
                         output.accept(ModItems.DECORATED_WREATH);
                         output.accept(ModBlocks.LIGHT_NET);
+                        output.accept(ModItems.COPPER_STAR);
+                        output.accept(ModItems.IRON_STAR);
                         output.accept(ModItems.GOLD_STAR);
-                        output.accept(ModItems.PRESENT);
+                        output.accept(ModItems.DIAMOND_STAR);
+                        Util.DYES.forEach(dyeColor -> {
+                            DeferredItem<@NotNull BlockItem> present = ModItems.PRESENTS_BY_COLOR.get(dyeColor);
+                            if (present != null) {
+                                output.accept(present);
+                            }
+                        });
                         output.accept(ModItems.STOCKING);
                         output.accept(ModItems.ITEM_DISPLAY);
                         output.accept(ModItems.BLANK_CAROL_DISC);

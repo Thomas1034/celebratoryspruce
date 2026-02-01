@@ -1,5 +1,6 @@
 package com.startraveler.celebratoryspruce;
 
+import com.startraveler.celebratoryspruce.block.ItemHoldingBoxPileBlock;
 import com.startraveler.celebratoryspruce.client.ItemRenderingBlockEntityRenderer;
 import com.startraveler.celebratoryspruce.datagen.*;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -12,6 +13,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.util.ProblemReporter;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -29,6 +31,7 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +53,7 @@ public class CelebratorySpruceClient {
         @NotNull IEventBus modBus = Objects.requireNonNull(container.getEventBus());
 
         modBus.addListener(CelebratorySpruceClient::gatherData);
-        modBus.addListener(CelebratorySpruceClient::registerTints);
+        modBus.addListener(CelebratorySpruceClient::registerBlockTints);
 
         // Allows NeoForge to create a config screen for this mod's configs.
         // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
@@ -68,10 +71,7 @@ public class CelebratorySpruceClient {
                     ModBlocks.POTTED_CELEBRATORY_SPRUCE_SAPLING.get(),
                     ChunkSectionLayer.CUTOUT
             );
-            ItemBlockRenderTypes.setRenderLayer(
-                    ModBlocks.LOG_FIRE.get(),
-                    ChunkSectionLayer.CUTOUT
-            );
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.LOG_FIRE.get(), ChunkSectionLayer.CUTOUT);
         });
     }
 
@@ -83,7 +83,18 @@ public class CelebratorySpruceClient {
         );
     }
 
-    public static void registerTints(final RegisterColorHandlersEvent.Block event) {
+    public static int getPresentBaseTint(DyeColor base) {
+        return base.getTextureDiffuseColor();
+    }
+
+    public static int getPresentOverlayTint(DyeColor base) {
+        return (Util.PRESENT_ACCENT_COLOR.getOrDefault(
+                base,
+                DyeColor.WHITE
+        ) instanceof DyeColor dye ? dye : DyeColor.WHITE).getTextureDiffuseColor();
+    }
+
+    public static void registerBlockTints(final RegisterColorHandlersEvent.Block event) {
         event.register(
                 (blockState, blockAndTintGetter, blockPos, i) -> i == 0 ? SPRUCE_LEAVES_TINT : -1,
                 ModBlocks.DECORATED_SPRUCE_LEAVES.get(),
@@ -93,6 +104,20 @@ public class CelebratorySpruceClient {
                 ModBlocks.DECORATED_WREATH.get(),
                 ModBlocks.DECORATED_WALL_WREATH.get()
         );
+        ModBlocks.PRESENT_PILES_BY_COLOR.forEach((DyeColor color, DeferredBlock<@NotNull ItemHoldingBoxPileBlock> deferredBlock) -> {
+
+            int baseTint = getPresentBaseTint(color);
+            int ribbonTint = getPresentOverlayTint(color);
+            event.register(
+                    (blockState, blockAndTintGetter, blockPos, i) -> switch (i) {
+                        case 0 -> baseTint;
+                        case 1 -> ribbonTint;
+                        default -> -1;
+                    }, deferredBlock.get()
+            );
+
+        });
+
     }
 
     public static void gatherData(final GatherDataEvent.Client event) {

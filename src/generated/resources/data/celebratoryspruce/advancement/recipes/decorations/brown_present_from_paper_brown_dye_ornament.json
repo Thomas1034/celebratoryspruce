@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brown_dye": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:brown_dye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_brown_present": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:brown_present"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_ornament": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:ornament"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_paper": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:paper"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "celebratoryspruce:brown_present_from_paper_brown_dye_ornament"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_paper",
+      "has_brown_dye",
+      "has_ornament",
+      "has_brown_present"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "celebratoryspruce:brown_present_from_paper_brown_dye_ornament"
+    ]
+  }
+}

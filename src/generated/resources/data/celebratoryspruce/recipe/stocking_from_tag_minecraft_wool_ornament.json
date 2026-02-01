@@ -8,7 +8,8 @@
   },
   "pattern": [
     "ioi",
-    "i i"
+    " ii",
+    "iii"
   ],
   "result": {
     "count": 2,

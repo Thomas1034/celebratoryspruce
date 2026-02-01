@@ -10,6 +10,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
@@ -49,9 +50,33 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
                 "celebratory_spruce_leaves"
         );
         shaped(
-                List.of("oio", "isi", "oio"),
-                List.of('i', 's', 'o'),
-                List.of(Items.GOLD_INGOT, Blocks.GLOWSTONE, ModItems.FESTIVE_LIGHT.get()),
+                List.of("oiw", "isi", "wio"),
+                List.of('i', 's', 'o', 'w'),
+                List.of(Items.DIAMOND, Blocks.GLOWSTONE, ModItems.FESTIVE_LIGHT.get(), Items.HONEYCOMB),
+                RecipeCategory.DECORATIONS,
+                ModItems.DIAMOND_STAR.get(),
+                1
+        );
+        shaped(
+                List.of("oiw", "isi", "wio"),
+                List.of('i', 's', 'o', 'w'),
+                List.of(Items.COPPER_INGOT, Blocks.GLOWSTONE, ModItems.FESTIVE_LIGHT.get(), Items.HONEYCOMB),
+                RecipeCategory.DECORATIONS,
+                ModItems.COPPER_STAR.get(),
+                1
+        );
+        shaped(
+                List.of("oiw", "isi", "wio"),
+                List.of('i', 's', 'o', 'w'),
+                List.of(Items.IRON_INGOT, Blocks.GLOWSTONE, ModItems.FESTIVE_LIGHT.get(), Items.HONEYCOMB),
+                RecipeCategory.DECORATIONS,
+                ModItems.IRON_STAR.get(),
+                1
+        );
+        shaped(
+                List.of("oiw", "isi", "wio"),
+                List.of('i', 's', 'o', 'w'),
+                List.of(Items.GOLD_INGOT, Blocks.GLOWSTONE, ModItems.FESTIVE_LIGHT.get(), Items.HONEYCOMB),
                 RecipeCategory.DECORATIONS,
                 ModItems.GOLD_STAR.get(),
                 1
@@ -131,17 +156,18 @@ public class CelebratorySpruceRecipeProvider extends RecipeProvider {
                 1
         );
 
-        shaped(
-                List.of(" i ", "ioi", " i "),
-                List.of('i', 'o'),
-                List.of(Items.PAPER, ModItems.ORNAMENT.get()),
+        ModItems.PRESENTS_BY_COLOR.forEach((key, value) -> shaped(
+                List.of("di ", "ioi", " id"),
+                List.of('i', 'd', 'o'),
+                List.of(Items.PAPER, DyeItem.byColor(key), ModItems.ORNAMENT),
                 RecipeCategory.DECORATIONS,
-                ModItems.PRESENT.get(),
-                2
-        );
+                value,
+                2,
+                "presents"
+        ));
 
         shaped(
-                List.of("ioi", "i i"),
+                List.of("ioi", " ii", "iii"),
                 List.of('i', 'o'),
                 List.of(ItemTags.WOOL, ModItems.ORNAMENT.get()),
                 RecipeCategory.MISC,

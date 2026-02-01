@@ -1,0 +1,11 @@
+{
+  "parent": "celebratoryspruce:block/tinted_box_pile_stack8",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "layer0_flower": "celebratoryspruce:block/present_pile",
+    "layer0_side": "celebratoryspruce:block/present_pile_side",
+    "layer1_flower": "celebratoryspruce:block/present_pile_overlay",
+    "layer1_side": "celebratoryspruce:block/present_pile_overlay_side",
+    "particle": "celebratoryspruce:block/present_pile"
+  }
+}

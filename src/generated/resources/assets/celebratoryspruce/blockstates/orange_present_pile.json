@@ -1,0 +1,692 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack1_closed",
+        "y": 90
+      },
+      "when": {
+        "boxes": "1",
+        "closed": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack1_closed",
+        "y": 180
+      },
+      "when": {
+        "boxes": "1",
+        "closed": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack1_closed",
+        "y": 270
+      },
+      "when": {
+        "boxes": "1",
+        "closed": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack1_closed"
+      },
+      "when": {
+        "boxes": "1",
+        "closed": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack1",
+        "y": 90
+      },
+      "when": {
+        "boxes": "1",
+        "closed": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack1",
+        "y": 180
+      },
+      "when": {
+        "boxes": "1",
+        "closed": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack1",
+        "y": 270
+      },
+      "when": {
+        "boxes": "1",
+        "closed": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack1"
+      },
+      "when": {
+        "boxes": "1",
+        "closed": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack2_closed",
+        "y": 90
+      },
+      "when": {
+        "boxes": "2",
+        "closed": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack2_closed",
+        "y": 180
+      },
+      "when": {
+        "boxes": "2",
+        "closed": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack2_closed",
+        "y": 270
+      },
+      "when": {
+        "boxes": "2",
+        "closed": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack2_closed"
+      },
+      "when": {
+        "boxes": "2",
+        "closed": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack2",
+        "y": 90
+      },
+      "when": {
+        "boxes": "2",
+        "closed": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack2",
+        "y": 180
+      },
+      "when": {
+        "boxes": "2",
+        "closed": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack2",
+        "y": 270
+      },
+      "when": {
+        "boxes": "2",
+        "closed": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack2"
+      },
+      "when": {
+        "boxes": "2",
+        "closed": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack3_closed",
+        "y": 90
+      },
+      "when": {
+        "boxes": "3",
+        "closed": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack3_closed",
+        "y": 180
+      },
+      "when": {
+        "boxes": "3",
+        "closed": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack3_closed",
+        "y": 270
+      },
+      "when": {
+        "boxes": "3",
+        "closed": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack3_closed"
+      },
+      "when": {
+        "boxes": "3",
+        "closed": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack3",
+        "y": 90
+      },
+      "when": {
+        "boxes": "3",
+        "closed": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack3",
+        "y": 180
+      },
+      "when": {
+        "boxes": "3",
+        "closed": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack3",
+        "y": 270
+      },
+      "when": {
+        "boxes": "3",
+        "closed": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack3"
+      },
+      "when": {
+        "boxes": "3",
+        "closed": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack4_closed",
+        "y": 90
+      },
+      "when": {
+        "boxes": "4",
+        "closed": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack4_closed",
+        "y": 180
+      },
+      "when": {
+        "boxes": "4",
+        "closed": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack4_closed",
+        "y": 270
+      },
+      "when": {
+        "boxes": "4",
+        "closed": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack4_closed"
+      },
+      "when": {
+        "boxes": "4",
+        "closed": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack4",
+        "y": 90
+      },
+      "when": {
+        "boxes": "4",
+        "closed": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack4",
+        "y": 180
+      },
+      "when": {
+        "boxes": "4",
+        "closed": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack4",
+        "y": 270
+      },
+      "when": {
+        "boxes": "4",
+        "closed": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack4"
+      },
+      "when": {
+        "boxes": "4",
+        "closed": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack5_closed",
+        "y": 90
+      },
+      "when": {
+        "boxes": "5",
+        "closed": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack5_closed",
+        "y": 180
+      },
+      "when": {
+        "boxes": "5",
+        "closed": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack5_closed",
+        "y": 270
+      },
+      "when": {
+        "boxes": "5",
+        "closed": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack5_closed"
+      },
+      "when": {
+        "boxes": "5",
+        "closed": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack5",
+        "y": 90
+      },
+      "when": {
+        "boxes": "5",
+        "closed": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack5",
+        "y": 180
+      },
+      "when": {
+        "boxes": "5",
+        "closed": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack5",
+        "y": 270
+      },
+      "when": {
+        "boxes": "5",
+        "closed": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack5"
+      },
+      "when": {
+        "boxes": "5",
+        "closed": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack6_closed",
+        "y": 90
+      },
+      "when": {
+        "boxes": "6",
+        "closed": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack6_closed",
+        "y": 180
+      },
+      "when": {
+        "boxes": "6",
+        "closed": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack6_closed",
+        "y": 270
+      },
+      "when": {
+        "boxes": "6",
+        "closed": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack6_closed"
+      },
+      "when": {
+        "boxes": "6",
+        "closed": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack6",
+        "y": 90
+      },
+      "when": {
+        "boxes": "6",
+        "closed": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack6",
+        "y": 180
+      },
+      "when": {
+        "boxes": "6",
+        "closed": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack6",
+        "y": 270
+      },
+      "when": {
+        "boxes": "6",
+        "closed": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack6"
+      },
+      "when": {
+        "boxes": "6",
+        "closed": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack7_closed",
+        "y": 90
+      },
+      "when": {
+        "boxes": "7",
+        "closed": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack7_closed",
+        "y": 180
+      },
+      "when": {
+        "boxes": "7",
+        "closed": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack7_closed",
+        "y": 270
+      },
+      "when": {
+        "boxes": "7",
+        "closed": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack7_closed"
+      },
+      "when": {
+        "boxes": "7",
+        "closed": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack7",
+        "y": 90
+      },
+      "when": {
+        "boxes": "7",
+        "closed": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack7",
+        "y": 180
+      },
+      "when": {
+        "boxes": "7",
+        "closed": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack7",
+        "y": 270
+      },
+      "when": {
+        "boxes": "7",
+        "closed": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack7"
+      },
+      "when": {
+        "boxes": "7",
+        "closed": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack8_closed",
+        "y": 90
+      },
+      "when": {
+        "boxes": "8",
+        "closed": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack8_closed",
+        "y": 180
+      },
+      "when": {
+        "boxes": "8",
+        "closed": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack8_closed",
+        "y": 270
+      },
+      "when": {
+        "boxes": "8",
+        "closed": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack8_closed"
+      },
+      "when": {
+        "boxes": "8",
+        "closed": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack8",
+        "y": 90
+      },
+      "when": {
+        "boxes": "8",
+        "closed": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack8",
+        "y": 180
+      },
+      "when": {
+        "boxes": "8",
+        "closed": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack8",
+        "y": 270
+      },
+      "when": {
+        "boxes": "8",
+        "closed": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "celebratoryspruce:block/orange_present_pile_stack8"
+      },
+      "when": {
+        "boxes": "8",
+        "closed": "false",
+        "facing": "north"
+      }
+    }
+  ]
+}

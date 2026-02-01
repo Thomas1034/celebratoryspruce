@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "presents",
+  "key": {
+    "d": "minecraft:magenta_dye",
+    "i": "minecraft:paper",
+    "o": "celebratoryspruce:ornament"
+  },
+  "pattern": [
+    "di ",
+    "ioi",
+    " id"
+  ],
+  "result": {
+    "count": 2,
+    "id": "celebratoryspruce:magenta_present"
+  }
+}

@@ -66,9 +66,14 @@ public class CelebratorySpruceTexturedModel {
             CelebratorySpruceModelTemplates.DOUBLE_SIDED_CUBE_COLUMN
     );
 
-    public static final BiFunction<Integer, Boolean, TexturedModel.Provider> BOX_PILE = (boxes, closed) -> TexturedModel.createDefault(
-            (block) -> CelebratorySpruceTextureMapping.boxPile(block, boxes, closed),
+    public static final TriFunction<Integer, Boolean, Identifier, TexturedModel.Provider> BOX_PILE = (boxes, closed, overrideBlockPathWith) -> TexturedModel.createDefault(
+            (block) -> CelebratorySpruceTextureMapping.boxPile(block, boxes, closed, overrideBlockPathWith),
             CelebratorySpruceModelTemplates.boxPile(boxes)
+    );
+
+    public static final TriFunction<Integer, Boolean, Identifier, TexturedModel.Provider> TINTED_BOX_PILE = (boxes, closed, overrideBlockPathWith) -> TexturedModel.createDefault(
+            (block) -> CelebratorySpruceTextureMapping.tintedBoxPile(block, boxes, closed, overrideBlockPathWith),
+            CelebratorySpruceModelTemplates.tintedBoxPile(boxes)
     );
 
 

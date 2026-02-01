@@ -2,7 +2,13 @@
   "layers": {
     "humanoid": [
       {
-        "texture": "celebratoryspruce:christmas/outer"
+        "texture": "celebratoryspruce:christmas/outer",
+				"dyeable": {
+          "color_when_undyed": 9180700
+        }
+      },
+			{
+        "texture": "celebratoryspruce:christmas/outer_overlay"
       }
     ]
   }

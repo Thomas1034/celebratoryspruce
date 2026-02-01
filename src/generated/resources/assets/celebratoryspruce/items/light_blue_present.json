@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "celebratoryspruce:item/light_blue_present",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -12930086
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -8170446
+      }
+    ]
+  }
+}

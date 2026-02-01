@@ -1,5 +1,11 @@
 {
   "values": [
+    "celebratoryspruce:diamond_star",
+    "celebratoryspruce:wall_diamond_star",
+    "celebratoryspruce:copper_star",
+    "celebratoryspruce:wall_copper_star",
+    "celebratoryspruce:iron_star",
+    "celebratoryspruce:wall_iron_star",
     "celebratoryspruce:gold_star",
     "celebratoryspruce:wall_gold_star"
   ]

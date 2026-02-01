@@ -109,12 +109,23 @@ public class CelebratorySpruceModelTemplates {
             CelebratorySpruceTextureSlot.OVERLAY
     );
 
-    public static ModelTemplate boxPile(Integer bombs) {
+    public static ModelTemplate boxPile(Integer boxes) {
         return ModelTemplates.create(
-                CelebratorySpruce.id("box_pile_stack" + bombs).toString(),
+                CelebratorySpruce.id("box_pile_stack" + boxes).toString(),
                 TextureSlot.PARTICLE,
                 CelebratorySpruceTextureSlot.FLOWER,
                 TextureSlot.SIDE
+        );
+    }
+
+    public static ModelTemplate tintedBoxPile(Integer boxes) {
+        return ModelTemplates.create(
+                CelebratorySpruce.id("tinted_box_pile_stack" + boxes).toString(),
+                TextureSlot.PARTICLE,
+                CelebratorySpruceTextureSlot.LAYER0_FLOWER,
+                CelebratorySpruceTextureSlot.LAYER0_SIDE,
+                CelebratorySpruceTextureSlot.LAYER1_FLOWER,
+                CelebratorySpruceTextureSlot.LAYER1_SIDE
         );
     }
 }

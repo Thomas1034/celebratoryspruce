@@ -31,13 +31,8 @@ public class CelebratorySpruceTextureMapping {
 
     @SuppressWarnings("unused")
     public static TextureMapping logFire(Block block) {
-        return new TextureMapping().put(
-                        CelebratorySpruceTextureSlot.LOG,
-                        TextureMapping.getBlockTexture(block, "_log")
-                ).put(
-                        CelebratorySpruceTextureSlot.BASE,
-                        TextureMapping.getBlockTexture(block, "_base")
-                )
+        return new TextureMapping().put(CelebratorySpruceTextureSlot.LOG, TextureMapping.getBlockTexture(block, "_log"))
+                .put(CelebratorySpruceTextureSlot.BASE, TextureMapping.getBlockTexture(block, "_base"))
                 .put(TextureSlot.LIT_LOG, TextureMapping.getBlockTexture(block, "_log_lit"))
                 .put(TextureSlot.FIRE, TextureMapping.getBlockTexture(block, "_fire"));
     }
@@ -53,13 +48,27 @@ public class CelebratorySpruceTextureMapping {
     }
 
     @SuppressWarnings("unused")
-    public static TextureMapping boxPile(Block block, int boxes, boolean closed) {
+    public static TextureMapping boxPile(Block block, int boxes, boolean closed, Identifier overrideBlockPathWith) {
+        Identifier basePath = overrideBlockPathWith == null ? TextureMapping.getBlockTexture(block) : overrideBlockPathWith;
         return new TextureMapping().put(
                         CelebratorySpruceTextureSlot.FLOWER,
-                        TextureMapping.getBlockTexture(block).withSuffix(closed ? "_closed" : "")
+                        basePath.withSuffix(closed ? "_closed" : "")
                 )
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"));
+                .put(TextureSlot.PARTICLE, basePath.withSuffix("_side"))
+                .put(TextureSlot.SIDE, basePath.withSuffix("_side"));
+    }
+
+    @SuppressWarnings("unused")
+    public static TextureMapping tintedBoxPile(Block block, int boxes, boolean closed, Identifier overrideBlockPathWith) {
+        Identifier basePath = overrideBlockPathWith == null ? TextureMapping.getBlockTexture(block) : overrideBlockPathWith;
+        return new TextureMapping().put(TextureSlot.PARTICLE, basePath)
+                .put(CelebratorySpruceTextureSlot.LAYER0_FLOWER, basePath.withSuffix(closed ? "_closed" : ""))
+                .put(CelebratorySpruceTextureSlot.LAYER0_SIDE, basePath.withSuffix("_side"))
+                .put(
+                        CelebratorySpruceTextureSlot.LAYER1_FLOWER,
+                        basePath.withSuffix(closed ? "_overlay_closed" : "_overlay")
+                )
+                .put(CelebratorySpruceTextureSlot.LAYER1_SIDE, basePath.withSuffix("_overlay_side"));
     }
 
     public static TextureMapping candleCake(Block cake, Block candle, boolean lit) {
@@ -96,7 +105,8 @@ public class CelebratorySpruceTextureMapping {
     public static TextureMapping wreath(Block block) {
         Identifier identifier = TextureMapping.getBlockTexture(block);
         return new TextureMapping().put(TextureSlot.PARTICLE, identifier)
-                .put(TextureSlot.FRONT, identifier).put(TextureSlot.ALL, identifier);
+                .put(TextureSlot.FRONT, identifier)
+                .put(TextureSlot.ALL, identifier);
     }
 
     public static TextureMapping overlaidWreath(Block block) {

@@ -10,6 +10,9 @@ import com.startraveler.celebratoryspruce.datagen.model.CelebratorySpruceTexture
 import com.startraveler.celebratoryspruce.datagen.model.CelebratorySpruceTexturedModel;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.minecraft.client.color.item.Constant;
+import net.minecraft.client.color.item.Dye;
+import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
@@ -190,10 +193,11 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         return generator;
     }
 
-    protected void booleanPropertyBoxPile(Block block) {
+    @SuppressWarnings("SameParameterValue")
+    protected void booleanPropertyBoxPile(Block block, TriFunction<Integer, Boolean, Identifier, TexturedModel.Provider> texturedModel, @Nullable Identifier overrideBlockPathWith) {
         blockModels.blockStateOutput.accept(createBooleanPropertyBoxPile(
                 block,
-                (i, b) -> CelebratorySpruceTexturedModel.BOX_PILE.apply(i, b)
+                (i, b) -> texturedModel.apply(i, b, overrideBlockPathWith)
                         .get(block)
                         .updateTemplate(template -> template.extend().renderType("cutout").build())
                         .createWithSuffix(block, "_stack" + i + (b ? "_closed" : ""), blockModels.modelOutput),
@@ -254,10 +258,10 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
     }
 
     @SuppressWarnings("unused")
-    protected void boxPile(Block block) {
+    protected void boxPile(Block block, @Nullable Identifier overrideBlockPathWith) {
         blockModels.blockStateOutput.accept(createBoxPile(
                 block,
-                (i) -> CelebratorySpruceTexturedModel.BOX_PILE.apply(i, false)
+                (i) -> CelebratorySpruceTexturedModel.BOX_PILE.apply(i, false, overrideBlockPathWith)
                         .get(block)
                         .updateTemplate(template -> template.extend().renderType("cutout").build())
                         .createWithSuffix(block, "_stack" + i, blockModels.modelOutput)
@@ -322,7 +326,16 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
                 ModBlocks.POTTED_CELEBRATORY_SPRUCE_SAPLING.get(),
                 BlockModelGenerators.PlantType.NOT_TINTED
         );
+        blockModels.registerSimpleFlatItemModel(ModItems.DIAMOND_STAR.asItem());
+        blockModels.registerSimpleFlatItemModel(ModItems.COPPER_STAR.asItem());
+        blockModels.registerSimpleFlatItemModel(ModItems.IRON_STAR.asItem());
         blockModels.registerSimpleFlatItemModel(ModItems.GOLD_STAR.asItem());
+        blockModels.createParticleOnlyBlock(ModBlocks.DIAMOND_STAR.get());
+        blockModels.createParticleOnlyBlock(ModBlocks.WALL_DIAMOND_STAR.get());
+        blockModels.createParticleOnlyBlock(ModBlocks.COPPER_STAR.get());
+        blockModels.createParticleOnlyBlock(ModBlocks.WALL_COPPER_STAR.get());
+        blockModels.createParticleOnlyBlock(ModBlocks.IRON_STAR.get());
+        blockModels.createParticleOnlyBlock(ModBlocks.WALL_IRON_STAR.get());
         blockModels.createParticleOnlyBlock(ModBlocks.GOLD_STAR.get());
         blockModels.createParticleOnlyBlock(ModBlocks.WALL_GOLD_STAR.get());
         blockModels.registerSimpleFlatItemModel(ModItems.ITEM_DISPLAY.asItem());
@@ -348,14 +361,26 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         basicItem(ModItems.MUSIC_DISC_CHRISTMAS_DAY_BELLS.get());
         basicItem(ModItems.MUSIC_DISC_CAROL_OF_THE_BELLS.get());
 
-        booleanPropertyBoxPile(ModBlocks.PRESENT_PILE.get());
-        basicItem(ModItems.PRESENT.get());
+        ModItems.PRESENTS_BY_COLOR.forEach((color, blockItem) -> {
+            booleanPropertyBoxPile(
+                    blockItem.get().getBlock(),
+                    CelebratorySpruceTexturedModel.TINTED_BOX_PILE,
+                    CelebratorySpruce.id("block/present_pile")
+            );
+            generateItemWithTintedBaseLayerAndOverlay(
+                    blockItem.get(),
+                    CelebratorySpruce.id("item/present"),
+                    "_overlay",
+                    new Constant(CelebratorySpruceClient.getPresentBaseTint(color)),
+                    new Constant(CelebratorySpruceClient.getPresentOverlayTint(color))
+            );
+        });
 
-        basicItem(ModItems.STOCKING.get());
+        itemModels.generateItemWithTintedOverlay(ModItems.STOCKING.get(), new Dye(9180700 | 0xFF000000));
 
         cakeBlock(ModBlocks.YULE_LOG_CAKE.get(), ModItems.YULE_LOG_CAKE.get());
         cakeBlock(ModBlocks.FRUIT_CAKE.get(), ModItems.FRUIT_CAKE.get());
-        ModBlocks.CANDLE_CAKES.stream()
+        ModBlocks.CANDLE_FRUIT_CAKES.stream()
                 .map(Supplier::get)
                 .forEach(cake -> candleCake(cake.getCandle().get(), cake.getBaseCake().get(), cake));
 
@@ -377,6 +402,15 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
         return super.getKnownItems().filter(entry -> !excluded.contains(entry.value()));
     }
 
+    public void generateItemWithTintedBaseLayerAndOverlay(Item item, Identifier overrideTexture, String suffix, ItemTintSource baseTintSource, ItemTintSource overlayTintSource) {
+        Identifier texturePath = overrideTexture == null ? TextureMapping.getItemTexture(item) : overrideTexture;
+        Identifier identifier = this.itemModels.generateLayeredItem(item, texturePath, texturePath.withSuffix(suffix));
+        this.itemModels.itemModelOutput.accept(
+                item,
+                ItemModelUtils.tintedModel(identifier, baseTintSource, overlayTintSource)
+        );
+    }
+
     @SuppressWarnings("deprecation")
     public void createLogFires(Block... logFireBlocks) {
         MultiVariant offVariant = BlockModelGenerators.plainVariant(ModelLocationUtils.decorateBlockModelLocation(
@@ -395,8 +429,7 @@ public class CelebratorySpruceModelProvider extends ModelProvider {
                             onVariant,
                             offVariant
                     ))
-                    .with(
-                            BlockModelGenerators.ROTATION_HORIZONTAL_FACING_ALT));
+                    .with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING_ALT));
         }
 
     }

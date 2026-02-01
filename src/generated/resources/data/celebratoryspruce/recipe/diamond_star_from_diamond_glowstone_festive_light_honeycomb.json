@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "celebratoryspruce:diamond_star",
+  "key": {
+    "i": "minecraft:diamond",
+    "o": "celebratoryspruce:festive_light",
+    "s": "minecraft:glowstone",
+    "w": "minecraft:honeycomb"
+  },
+  "pattern": [
+    "oiw",
+    "isi",
+    "wio"
+  ],
+  "result": {
+    "count": 1,
+    "id": "celebratoryspruce:diamond_star"
+  }
+}

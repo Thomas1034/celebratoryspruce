@@ -4,11 +4,13 @@ import com.mojang.logging.LogUtils;
 import com.startraveler.celebratoryspruce.block.RandomizedDecoratedLeavesBlock;
 import com.startraveler.celebratoryspruce.block.entity.ItemRenderingBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -26,9 +28,26 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
-// Maybe make description have fancy titles and headers as images? Hmm...
+// Bugs Fixed:
+// Fruitcakes with candles now drop themselves correctly.
+
+// Changes:
+// Existing Stockings and Presents will be automatically converted into Red Stockings and Red Presents.
+// The recipes for Gold Stars and Stockings were modified; all stars require honeycombs, and Stockings require additional wool.
+
+// New Features:
+// A full spectrum of presents!
+// Dyeable stockings!
+// Stars in copper, iron, and diamond.
+
+
+// Ideas:
+// - More colors of presents and stockings
+// - Different star types
+// -
 
 // https://commons.wikimedia.org/wiki/File:Shchedryk_(Carol_of_the_Bells)_-_Instrumental.ogg
 // https://commons.wikimedia.org/wiki/File%3AJohn_Baptiste_Calkin_-_I_Heard_the_Bells_on_Christmas_Day.ogg
@@ -135,7 +154,11 @@ public class CelebratorySpruce {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
-        event.enqueueWork(() -> ModBlocks.CANDLE_CAKES.stream()
+        event.enqueueWork(() -> {
+            Map<Item, CauldronInteraction> water = CauldronInteraction.WATER.map();
+            water.put(ModItems.STOCKING.get(), CauldronInteraction::dyedItemIteration);
+        });
+        event.enqueueWork(() -> ModBlocks.CANDLE_FRUIT_CAKES.stream()
                 .map(Supplier::get)
                 .forEach(cake -> cake.getBaseCake().get().addCandleCake(cake.getCandle().get(), cake)));
     }

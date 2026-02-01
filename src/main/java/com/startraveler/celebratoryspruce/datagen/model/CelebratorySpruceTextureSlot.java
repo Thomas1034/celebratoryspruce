@@ -18,5 +18,9 @@ public class CelebratorySpruceTextureSlot {
     public static final TextureSlot SPIKES = TextureSlot.create("spikes", TextureSlot.ALL);
     public static final TextureSlot BAR = TextureSlot.create("bar", TextureSlot.ALL);
     public static final TextureSlot FLOWER = TextureSlot.create("flower", TextureSlot.ALL);
+    public static final TextureSlot LAYER0_FLOWER = TextureSlot.create("layer0_flower", TextureSlot.ALL);
+    public static final TextureSlot LAYER0_SIDE = TextureSlot.create("layer0_side", TextureSlot.ALL);
+    public static final TextureSlot LAYER1_FLOWER = TextureSlot.create("layer1_flower", TextureSlot.ALL);
+    public static final TextureSlot LAYER1_SIDE = TextureSlot.create("layer1_side", TextureSlot.ALL);
 
 }

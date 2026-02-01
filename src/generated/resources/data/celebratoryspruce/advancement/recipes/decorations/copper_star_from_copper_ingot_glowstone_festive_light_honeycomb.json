@@ -1,0 +1,76 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:copper_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_copper_star": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:copper_star"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_festive_light": {
+      "conditions": {
+        "items": [
+          {
+            "items": "celebratoryspruce:festive_light"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_glowstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:glowstone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_honeycomb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:honeycomb"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "celebratoryspruce:copper_star_from_copper_ingot_glowstone_festive_light_honeycomb"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_copper_ingot",
+      "has_glowstone",
+      "has_festive_light",
+      "has_honeycomb",
+      "has_copper_star"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "celebratoryspruce:copper_star_from_copper_ingot_glowstone_festive_light_honeycomb"
+    ]
+  }
+}

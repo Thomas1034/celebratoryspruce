@@ -1,2 +1,4 @@
-// 1.21.11	2026-01-06T14:54:49.314771	Tags for minecraft:item mod id celebratoryspruce
+// 1.21.11	2026-02-01T01:18:01.2810338	Tags for minecraft:item mod id celebratoryspruce
+82cbf6aa8d5dcb7345b800bb885fe9f25d0f2999 data/c/tags/item/dyed.json
 f265b99aec44aa9eec3935b88427ba4775c06127 data/c/tags/item/foods/edible_when_placed.json
+62d2f076ec67de74d6ed97c0108d9476de4c84f8 data/minecraft/tags/item/dyeable.json

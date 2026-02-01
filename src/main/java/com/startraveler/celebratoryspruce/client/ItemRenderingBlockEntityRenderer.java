@@ -17,20 +17,12 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 
-import java.util.List;
-
 public class ItemRenderingBlockEntityRenderer<T extends ItemRenderingBlockEntity> implements BlockEntityRenderer<@NotNull T, @NotNull ItemRenderingBlockEntityRenderState> {
 
     private final ItemModelResolver itemModelResolver;
 
     public ItemRenderingBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         this.itemModelResolver = context.itemModelResolver();
-    }
-
-    public static void applyAllTransforms(PoseStack stack, List<ItemRenderingBlockEntity.Transform<?>> transforms) {
-        for (ItemRenderingBlockEntity.Transform<?> transform : transforms) {
-            transform.apply(stack.last().pose());
-        }
     }
 
     @Override
@@ -63,15 +55,13 @@ public class ItemRenderingBlockEntityRenderer<T extends ItemRenderingBlockEntity
         if (isNormallyFoil != null) {
             stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, isNormallyFoil);
         }
-        renderState.transforms = blockEntity.getTransforms();
+        renderState.bakedTransforms = blockEntity.bakeTransforms();
     }
 
     @Override
     public void submit(ItemRenderingBlockEntityRenderState itemRenderingBlockEntityRenderState, @NotNull PoseStack poseStack, @NotNull SubmitNodeCollector submitNodeCollector, @NotNull CameraRenderState cameraRenderState) {
         poseStack.pushPose();
-        // TODO refactor to use baked transforms.
-        applyAllTransforms(poseStack, itemRenderingBlockEntityRenderState.transforms);
-
+        poseStack.mulPose(itemRenderingBlockEntityRenderState.bakedTransforms);
         itemRenderingBlockEntityRenderState.item.submit(
                 poseStack,
                 submitNodeCollector,

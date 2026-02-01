@@ -1,21 +1,21 @@
 {
   "values": [
-    "celebratoryspruce:gray_candle_fruit_cake",
-    "celebratoryspruce:orange_candle_fruit_cake",
-    "celebratoryspruce:blue_candle_fruit_cake",
-    "celebratoryspruce:white_candle_fruit_cake",
-    "celebratoryspruce:yellow_candle_fruit_cake",
-    "celebratoryspruce:light_gray_candle_fruit_cake",
-    "celebratoryspruce:purple_candle_fruit_cake",
-    "celebratoryspruce:light_blue_candle_fruit_cake",
-    "celebratoryspruce:black_candle_fruit_cake",
-    "celebratoryspruce:magenta_candle_fruit_cake",
-    "celebratoryspruce:pink_candle_fruit_cake",
-    "celebratoryspruce:red_candle_fruit_cake",
-    "celebratoryspruce:brown_candle_fruit_cake",
     "celebratoryspruce:candle_fruit_cake",
+    "celebratoryspruce:white_candle_fruit_cake",
+    "celebratoryspruce:light_gray_candle_fruit_cake",
+    "celebratoryspruce:gray_candle_fruit_cake",
+    "celebratoryspruce:black_candle_fruit_cake",
+    "celebratoryspruce:brown_candle_fruit_cake",
+    "celebratoryspruce:red_candle_fruit_cake",
+    "celebratoryspruce:orange_candle_fruit_cake",
+    "celebratoryspruce:yellow_candle_fruit_cake",
     "celebratoryspruce:lime_candle_fruit_cake",
     "celebratoryspruce:green_candle_fruit_cake",
-    "celebratoryspruce:cyan_candle_fruit_cake"
+    "celebratoryspruce:cyan_candle_fruit_cake",
+    "celebratoryspruce:light_blue_candle_fruit_cake",
+    "celebratoryspruce:blue_candle_fruit_cake",
+    "celebratoryspruce:purple_candle_fruit_cake",
+    "celebratoryspruce:magenta_candle_fruit_cake",
+    "celebratoryspruce:pink_candle_fruit_cake"
   ]
 }

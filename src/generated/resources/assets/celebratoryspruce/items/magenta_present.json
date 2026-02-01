@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "celebratoryspruce:item/magenta_present",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -3715395
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -816214
+      }
+    ]
+  }
+}

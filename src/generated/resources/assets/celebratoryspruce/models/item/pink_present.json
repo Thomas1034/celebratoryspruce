@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "celebratoryspruce:item/present",
+    "layer1": "celebratoryspruce:item/present_overlay"
+  }
+}
